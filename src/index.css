@@ -1,16 +1,27 @@
+* {
+  font-family: Helvetica;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+  --bg-color: #222;
+  --font-color: #ffffff;
+  --link-color: #f7d354;
+  --link-color-hover: #b8930c;
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+body {
+  background-color: var(--bg-color);
+  color: var(--font-color);
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+a {
+  text-decoration: none;
+  color: var(--link-color);
+  transition: 0.5s;
+}
+
+a:hover {
+  color: var(--link-color-hover);
 }
