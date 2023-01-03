@@ -51,3 +51,12 @@ nav form button {
 
   cursor: pointer;
 }
+
+@media (min-width: 768px) {
+  nav {
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin: 0 40px;
+  }
+}
