@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container #pagination {
+  margin: 32px 0;
+}
+.container #pagination ul {
+  margin: 0 16px;
+}
+
+.container #pagination ul li {
+  background-color: #f7d354;
+  color: #222222;
+
+  margin-bottom: 16px;
+  border: none;
+}
+.container #pagination ul li span svg {
+  color: #222222;
+}
+.container #pagination ul li a {
+  font-size: 1.15rem;
+}
+.container #pagination ul .ant-pagination-item-active {
+  background-color: #222222;
+  color: #f7d354;
+
+  border: 2px solid #ffffff;
+}
+
+.container #pagination ul .ant-pagination-item-active a {
+  color: #ffffff;
+}

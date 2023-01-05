@@ -12,11 +12,11 @@ export const Card = ({
   vote_average: string;
 }) => {
   //
-  const api_image = import.meta.env.VITE_IMG;
+  const api_image = import.meta.env.VITE_API_IMG;
 
   return (
     <>
-      <li>
+      <li className="item_movie">
         <div className="bg">
           <img src={`${api_image}${url_image}`} alt={title} />
           <div className="content">
