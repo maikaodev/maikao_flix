@@ -1,7 +1,7 @@
 ul {
   list-style: none;
 }
-ul li {
+ul .item_movie {
   width: 300px;
   height: 500px;
 
@@ -10,7 +10,7 @@ ul li {
   margin-bottom: 32px;
 }
 
-ul li .bg {
+ul .item_movie .bg {
   width: 300px;
   height: 520px;
 
@@ -22,14 +22,14 @@ ul li .bg {
   background-color: #484848;
 }
 
-ul li .content {
+ul .item_movie .content {
   display: flex;
   flex-direction: column;
 
   margin-bottom: 32px;
 }
 
-ul li img {
+ul .item_movie img {
   width: 250px;
 
   height: 250px;
@@ -39,25 +39,25 @@ ul li img {
   margin-top: 24px;
 }
 
-ul li .content span {
+ul .item_movie .content span {
   width: 250px;
 
   font-size: 1.5rem;
 }
 
-ul li .content .vote_average {
+ul .item_movie .content .vote_average {
   display: flex;
 
   margin-top: 8px;
   margin-bottom: 8px;
 }
 
-ul li .content .vote_average #star_icon {
+ul .item_movie .content .vote_average #star_icon {
   color: #f7d354;
   margin-right: 4px;
 }
 
-ul li a {
+ul .item_movie a {
   width: 250px;
 
   background-color: #f7d354;
@@ -72,7 +72,7 @@ ul li a {
 
   transition: 0.75s;
 }
-li a:hover {
+.item_movie a:hover {
   background-color: #222222;
   color: #f7d354;
 
@@ -90,7 +90,7 @@ li a:hover {
     width: 80%;
     margin: 0 auto;
   }
-  ul li {
+  ul .item_movie {
     width: 350px;
   }
 }
@@ -99,7 +99,7 @@ li a:hover {
   ul {
     width: 100%;
   }
-  ul li {
+  ul .item_movie {
     width: 300px;
   }
 }
