@@ -2,17 +2,20 @@ import { AiFillStar } from "react-icons/ai";
 
 import "./style.css";
 
+const api_image = import.meta.env.VITE_API_IMG;
+
 export const Card = ({
   url_image,
   title,
   vote_average,
+  id_movie,
 }: {
   url_image: string;
   title: string;
-  vote_average: string;
+  vote_average: number;
+  id_movie: number;
 }) => {
-  //
-  const api_image = import.meta.env.VITE_API_IMG;
+  // .env
 
   return (
     <>
@@ -26,7 +29,7 @@ export const Card = ({
             </div>
             <span>{title}</span>
           </div>
-          <a href="#">Detalhes</a>
+          <a href={`/movie/${id_movie}`}>Detalhes</a>
         </div>
       </li>
     </>

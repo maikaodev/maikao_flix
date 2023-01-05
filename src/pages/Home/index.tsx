@@ -7,14 +7,15 @@ import "./style.css";
 const movies_url = import.meta.env.VITE_API_URL_DEFAULT;
 const api_key = import.meta.env.VITE_API_KEY;
 
-type data = {
-  [key: string]: string;
-  url_image: string;
+type TopMoviesData = {
+  backdrop_path: string;
   title: string;
+  vote_average: number;
+  id: number;
 };
 
 const Home = () => {
-  const [topMovies, setTopMovies] = useState([{} as data]);
+  const [topMovies, setTopMovies] = useState([{} as TopMoviesData]);
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const getTopRatedMovies = async (url: string) => {
@@ -30,7 +31,9 @@ const Home = () => {
         throw new Error("Ocorreu um erro inesperado!");
       }
     } catch (error: any) {
-      alert(error.message);
+      if (error) {
+        alert(error.message);
+      }
     }
   };
 
@@ -56,6 +59,7 @@ const Home = () => {
                 url_image={movie.backdrop_path}
                 title={movie.title}
                 vote_average={movie.vote_average}
+                id_movie={movie.id}
               />
             );
           })}
