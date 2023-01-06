@@ -18,6 +18,10 @@
   margin-bottom: 16px;
   border: none;
 }
+.container #pagination ul li div {
+  display: none;
+}
+
 .container #pagination ul li span svg {
   color: #222222;
 }
