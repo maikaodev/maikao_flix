@@ -56,6 +56,9 @@ const Movie = () => {
         <button id="back" onClick={() => navigate(-1)}>
           Voltar
         </button>
+        <a id="float_button" href="#navBar">
+          ⬆
+        </a>
       </div>
       <section>
         <Details
