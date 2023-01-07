@@ -6,7 +6,7 @@ import { BiCameraMovie, BiSearchAlt2 } from "react-icons/bi";
 
 export const NavBar = () => {
   return (
-    <nav>
+    <nav id="navBar">
       <Link to="/">
         <h2>
           <BiCameraMovie />

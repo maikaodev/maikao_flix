@@ -1,5 +1,6 @@
 import { Pagination } from "antd";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Card } from "../../components";
 
 import "./style.css";
@@ -17,6 +18,8 @@ type TopMoviesData = {
 const Home = () => {
   const [topMovies, setTopMovies] = useState([{} as TopMoviesData]);
   const [totalPages, setTotalPages] = useState<number>(0);
+
+  const [currentPage, setCurrentPage] = useSearchParams();
 
   const getTopRatedMovies = async (url: string) => {
     const response = await fetch(url);
@@ -39,11 +42,20 @@ const Home = () => {
 
   const pagination = (page: number) => {
     const nextPageTopRatedUrl = `${movies_url}top_rated?${api_key}&language=pt-BR&page=${page}&region=BR`;
+
+    const current_page = {
+      page: page.toString(),
+    };
+
+    setCurrentPage(current_page);
+
     getTopRatedMovies(nextPageTopRatedUrl);
   };
 
   useEffect(() => {
-    const topRatedUrl = `${movies_url}top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
+    const topRatedUrl = `${movies_url}top_rated?${api_key}&language=pt-BR&page=${currentPage.get(
+      "page"
+    )}&region=BR`;
 
     getTopRatedMovies(topRatedUrl);
   }, []);
@@ -67,6 +79,7 @@ const Home = () => {
       <div id="pagination">
         <Pagination
           defaultCurrent={1}
+          current={Number(currentPage.get("page"))}
           total={totalPages}
           onChange={(event) => {
             pagination(event);

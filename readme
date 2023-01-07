@@ -3,16 +3,22 @@
 Tasks:
 
 - [ ] -> COMPONENTS
+
   - [x] -> Create the component navbar
   - [x] -> Create the component CARD
   - [ ] -> Create the component Alert
+  - [ ] -> Create the component Loading
+
 - [ ] -> PAGES
 
   - [x] -> Home
   - [ ] -> Movie/:id
-  - [ ] -> Create a ' BACK ' button for the old page
+  - [x] -> Create a ' BACK ' button for the old page
+  - [ ] -> Catch All
 
-- [x] -> Create pagination for the most rated
-- [x] -> Fixing CSS -> Hover on details changes layout
-- [ ] -> Save the current page -> Top Rated
-- [ ] -> Add new propriete in <Pagination/> - current
+- [ ] - Others
+  - [x] -> Create pagination for the most rated
+  - [x] -> Fixing CSS -> Hover on details changes layout
+  - [x] -> Save the current page -> Top Rated
+  - [x] -> Add new propriete in <Pagination/> - current
+  - [ ] -> Format detail page numbers
