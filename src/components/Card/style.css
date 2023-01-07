@@ -12,12 +12,11 @@ ul .item_movie {
 
 ul .item_movie .bg {
   width: 300px;
-  height: 520px;
+  height: 480px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
 
   background-color: #484848;
 }
@@ -41,6 +40,7 @@ ul .item_movie img {
 
 ul .item_movie .content span {
   width: 250px;
+  height: 55px;
 
   font-size: 1.5rem;
 }
