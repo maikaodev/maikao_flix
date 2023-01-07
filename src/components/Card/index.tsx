@@ -1,4 +1,5 @@
 import { AiFillStar } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 import "./style.css";
 
@@ -15,7 +16,7 @@ export const Card = ({
   vote_average: number;
   id_movie: number;
 }) => {
-  // .env
+  //
 
   return (
     <>
@@ -29,7 +30,7 @@ export const Card = ({
             </div>
             <span>{title}</span>
           </div>
-          <a href={`/movie/${id_movie}`}>Detalhes</a>
+          <Link to={`/movie/${id_movie}`}>Detalhes</Link>
         </div>
       </li>
     </>
