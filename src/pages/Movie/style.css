@@ -1,0 +1,21 @@
+#back {
+  background-color: #f7d354;
+  color: #222222;
+
+  border: 2px solid #ffffff;
+
+  margin-top: 16px;
+  padding: 8px;
+
+  font-weight: 700;
+  font-size: 1.2rem;
+
+  cursor: pointer;
+
+  transition: 0.75s;
+}
+
+button:hover {
+  background-color: #222222;
+  color: #f7d354;
+}
