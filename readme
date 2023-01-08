@@ -22,3 +22,4 @@ Tasks:
   - [x] -> Save the current page -> Top Rated
   - [x] -> Add new propriete in <Pagination/> - current
   - [ ] -> Format detail page numbers
+  - [ ] -> Remove markup in url when page up

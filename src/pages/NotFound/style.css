@@ -1,0 +1,31 @@
+#notFound {
+  width: 100vw;
+  height: 80vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 32px;
+
+  background-color: #222222;
+  color: #f7d354;
+}
+
+#notFound a {
+  background-color: #f7d354;
+  color: #222222;
+
+  border: 2px solid #ffffff;
+
+  padding: 16px;
+
+  font-size: 1.2rem;
+
+  transition: 0.75s;
+}
+#notFound a:hover {
+  background-color: #222222;
+  color: #f7d354;
+}
