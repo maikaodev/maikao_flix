@@ -7,7 +7,7 @@ import { BiCameraMovie, BiSearchAlt2 } from "react-icons/bi";
 export const NavBar = () => {
   return (
     <nav id="navBar">
-      <Link to="/">
+      <Link to="/?page=1">
         <h2>
           <BiCameraMovie />
           MaikaoFlix
