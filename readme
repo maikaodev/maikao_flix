@@ -7,12 +7,12 @@ Tasks:
   - [x] -> Create the component navbar
   - [x] -> Create the component CARD
   - [ ] -> Create the component Alert
-  - [ ] -> Create the component Loading
+  - [x] -> Create the component Loading
 
 - [ ] -> PAGES
 
   - [x] -> Home
-  - [ ] -> Movie/:id
+  - [x] -> Movie/:id
   - [x] -> Create a ' BACK ' button for the old page
   - [x] -> Catch All
 
