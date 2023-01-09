@@ -21,8 +21,12 @@ const Home = () => {
 
   const [currentPage, setCurrentPage] = useSearchParams();
 
-  const getTopRatedMovies = async (url: string) => {
-    const response = await fetch(url);
+  const getTopRatedMovies = async () => {
+    const topRatedUrl = `${movies_url}top_rated?${api_key}&language=pt-BR&page=${currentPage.get(
+      "page"
+    )}&region=BR`;
+
+    const response = await fetch(topRatedUrl);
     const data = await response.json();
 
     try {
@@ -40,28 +44,39 @@ const Home = () => {
     }
   };
 
-  const pagination = (page: number) => {
-    const nextPageTopRatedUrl = `${movies_url}top_rated?${api_key}&language=pt-BR&page=${page}&region=BR`;
-
-    const current_page = {
-      page: page.toString(),
-    };
-
-    setCurrentPage(current_page);
-
-    getTopRatedMovies(nextPageTopRatedUrl);
-  };
+  useEffect(() => {
+    //
+    if (!currentPage.get("page")) {
+      const current_page = {
+        page: "1",
+      };
+      setCurrentPage(current_page);
+    }
+  }, []);
 
   useEffect(() => {
-    const topRatedUrl = `${movies_url}top_rated?${api_key}&language=pt-BR&page=${currentPage.get(
-      "page"
-    )}&region=BR`;
+    getTopRatedMovies();
+  }, [currentPage.get("page")]);
 
-    getTopRatedMovies(topRatedUrl);
-  }, []);
+  console.log("RENDER");
 
   return (
     <section className="container">
+      <div id="pagination">
+        <Pagination
+          defaultCurrent={1}
+          current={Number(currentPage.get("page"))}
+          total={totalPages}
+          onChange={(event) => {
+            //
+            const current_page = {
+              page: event.toString(),
+            };
+
+            setCurrentPage(current_page);
+          }}
+        />
+      </div>
       <ul>
         {topMovies &&
           topMovies.map((movie, index) => {
@@ -82,7 +97,12 @@ const Home = () => {
           current={Number(currentPage.get("page"))}
           total={totalPages}
           onChange={(event) => {
-            pagination(event);
+            //
+            const current_page = {
+              page: event.toString(),
+            };
+
+            setCurrentPage(current_page);
           }}
         />
       </div>

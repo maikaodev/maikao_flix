@@ -14,12 +14,12 @@ Tasks:
   - [x] -> Home
   - [ ] -> Movie/:id
   - [x] -> Create a ' BACK ' button for the old page
-  - [ ] -> Catch All
+  - [x] -> Catch All
 
 - [ ] - Others
   - [x] -> Create pagination for the most rated
   - [x] -> Fixing CSS -> Hover on details changes layout
   - [x] -> Save the current page -> Top Rated
   - [x] -> Add new propriete in <Pagination/> - current
-  - [ ] -> Format detail page numbers
+  - [x] -> Format detail page numbers
   - [ ] -> Remove markup in url when page up

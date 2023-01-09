@@ -25,7 +25,13 @@ export const Details = ({
   runTime,
   title,
 }: DetailsProps) => {
-  console.log(`${api_image}${background_img}`);
+  const formatCurrency = (number: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(number);
+  };
+
   return (
     <div className="content details">
       <img
@@ -41,14 +47,14 @@ export const Details = ({
             <SlWallet />
             <strong>Orçamento:</strong>
           </div>
-          <span>{budget}</span>
+          <span>{formatCurrency(budget)}</span>
         </li>
         <li className="item_details">
           <div>
             <BsGraphUp />
             <strong>Receita:</strong>
           </div>
-          <span>{revenue}</span>
+          <span>{formatCurrency(revenue)}</span>
         </li>
         <li className="item_details">
           <div>
