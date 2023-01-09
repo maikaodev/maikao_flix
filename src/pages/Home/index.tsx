@@ -1,7 +1,7 @@
 import { Pagination } from "antd";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Card } from "../../components";
+import { Card, Loading } from "../../components";
 
 import "./style.css";
 
@@ -18,6 +18,7 @@ type TopMoviesData = {
 const Home = () => {
   const [topMovies, setTopMovies] = useState([{} as TopMoviesData]);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [currentPage, setCurrentPage] = useSearchParams();
 
@@ -42,6 +43,7 @@ const Home = () => {
         alert(error.message);
       }
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -55,58 +57,62 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
     getTopRatedMovies();
   }, [currentPage.get("page")]);
 
-  console.log("RENDER");
-
   return (
-    <section className="container">
-      <div id="pagination">
-        <Pagination
-          defaultCurrent={1}
-          current={Number(currentPage.get("page"))}
-          total={totalPages}
-          onChange={(event) => {
-            //
-            const current_page = {
-              page: event.toString(),
-            };
+    <>
+      {isLoading && <Loading />}
+      {!isLoading && (
+        <section className="container">
+          <div id="pagination">
+            <Pagination
+              defaultCurrent={1}
+              current={Number(currentPage.get("page"))}
+              total={totalPages}
+              onChange={(event) => {
+                //
+                const current_page = {
+                  page: event.toString(),
+                };
 
-            setCurrentPage(current_page);
-          }}
-        />
-      </div>
-      <ul>
-        {topMovies &&
-          topMovies.map((movie, index) => {
-            return (
-              <Card
-                key={index}
-                url_image={movie.backdrop_path}
-                title={movie.title}
-                vote_average={movie.vote_average}
-                id_movie={movie.id}
-              />
-            );
-          })}
-      </ul>
-      <div id="pagination">
-        <Pagination
-          defaultCurrent={1}
-          current={Number(currentPage.get("page"))}
-          total={totalPages}
-          onChange={(event) => {
-            //
-            const current_page = {
-              page: event.toString(),
-            };
+                setCurrentPage(current_page);
+              }}
+            />
+          </div>
+          <ul>
+            {topMovies &&
+              topMovies.map((movie, index) => {
+                return (
+                  <Card
+                    key={index}
+                    url_image={movie.backdrop_path}
+                    title={movie.title}
+                    vote_average={movie.vote_average}
+                    id_movie={movie.id}
+                  />
+                );
+              })}
+          </ul>
+          <div id="pagination">
+            <Pagination
+              defaultCurrent={1}
+              current={Number(currentPage.get("page"))}
+              total={totalPages}
+              onChange={(event) => {
+                //
+                const current_page = {
+                  page: event.toString(),
+                };
 
-            setCurrentPage(current_page);
-          }}
-        />
-      </div>
-    </section>
+                setCurrentPage(current_page);
+              }}
+            />
+          </div>
+        </section>
+      )}
+    </>
   );
 };
 

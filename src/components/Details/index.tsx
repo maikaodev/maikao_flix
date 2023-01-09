@@ -25,6 +25,7 @@ export const Details = ({
   runTime,
   title,
 }: DetailsProps) => {
+  //
   const formatCurrency = (number: number) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",

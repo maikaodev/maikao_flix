@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 // Component
-import { Details } from "../../components";
+import { Details, Loading } from "../../components";
 
 // CSS
 import "./style.css";
@@ -23,6 +23,7 @@ type DetailsData = {
 const Movie = () => {
   //
   const [details, setDetails] = useState({} as DetailsData);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   let { id } = useParams();
 
@@ -42,34 +43,41 @@ const Movie = () => {
     } catch (error: any) {
       alert(error.message);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
     const detailsURL = `${movies_url}${id}?${api_key}&language=pt-BR&page=1&region=BR`;
 
+    setIsLoading(true);
     getDetailsMovies(detailsURL);
   }, []);
 
   return (
     <>
-      <div>
-        <button id="back" onClick={() => navigate(-1)}>
-          Voltar
-        </button>
-        <a id="float_button" href="#navBar">
-          ⬆
-        </a>
-      </div>
-      <section>
-        <Details
-          title={details.title}
-          background_img={details.poster_path}
-          budget={details.budget}
-          revenue={details.revenue}
-          runTime={details.runtime}
-          overView={details.overview}
-        />
-      </section>
+      {isLoading && <Loading />}
+      {!isLoading && (
+        <>
+          <div>
+            <button id="back" onClick={() => navigate(-1)}>
+              Voltar
+            </button>
+            <a id="float_button" href="#navBar">
+              ⬆
+            </a>
+          </div>
+          <section>
+            <Details
+              title={details.title}
+              background_img={details.poster_path}
+              budget={details.budget}
+              revenue={details.revenue}
+              runTime={details.runtime}
+              overView={details.overview}
+            />
+          </section>
+        </>
+      )}
     </>
   );
 };
