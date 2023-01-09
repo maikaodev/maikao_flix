@@ -24,6 +24,7 @@ const Movie = () => {
   //
   const [details, setDetails] = useState({} as DetailsData);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [navigations, setNavigations] = useState<number>(-1);
 
   let { id } = useParams();
 
@@ -59,10 +60,17 @@ const Movie = () => {
       {!isLoading && (
         <>
           <div>
-            <button id="back" onClick={() => navigate(-1)}>
+            <button id="back" onClick={() => navigate(navigations)}>
               Voltar
             </button>
-            <a id="float_button" href="#navBar">
+            <a
+              id="float_button"
+              href="#navBar"
+              onClick={() => {
+                setNavigations((prevCount) => (prevCount += -1));
+                console.log(navigations);
+              }}
+            >
               ⬆
             </a>
           </div>
