@@ -1,6 +1,6 @@
 import { Pagination } from "antd";
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { Card, Loading } from "../../components";
 
 import "./style.css";
@@ -129,7 +129,10 @@ const Search = () => {
       )}
       {filmResearched.length === 0 && (
         <>
-          <h1>Filme não encontrado</h1>
+          <div id="nothingToSeeHere">
+            <h1>Filme não encontrado...</h1>
+            <Link to="/">Voltar para página principal</Link>
+          </div>
         </>
       )}
     </section>
