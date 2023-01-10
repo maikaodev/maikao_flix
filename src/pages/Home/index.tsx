@@ -65,7 +65,7 @@ const Home = () => {
     <>
       {isLoading && <Loading />}
       {!isLoading && (
-        <section className="container">
+        <section className="content">
           <div id="pagination">
             <Pagination
               defaultCurrent={Number(currentPage.get("page"))}

@@ -23,7 +23,7 @@ export const Card = ({
       <li className="item_movie">
         <div className="bg">
           <img src={`${api_image}${url_image}`} alt={title} />
-          <div className="content">
+          <div className="content_average">
             <div className="vote_average">
               <AiFillStar id="star_icon" />
               {vote_average}

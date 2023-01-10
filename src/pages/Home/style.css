@@ -1,40 +1,44 @@
-.container {
+.content {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 100vw;
+
+  margin: 0 auto;
 }
 
-.container #pagination {
+.content #pagination {
   margin: 32px 0;
 }
-.container #pagination ul {
+.content #pagination ul {
   margin: 0 16px;
 }
 
-.container #pagination ul li {
+.content #pagination ul li {
   background-color: #f7d354;
   color: #222222;
 
   margin-bottom: 16px;
   border: none;
 }
-.container #pagination ul li div {
+.content #pagination ul li div {
   display: none;
 }
 
-.container #pagination ul li span svg {
+.content #pagination ul li span svg {
   color: #222222;
 }
-.container #pagination ul li a {
+.content #pagination ul li a {
   font-size: 1.15rem;
 }
-.container #pagination ul .ant-pagination-item-active {
+.content #pagination ul .ant-pagination-item-active {
   background-color: #222222;
   color: #f7d354;
 
   border: 2px solid #ffffff;
 }
 
-.container #pagination ul .ant-pagination-item-active a {
+.content #pagination ul .ant-pagination-item-active a {
   color: #ffffff;
 }

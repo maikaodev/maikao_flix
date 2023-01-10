@@ -69,22 +69,24 @@ const Search = () => {
     <>
       {isLoading && <Loading />}
       {!isLoading && (
-        <section className="container">
-          <div id="pagination">
-            <Pagination
-              defaultCurrent={Number(currentPage.get("page"))}
-              current={Number(currentPage.get("page"))}
-              total={totalPages}
-              onChange={(event) => {
-                //
-                const current_page = {
-                  page: event.toString(),
-                };
+        <section className="content">
+          {totalPages > 1 && (
+            <div id="pagination">
+              <Pagination
+                defaultCurrent={Number(currentPage.get("page"))}
+                current={Number(currentPage.get("page"))}
+                total={totalPages}
+                onChange={(event) => {
+                  //
+                  const current_page = {
+                    page: event.toString(),
+                  };
 
-                setCurrentPage(current_page);
-              }}
-            />
-          </div>
+                  setCurrentPage(current_page);
+                }}
+              />
+            </div>
+          )}
           <ul>
             {topMovies &&
               topMovies.map((movie, index) => {
@@ -103,21 +105,23 @@ const Search = () => {
                 );
               })}
           </ul>
-          <div id="pagination">
-            <Pagination
-              defaultCurrent={Number(currentPage.get("page"))}
-              current={Number(currentPage.get("page"))}
-              total={totalPages}
-              onChange={(event) => {
-                //
-                const current_page = {
-                  page: event.toString(),
-                };
+          {totalPages > 1 && (
+            <div id="pagination">
+              <Pagination
+                defaultCurrent={Number(currentPage.get("page"))}
+                current={Number(currentPage.get("page"))}
+                total={totalPages}
+                onChange={(event) => {
+                  //
+                  const current_page = {
+                    page: event.toString(),
+                  };
 
-                setCurrentPage(current_page);
-              }}
-            />
-          </div>
+                  setCurrentPage(current_page);
+                }}
+              />
+            </div>
+          )}
         </section>
       )}
     </>
