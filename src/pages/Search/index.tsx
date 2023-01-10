@@ -8,7 +8,7 @@ import "./style.css";
 const movies_url_search = import.meta.env.VITE_API_URL_SEARCH;
 const api_key = import.meta.env.VITE_API_KEY;
 
-type TopMoviesData = {
+type FilmResearchedData = {
   poster_path: string;
   backdrop_path: string;
   title: string;
@@ -18,7 +18,10 @@ type TopMoviesData = {
 
 const Search = () => {
   // React
-  const [topMovies, setTopMovies] = useState([{} as TopMoviesData]);
+
+  const [filmResearched, setFilmResearched] = useState([
+    {} as FilmResearchedData,
+  ]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -27,19 +30,19 @@ const Search = () => {
   const [currentPage, setCurrentPage] = useSearchParams();
 
   const getTopRatedMovies = async () => {
-    const movies = `${movies_url_search}/?${api_key}&language=pt-BR&query=${name}&include_adult=false&region=BR`;
+    setIsLoading(true);
+
+    const movies = `${movies_url_search}/?${api_key}&language=pt-BR&query=${name}&page=${currentPage.get(
+      "page"
+    )}&include_adult=false&region=BR`;
 
     const response = await fetch(movies);
     const data = await response.json();
 
-    setIsLoading(true);
-
     try {
       if (response.ok) {
-        setTopMovies(data.results);
+        setFilmResearched(data.results);
         setTotalPages(data.total_pages);
-        console.log(data);
-        console.log(totalPages);
       } else {
         throw new Error("Ocorreu um erro inesperado!");
       }
@@ -63,19 +66,19 @@ const Search = () => {
 
   useEffect(() => {
     getTopRatedMovies();
-  }, [name]);
+  }, [name, currentPage.get("page")]);
 
   return (
-    <>
+    <section className="content">
       {isLoading && <Loading />}
-      {!isLoading && (
-        <section className="content">
+      {!isLoading && filmResearched && (
+        <>
           {totalPages > 1 && (
             <div id="pagination">
               <Pagination
                 defaultCurrent={Number(currentPage.get("page"))}
                 current={Number(currentPage.get("page"))}
-                total={totalPages}
+                total={totalPages * 10}
                 onChange={(event) => {
                   //
                   const current_page = {
@@ -88,8 +91,8 @@ const Search = () => {
             </div>
           )}
           <ul>
-            {topMovies &&
-              topMovies.map((movie, index) => {
+            {filmResearched &&
+              filmResearched.map((movie, index) => {
                 return (
                   <Card
                     key={index}
@@ -110,7 +113,7 @@ const Search = () => {
               <Pagination
                 defaultCurrent={Number(currentPage.get("page"))}
                 current={Number(currentPage.get("page"))}
-                total={totalPages}
+                total={totalPages * 10}
                 onChange={(event) => {
                   //
                   const current_page = {
@@ -122,9 +125,14 @@ const Search = () => {
               />
             </div>
           )}
-        </section>
+        </>
       )}
-    </>
+      {filmResearched.length === 0 && (
+        <>
+          <h1>Filme não encontrado</h1>
+        </>
+      )}
+    </section>
   );
 };
 

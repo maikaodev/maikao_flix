@@ -14,7 +14,7 @@ Tasks:
   - [x] -> Home
   - [x] -> Movie/:id
   - [ ] -> Search/:id
-    - [ ] -> Pagination
+    - [x] -> Pagination
     - [x] -> Layout
       - [x] -> Background without image
   - [x] -> Create a ' BACK ' button for the old page
