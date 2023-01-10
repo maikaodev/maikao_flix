@@ -8,11 +8,13 @@ import "./style.css";
 import { BiCameraMovie, BiSearchAlt2 } from "react-icons/bi";
 
 // TS
-import { FormEvent } from "react";
+import { FormEvent, useRef } from "react";
 
 export const NavBar = () => {
   //
   const navigate = useNavigate();
+
+  const input = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -27,6 +29,7 @@ export const NavBar = () => {
     if (name_movie) {
       navigate(`/${name_movie}`);
     }
+    input.current!.value = "";
   };
   return (
     <nav id="navBar">
@@ -37,7 +40,12 @@ export const NavBar = () => {
         </h2>
       </Link>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="name_movie" placeholder="Buscar..." />
+        <input
+          ref={input}
+          type="text"
+          name="name_movie"
+          placeholder="Buscar..."
+        />
         <button type="submit">
           <BiSearchAlt2 id="icon" />
         </button>
