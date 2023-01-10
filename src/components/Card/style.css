@@ -20,7 +20,7 @@ ul .item_movie .bg {
   background-color: #484848;
 }
 
-ul .item_movie .content {
+ul .item_movie .content_average {
   display: flex;
   flex-direction: column;
 
@@ -37,21 +37,21 @@ ul .item_movie img {
   margin-top: 24px;
 }
 
-ul .item_movie .content span {
+ul .item_movie .content_average span {
   width: 250px;
   height: 55px;
 
   font-size: 1.5rem;
 }
 
-ul .item_movie .content .vote_average {
+ul .item_movie .content_average .vote_average {
   display: flex;
 
   margin-top: 8px;
   margin-bottom: 8px;
 }
 
-ul .item_movie .content .vote_average #star_icon {
+ul .item_movie .content_average .vote_average #star_icon {
   color: #f7d354;
   margin-right: 4px;
 }

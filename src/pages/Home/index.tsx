@@ -34,7 +34,7 @@ const Home = () => {
       if (response.ok) {
         setTopMovies(data.results);
         setTotalPages(data.total_pages);
-        console.log(data);
+        // console.log(data);
       } else {
         throw new Error("Ocorreu um erro inesperado!");
       }
@@ -65,10 +65,10 @@ const Home = () => {
     <>
       {isLoading && <Loading />}
       {!isLoading && (
-        <section className="container">
+        <section className="content">
           <div id="pagination">
             <Pagination
-              defaultCurrent={1}
+              defaultCurrent={Number(currentPage.get("page"))}
               current={Number(currentPage.get("page"))}
               total={totalPages}
               onChange={(event) => {
@@ -97,7 +97,7 @@ const Home = () => {
           </ul>
           <div id="pagination">
             <Pagination
-              defaultCurrent={1}
+              defaultCurrent={Number(currentPage.get("page"))}
               current={Number(currentPage.get("page"))}
               total={totalPages}
               onChange={(event) => {

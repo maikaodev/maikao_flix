@@ -42,3 +42,42 @@
 .content #pagination ul .ant-pagination-item-active a {
   color: #ffffff;
 }
+
+#nothingToSeeHere {
+  height: 80vh;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 16px;
+}
+
+#nothingToSeeHere h1 {
+}
+
+#nothingToSeeHere a {
+  width: 250px;
+
+  background-color: #f7d354;
+  color: #222222;
+  border: 2px solid #222222;
+
+  padding: 16px;
+
+  border-radius: 6px;
+
+  text-align: center;
+  font-weight: 700;
+
+  transition: 0.75s;
+}
+
+#nothingToSeeHere a:hover {
+  background-color: #222222;
+  color: #f7d354;
+
+  border: 2px solid #fff;
+}

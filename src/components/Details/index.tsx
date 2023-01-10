@@ -62,7 +62,7 @@ export const Details = ({
             <CgSandClock />
             <strong>Duração:</strong>
           </div>
-          <span> {runTime}</span>
+          <span> {runTime} min. </span>
         </li>
         <li className="item_details">
           <div>
