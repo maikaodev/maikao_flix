@@ -1,6 +1,31 @@
 # MaikaoFlix
 
-Tasks:
+🚧
+
+## PROJETO EM DESENVOLVIMENTO 
+
+🚧
+
+## Menu
+
+- [Descrição](#Descrição)
+- [Deploy](#Deploy)
+- [Linkedin](#Linkedin)
+- [Tasks](#Tasks)
+
+
+### Deploy
+
+https://encontreseuendereco.netlify.app/
+
+### Linkedin
+
+https://www.linkedin.com/in/maikaodev/
+
+### Descrição
+- Projeto em desenvolvimento. O projeto consome uma [API](https://developers.themoviedb.org/3) onde obtém todo tipo de dado relacionado a filmes e séries. 
+
+### Tasks:
 
 - [ ] -> COMPONENTS
 
@@ -9,7 +34,7 @@ Tasks:
   - [ ] -> Create the component Alert
   - [x] -> Create the component Loading
 
-- [ ] -> PAGES
+- [x] -> PAGES
 
   - [x] -> Home
   - [x] -> Movie/:id
@@ -27,3 +52,17 @@ Tasks:
   - [x] -> Add new propriete in <Pagination/> - current
   - [x] -> Format detail page numbers
   - [ ] -> Remove markup in url when page up
+  
+  ## Coming soon
+
+  - [ ] -> Create a new homepage layout
+  - [ ] -> Change the default environment variable to make it more flexible
+  - [ ] -> Improve the layout of posters
+  - [ ] -> On the home page add a preview of movies and series
+  - [ ] -> Add more information about what is searched
+  - [ ] -> Create a navigation menu for series, movies and tv
+  - [ ] -> Tests
+   - [ ] -> Unit test
+   - [ ] -> Unit e2e
+  - [ ] -> MOCK
+  - [ ] -> Error boundaries
