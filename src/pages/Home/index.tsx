@@ -4,6 +4,7 @@ import { BiSearchAlt2 } from "react-icons/bi";
 import "./style.css";
 
 type TopMoviesData = {
+  name: string;
   backdrop_path: string;
   title: string;
   vote_average: number;
@@ -27,7 +28,7 @@ const Home = () => {
     try {
       if (response.ok) {
         setTopRated(data.results);
-        // console.log(data);
+        console.log(data.results);
       } else {
         throw new Error("Ocorreu um erro inesperado!");
       }
@@ -40,6 +41,9 @@ const Home = () => {
 
   const handleClick = (event: any) => {
     const value = event.target.attributes[0].value;
+
+    if (value === searchTopic) return;
+
     setSearchTopic(value);
   };
 
@@ -97,7 +101,7 @@ const Home = () => {
                       <Card
                         key={index}
                         url_image={movie.backdrop_path}
-                        title={movie.title}
+                        title={movie.title || movie.name}
                         vote_average={movie.vote_average}
                         id_movie={movie.id}
                       />
