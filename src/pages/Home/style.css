@@ -96,7 +96,7 @@ main #overview_top_rated div #nav {
 
   margin: 8px 0;
 }
-main #overview_top_rated div #nav li {
+main #overview_top_rated div #nav li button {
   background-color: #2e9abf;
   color: #222222;
 
@@ -112,7 +112,7 @@ main #overview_top_rated div #nav li {
 
   transition: all 0.75s;
 }
-main #overview_top_rated div #nav li:hover {
+main #overview_top_rated div #nav li button:hover {
   background-color: #02f2ff;
   color: #222222;
 
