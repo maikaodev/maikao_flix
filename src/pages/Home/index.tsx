@@ -1,117 +1,60 @@
-import { Pagination } from "antd";
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { Card, Loading } from "../../components";
-
+import { BiSearchAlt2 } from "react-icons/bi";
 import "./style.css";
 
-const movies_url = import.meta.env.VITE_API_URL_DEFAULT;
-const api_key = import.meta.env.VITE_API_KEY;
-
-type TopMoviesData = {
-  backdrop_path: string;
-  title: string;
-  vote_average: number;
-  id: number;
-};
-
 const Home = () => {
-  const [topMovies, setTopMovies] = useState([{} as TopMoviesData]);
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const [currentPage, setCurrentPage] = useSearchParams();
-
-  const getTopRatedMovies = async () => {
-    const topRatedUrl = `${movies_url}top_rated?${api_key}&language=pt-BR&page=${currentPage.get(
-      "page"
-    )}&region=BR`;
-
-    const response = await fetch(topRatedUrl);
-    const data = await response.json();
-
-    try {
-      if (response.ok) {
-        setTopMovies(data.results);
-        setTotalPages(data.total_pages);
-        // console.log(data);
-      } else {
-        throw new Error("Ocorreu um erro inesperado!");
-      }
-    } catch (error: any) {
-      if (error) {
-        alert(error.message);
-      }
-    }
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    //
-    if (!currentPage.get("page")) {
-      const current_page = {
-        page: "1",
-      };
-      setCurrentPage(current_page);
-    }
-  }, []);
-
-  useEffect(() => {
-    setIsLoading(true);
-    getTopRatedMovies();
-  }, [currentPage.get("page")]);
-
   return (
     <>
-      {isLoading && <Loading />}
-      {!isLoading && (
-        <section className="content">
-          <div id="pagination">
-            <Pagination
-              defaultCurrent={Number(currentPage.get("page"))}
-              current={Number(currentPage.get("page"))}
-              total={totalPages}
-              onChange={(event) => {
-                //
-                const current_page = {
-                  page: event.toString(),
-                };
-
-                setCurrentPage(current_page);
-              }}
+      <div id="container">
+        {/* HEADER */}
+        <header>
+          <h1>Bem-vindo(a).</h1>
+          <h2>Milhares de filmes, séries para descobrir. Explore já!</h2>
+          <form onSubmit={(event) => event.preventDefault()}>
+            <input
+              type="text"
+              name="procurando"
+              placeholder="Buscar por um Filme ou Série..."
             />
-          </div>
-          <ul>
-            {topMovies &&
-              topMovies.map((movie, index) => {
-                return (
-                  <Card
-                    key={index}
-                    url_image={movie.backdrop_path}
-                    title={movie.title}
-                    vote_average={movie.vote_average}
-                    id_movie={movie.id}
-                  />
-                );
-              })}
-          </ul>
-          <div id="pagination">
-            <Pagination
-              defaultCurrent={Number(currentPage.get("page"))}
-              current={Number(currentPage.get("page"))}
-              total={totalPages}
-              onChange={(event) => {
-                //
-                const current_page = {
-                  page: event.toString(),
-                };
+            <button type="submit">
+              <BiSearchAlt2 id="icon" />
+            </button>
+          </form>
+        </header>
+        {/* HEADER */}
 
-                setCurrentPage(current_page);
-              }}
-            />
-          </div>
-        </section>
-      )}
+        {/* MAIN */}
+        <main>
+          <section id="overview_top_rated">
+            <div>
+              <h2>Os mais populares</h2>
+              <ul id="nav">
+                <li>Na TV</li>
+                <li>Nos Cinemas</li>
+              </ul>
+            </div>
+            <div id="card_list">
+              <ul>
+                <li>Cartaz</li>
+                <li>Cartaz</li>
+                <li>Cartaz</li>
+                <li>Cartaz</li>
+                <li>Cartaz</li>
+                <li>Cartaz</li>
+                <li>Cartaz</li>
+              </ul>
+            </div>
+          </section>
+        </main>
+        {/* MAIN */}
+
+        <footer>
+          Desenvolvido por{" "}
+          <a href="https://github.com/maikaodev" target="_blank">
+            maikaodev
+          </a>
+          &copy; 2023
+        </footer>
+      </div>
     </>
   );
 };

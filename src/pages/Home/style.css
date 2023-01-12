@@ -1,44 +1,136 @@
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+@keyframes changeBg {
+  0% {
+    background: #2e9abf;
+  }
+  25% {
+    background: #60d394;
+  }
+  50% {
+    background: #51e293;
+  }
+  75% {
+    background: #0aabe3;
+  }
+  100% {
+    background: #04ade9;
+  }
+}
 
+#container {
   width: 100vw;
+  height: 100vh;
 
   margin: 0 auto;
 }
+header {
+  display: flex;
+  flex-direction: column;
 
-.content #pagination {
-  margin: 32px 0;
-}
-.content #pagination ul {
-  margin: 0 16px;
-}
+  color: black;
 
-.content #pagination ul li {
-  background-color: #f7d354;
-  color: #222222;
+  gap: 16px;
 
+  animation: changeBg 5s infinite alternate linear;
+
+  padding: 16px;
   margin-bottom: 16px;
-  border: none;
 }
-.content #pagination ul li div {
-  display: none;
+header h1 {
+  font-weight: 700;
 }
 
-.content #pagination ul li span svg {
+header h2 {
+  font-weight: 400;
+}
+
+header form {
+  display: flex;
+  align-items: center;
+}
+
+header form input {
+  width: 280px;
+
+  font-weight: 400;
+  font-size: 1.1rem;
+
+  border: none;
+
+  padding: 12px 16px;
+
+  -webkit-box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px,
+    5px 5px 15px 5px rgba(0, 0, 0, 0);
+  box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+}
+header form input:focus-visible {
+  outline: none;
+}
+
+header form button {
+  background: transparent;
+  border: none;
+  padding: 8px;
+
+  cursor: pointer;
+}
+header form button:hover {
+  background: transparent;
+  border: none;
+
   color: #222222;
 }
-.content #pagination ul li a {
-  font-size: 1.15rem;
-}
-.content #pagination ul .ant-pagination-item-active {
-  background-color: #222222;
-  color: #f7d354;
 
-  border: 2px solid #ffffff;
+header form #icon {
+  width: 26px;
+  height: 26px;
 }
 
-.content #pagination ul .ant-pagination-item-active a {
-  color: #ffffff;
+main #overview_top_rated {
+  padding: 16px;
+}
+main #overview_top_rated div #nav {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  margin: 8px 0;
+}
+main #overview_top_rated div #nav li {
+  background-color: #2e9abf;
+  color: #222222;
+
+  border: 2px solid #2e9abf;
+
+  padding: 8px 16px;
+
+  border-radius: 4px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: all 0.75s;
+}
+main #overview_top_rated div #nav li:hover {
+  background-color: #02f2ff;
+  color: #222222;
+
+  border: 2px solid #02f2ff;
+}
+
+footer {
+  text-align: center;
+
+  font-size: 1.1rem;
+}
+
+footer a {
+  margin-right: 8px;
+}
+
+@media (min-width: 768px) {
+  #container {
+    width: 80vw;
+  }
 }
