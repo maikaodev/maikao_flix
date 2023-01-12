@@ -10,11 +10,13 @@ export const Card = ({
   title,
   vote_average,
   id_movie,
+  search_topic,
 }: {
   url_image: string;
   title: string;
   vote_average: number;
   id_movie: number;
+  search_topic: string;
 }) => {
   //
 
@@ -36,7 +38,7 @@ export const Card = ({
             </div>
           </div>
 
-          <Link to={`/movie/${id_movie}`}>{title}</Link>
+          <Link to={`/${search_topic}/${id_movie}`}>{title}</Link>
         </div>
       </li>
     </>
