@@ -10,27 +10,35 @@ export const Card = ({
   title,
   vote_average,
   id_movie,
+  search_topic,
 }: {
   url_image: string;
   title: string;
   vote_average: number;
   id_movie: number;
+  search_topic: string;
 }) => {
   //
 
   return (
     <>
       <li className="item_movie">
-        <div className="bg">
-          <img src={`${api_image}${url_image}`} alt={title} />
-          <div className="content_average">
+        <div className="card">
+          <div id="background">
+            <img
+              src={`${api_image}${url_image}`}
+              alt={title}
+              width={150}
+              height={200}
+            />
+
             <div className="vote_average">
               <AiFillStar id="star_icon" />
-              {vote_average}
+              <span>{vote_average}</span>
             </div>
-            <span>{title}</span>
           </div>
-          <Link to={`/movie/${id_movie}`}>Detalhes</Link>
+
+          <Link to={`/${search_topic}/${id_movie}`}>{title}</Link>
         </div>
       </li>
     </>

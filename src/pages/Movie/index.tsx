@@ -26,7 +26,7 @@ const Movie = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [navigations, setNavigations] = useState<number>(-1);
 
-  let { id } = useParams();
+  let { id, searchTopic } = useParams();
 
   const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ const Movie = () => {
   };
 
   useEffect(() => {
-    const detailsURL = `${movies_url}${id}?${api_key}&language=pt-BR&page=1&region=BR`;
+    const detailsURL = `${movies_url}${searchTopic}/${id}?${api_key}&language=pt-BR&page=1&region=BR`;
 
     setIsLoading(true);
     getDetailsMovies(detailsURL);

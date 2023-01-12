@@ -1,5 +1,5 @@
 * {
-  font-family: Helvetica;
+  font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,8 +7,8 @@
 :root {
   --bg-color: #222;
   --font-color: #ffffff;
-  --link-color: #f7d354;
-  --link-color-hover: #b8930c;
+  --link-color: #04ade9;
+  --link-color-hover: #02f2ff;
 }
 
 body {

@@ -1,106 +1,79 @@
 ul {
   list-style: none;
-}
-ul .item_movie {
-  width: 300px;
-  height: 500px;
-
-  margin: 0 auto;
-
-  margin-bottom: 32px;
-}
-
-ul .item_movie .bg {
-  width: 300px;
 
   display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  background-color: #484848;
+  gap: 16px;
+  overflow: auto;
 }
-
-ul .item_movie .content_average {
-  display: flex;
-  flex-direction: column;
-
-  margin: 16px 0;
-}
-
-ul .item_movie img {
-  width: 250px;
-
-  height: 250px;
-
+ul .item_movie .card img {
   object-fit: cover;
 
-  margin-top: 24px;
-}
-
-ul .item_movie .content_average span {
-  width: 250px;
-  height: 55px;
-
-  font-size: 1.5rem;
-}
-
-ul .item_movie .content_average .vote_average {
-  display: flex;
-
-  margin-top: 8px;
   margin-bottom: 8px;
+
+  -webkit-box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px,
+    5px 5px 15px 5px rgba(0, 0, 0, 0);
+  box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 
-ul .item_movie .content_average .vote_average #star_icon {
-  color: #f7d354;
-  margin-right: 4px;
+ul .item_movie .card #background {
+  position: relative;
 }
 
-ul .item_movie a {
-  width: 250px;
+ul .item_movie .card #background .vote_average {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  background-color: #f7d354;
-  color: #222222;
+  height: 45px;
+  width: 45px;
 
-  padding: 16px;
+  background-color: #001a1b;
 
-  margin: 16px 0 24px 0;
+  border-radius: 50%;
 
-  border-radius: 6px;
+  border: 1px solid #fff;
 
-  text-align: center;
   font-weight: 700;
+  font-size: 0.9rem;
 
-  transition: 0.75s;
-}
-.item_movie a:hover {
-  background-color: #222222;
-  color: #f7d354;
+  position: absolute;
 
-  border: 2px solid #fff;
+  right: 6px;
+  bottom: 14px;
+}
+ul .item_movie .card #background .vote_average #star_icon {
+  margin-right: 4px;
+
+  color: #02f2ff;
+}
+ul .item_movie .card a {
+  display: block;
+
+  color: #ffffff;
+
+  font-size: 1.1rem;
+
+  margin-bottom: 16px;
+
+  cursor: pointer;
+}
+ul .item_movie .card a:hover {
+  color: #ffffff;
 }
 
-@media (min-width: 768px) {
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
-@media (min-width: 1024px) {
-  ul {
-    width: 80%;
-    margin: 0 auto;
-  }
-  ul .item_movie {
-    width: 350px;
-  }
+::-webkit-scrollbar {
+  width: 10px;
+  height: 12px;
 }
 
-@media (min-width: 1440px) {
-  ul {
-    width: 100%;
-  }
-  ul .item_movie {
-    width: 300px;
-  }
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

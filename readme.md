@@ -2,7 +2,7 @@
 
 🚧
 
-## PROJETO EM DESENVOLVIMENTO 
+## PROJETO EM DESENVOLVIMENTO
 
 🚧
 
@@ -13,7 +13,6 @@
 - [Linkedin](#Linkedin)
 - [Tarefas](#Tarefas)
 
-
 ### Deploy
 
 https://maikaoflix.netlify.app/?page=1
@@ -23,7 +22,8 @@ https://maikaoflix.netlify.app/?page=1
 https://www.linkedin.com/in/maikaodev/
 
 ### Descrição
-- Projeto em desenvolvimento. O projeto consome uma [API](https://developers.themoviedb.org/3) onde obtém todo tipo de dado relacionado a filmes e séries. 
+
+- Projeto em desenvolvimento. O projeto consome uma [API](https://developers.themoviedb.org/3) onde obtém todo tipo de dado relacionado a filmes e séries.
 
 ### Tarefas:
 
@@ -52,15 +52,14 @@ https://www.linkedin.com/in/maikaodev/
   - [x] -> Format detail page numbers
   - [x] -> Criar um botão ' VOLTAR ' para página anterior
   - [ ] -> Remove markup in url when page up
-  - [ ] -> Criar um novo layout para página inicial
-  - [ ] -> Mudar a variáveis de ambiente para deixar mais flexível
-  - [ ] -> Melhorar o layout dos cartazes
+  - [x] -> Criar um novo layout para página inicial
+  - [x] -> Mudar a variáveis de ambiente para deixar mais flexível
+  - [x] -> Melhorar o layout dos cartazes
   - [ ] -> Colocar na página inicial uma pré-visualização dos mais avaliados(filmes e séries)
   - [ ] -> Adicionar mais informações nos detalhes
   - [ ] -> Criar um menu de navegação para séries, filmes e TV
-  
- - [ ] -> Testes
-  - [ ] -> Testes unitários
-  - [ ] -> Teste de ponta a ponta
- - [ ] -> MOCK
- - [ ] -> Error boundaries
+- [ ] -> Testes
+- [ ] -> Testes unitários
+- [ ] -> Teste de ponta a ponta
+- [ ] -> MOCK
+- [ ] -> Error boundaries
