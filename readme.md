@@ -57,7 +57,7 @@ https://www.linkedin.com/in/maikaodev/
   - [x] -> Colocar na página inicial uma pré-visualização dos mais avaliados(filmes e séries)
   - [x] -> Adicionar mais informações nos detalhes
   - [ ] -> Adicionar coleções nos detalhes
-  - [ ] -> Adicionar recomendações nos detalhes
+  - [x] -> Adicionar recomendações nos detalhes
   - [ ] -> Criar um menu de navegação para séries, filmes e TV
   - [ ] -> Adicionar minhas redes sociais
 - [ ] -> Testes

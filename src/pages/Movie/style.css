@@ -39,3 +39,16 @@ div #float_button {
 
   cursor: pointer;
 }
+#recommendations {
+  margin-left: 16px;
+}
+#recommendations h2 {
+  margin: 16px 0;
+}
+@media (min-width: 1024px) {
+  #recommendations {
+    width: 80vw;
+
+    margin: 0 auto;
+  }
+}

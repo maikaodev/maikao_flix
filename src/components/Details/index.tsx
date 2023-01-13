@@ -54,10 +54,6 @@ export const Details = ({
     return `${textHours} ${textMinutes}`;
   };
 
-  console.log();
-
-  console.log("[GENRES]===> ", genres);
-
   return (
     <div className="content_details">
       <img
