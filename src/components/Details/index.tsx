@@ -8,6 +8,8 @@ import "./style.css";
 
 const api_image = import.meta.env.VITE_API_IMG;
 
+type genres = {};
+
 type DetailsProps = {
   background_img: string;
   budget: number;
@@ -15,6 +17,8 @@ type DetailsProps = {
   runTime: number;
   overView: string;
   title: string;
+  release_date: string;
+  genres: [{ name: string }];
 };
 
 export const Details = ({
@@ -24,6 +28,8 @@ export const Details = ({
   revenue,
   runTime,
   title,
+  release_date,
+  genres,
 }: DetailsProps) => {
   //
   const formatCurrency = (number: number) => {
@@ -33,45 +39,87 @@ export const Details = ({
     }).format(number);
   };
 
+  const releaseData = (date: any) => {
+    const convertDate = new Date(date).getFullYear();
+
+    return convertDate;
+  };
+
+  const converterMinutesInHoures = (minutes: number) => {
+    const hours = Math.floor(minutes / 60);
+    const min = minutes % 60;
+    const textHours = `${hours}hr`;
+    const textMinutes = `${min}min`;
+
+    return `${textHours} ${textMinutes}`;
+  };
+
   return (
-    <div className="content details">
+    <div className="content_details">
       <img
         id="img"
         src={`${api_image}${background_img}`}
         alt={title}
-        height={450}
+        height={400}
         width={300}
       />
-      <ul>
-        <li className="item_details">
-          <div>
-            <SlWallet />
-            <strong>Orçamento:</strong>
-          </div>
-          <span>{formatCurrency(budget)}</span>
-        </li>
-        <li className="item_details">
-          <div>
-            <BsGraphUp />
-            <strong>Receita:</strong>
-          </div>
-          <span>{formatCurrency(revenue)}</span>
-        </li>
-        <li className="item_details">
-          <div>
-            <CgSandClock />
-            <strong>Duração:</strong>
-          </div>
-          <span> {runTime} min. </span>
-        </li>
-        <li className="item_details">
-          <div>
-            <MdDescription />
-            <strong>Descrição:</strong>
-          </div>
-          <p>{overView}</p>
-        </li>
-      </ul>
+      <section>
+        {/* HEADER */}
+        <div id="header_movie">
+          <h2>
+            {title} ({releaseData(release_date)})
+          </h2>
+          <ul id="genre_list">
+            <>
+              {genres &&
+                genres.map((genre) => {
+                  return (
+                    <>
+                      <li key={genre.name}>{genre.name}</li>
+                      <span>-</span>
+                    </>
+                  );
+                })}
+            </>
+            <div id="runtime">
+              <CgSandClock />
+              <span> {converterMinutesInHoures(runTime)}</span>
+            </div>
+          </ul>
+        </div>
+        {/* HEADER */}
+
+        {/* DESCRIPTION */}
+        <ul id="details_list">
+          {budget > 0 && (
+            <li className="item_details">
+              <div>
+                <SlWallet />
+                <strong>Orçamento :</strong>
+              </div>
+              <span>{formatCurrency(budget)}</span>
+            </li>
+          )}
+          {revenue > 0 && (
+            <li className="item_details">
+              <div>
+                <BsGraphUp />
+                <strong>Receita :</strong>
+              </div>
+              <span>{formatCurrency(revenue)}</span>
+            </li>
+          )}
+
+          <li className="item_details">
+            <div>
+              <MdDescription />
+              <strong>Sinopse :</strong>
+            </div>
+            <p id="synopsis">{overView}</p>
+          </li>
+        </ul>
+        {/* DESCRIPTION */}
+      </section>
     </div>
   );
 };

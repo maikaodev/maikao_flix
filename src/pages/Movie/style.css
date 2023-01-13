@@ -1,8 +1,8 @@
 #back {
-  background-color: #f7d354;
+  background-color: #2e9abf;
   color: #222222;
 
-  border: 2px solid #ffffff;
+  border: 2px solid #2e9abf;
 
   margin-top: 16px;
   padding: 8px;
@@ -15,13 +15,11 @@
   transition: 0.75s;
 }
 
-button:hover {
-  background-color: #222222;
-  color: #f7d354;
-}
 div #float_button {
-  background-color: #f7d354;
+  background-color: #2e9abf;
   color: #222222;
+
+  border: 2px solid #2e9abf;
 
   width: 50px;
   height: 50px;
@@ -35,7 +33,28 @@ div #float_button {
   right: 10px;
 
   border-radius: 50%;
-  border: 2px solid #ffffff;
 
   cursor: pointer;
+}
+
+#back:hover,
+div #float_button:hover {
+  background-color: #02f2ff;
+  color: #222222;
+
+  border: 2px solid #02f2ff;
+}
+
+#recommendations {
+  margin-left: 16px;
+}
+#recommendations h2 {
+  margin: 16px 0;
+}
+@media (min-width: 1024px) {
+  #recommendations {
+    width: 80vw;
+
+    margin: 0 auto;
+  }
 }
