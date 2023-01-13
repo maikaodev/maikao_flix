@@ -32,7 +32,7 @@ export const NavBar = () => {
     input.current!.value = "";
   };
   return (
-    <nav id="navBar">
+    <nav id="topo">
       <Link to="/?page=1">
         <h2>
           <BiCameraMovie />

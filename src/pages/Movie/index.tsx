@@ -99,7 +99,7 @@ const Movie = () => {
             </button>
             <a
               id="float_button"
-              href="#navBar"
+              href="#topo"
               onClick={() => {
                 setNavigations((prevCount) => (prevCount += -1));
                 console.log(navigations);
@@ -132,7 +132,7 @@ const Movie = () => {
                       title={movie.title || movie.name}
                       vote_average={movie.vote_average}
                       id_movie={movie.id}
-                      search_topic={searchTopic}
+                      search_topic={searchTopic!}
                     />
                   );
                 })}
