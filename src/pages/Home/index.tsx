@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
 import "./style.css";
 
-type TopMoviesData = {
+export type TopMoviesData = {
   name: string;
   backdrop_path: string;
+  poster_path: string;
   title: string;
   vote_average: number;
   id: number;
@@ -100,7 +101,7 @@ const Home = () => {
                     return (
                       <Card
                         key={index}
-                        url_image={movie.backdrop_path}
+                        url_image={movie.backdrop_path || movie.poster_path}
                         title={movie.title || movie.name}
                         vote_average={movie.vote_average}
                         id_movie={movie.id}
