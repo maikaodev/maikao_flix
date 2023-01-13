@@ -51,13 +51,15 @@ https://www.linkedin.com/in/maikaodev/
   - [x] -> Add new propriete in <Pagination/> - current
   - [x] -> Format detail page numbers
   - [x] -> Criar um botão ' VOLTAR ' para página anterior
-  - [ ] -> Remove markup in url when page up
   - [x] -> Criar um novo layout para página inicial
   - [x] -> Mudar a variáveis de ambiente para deixar mais flexível
   - [x] -> Melhorar o layout dos cartazes
-  - [ ] -> Colocar na página inicial uma pré-visualização dos mais avaliados(filmes e séries)
-  - [ ] -> Adicionar mais informações nos detalhes
+  - [x] -> Colocar na página inicial uma pré-visualização dos mais avaliados(filmes e séries)
+  - [x] -> Adicionar mais informações nos detalhes
+  - [ ] -> Adicionar coleções nos detalhes
+  - [ ] -> Adicionar recomendações nos detalhes
   - [ ] -> Criar um menu de navegação para séries, filmes e TV
+  - [ ] -> Adicionar minhas redes sociais
 - [ ] -> Testes
 - [ ] -> Testes unitários
 - [ ] -> Teste de ponta a ponta

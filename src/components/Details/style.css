@@ -1,58 +1,91 @@
-.content.details {
+.content_details {
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  margin: 16px;
+  width: 100vw;
 }
 
-.content.details #img {
-  margin: 40px 0;
-}
+.content_details img {
+  border-radius: 8px;
 
-.content.details ul .item_details {
-  display: flex;
-  flex-direction: column;
-
-  margin: 16px 0;
-
-  font-weight: 700;
-}
-
-.content.details ul .item_details div {
-  display: flex;
-  align-items: center;
-}
-
-.content.details ul .item_details p {
   margin-top: 16px;
 
-  font-weight: 300;
+  -webkit-box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px,
+    5px 5px 15px 5px rgba(0, 0, 0, 0);
+  box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+}
+
+.content_details section #header_movie {
+  margin-bottom: 16px;
+}
+
+.content_details section #header_movie h2 {
+  text-align: center;
+
+  margin: 16px 0 8px 0;
+}
+.content_details section #header_movie #genre_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.content_details section #header_movie #genre_list #runtime {
+  display: flex;
+  align-items: center;
+}
+.content_details section #details_list {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 32px;
+  margin-left: 16px;
+}
+.content_details section #details_list .item_details div {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 4px;
+}
+.content_details section #details_list .item_details div svg {
   font-size: 1.2rem;
-}
 
-.content.details ul .item_details span {
-  font-weight: 300;
-  margin-top: 4px;
-}
+  margin-right: 8px;
 
-.content.details ul .item_details svg {
-  margin-right: 6px;
-
-  font-size: 1.3rem;
-
-  color: #f7d354;
+  color: #02f2ff;
 }
 
 @media (min-width: 768px) {
-  .content.details {
-    width: 500px;
+  .content_details {
+    flex-direction: row;
+  }
+  .content_details section #header_movie h2 {
+    text-align: left;
+    margin-left: 16px;
+  }
+  .content_details section #header_movie #genre_list {
+    justify-content: start;
+
+    margin-left: 16px;
+  }
+  .content_details section #details_list {
+    margin-top: 0;
+  }
+
+  .content_details section #details_list .item_details #synopsis {
+    width: 480px;
+  }
+}
+@media (min-width: 1024px) {
+  .content_details {
+    width: 80vw;
 
     margin: 0 auto;
   }
 
-  .content.details ul {
-    display: flex;
-    flex-direction: column;
+  .content_details section #details_list .item_details #synopsis {
+    width: 600px;
   }
+}
+@media (min-width: 1440px) {
 }

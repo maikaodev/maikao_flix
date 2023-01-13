@@ -12,6 +12,8 @@ const movies_url = import.meta.env.VITE_API_URL_DEFAULT;
 const api_key = import.meta.env.VITE_API_KEY;
 
 type DetailsData = {
+  genres: [{ name: string }];
+  release_date: string;
   title: string;
   poster_path: string;
   budget: number;
@@ -82,6 +84,8 @@ const Movie = () => {
               revenue={details.revenue}
               runTime={details.runtime}
               overView={details.overview}
+              release_date={details.release_date}
+              genres={details.genres}
             />
           </section>
         </>
