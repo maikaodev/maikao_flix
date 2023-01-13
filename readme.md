@@ -56,10 +56,10 @@ https://www.linkedin.com/in/maikaodev/
   - [x] -> Melhorar o layout dos cartazes
   - [x] -> Colocar na página inicial uma pré-visualização dos mais avaliados(filmes e séries)
   - [x] -> Adicionar mais informações nos detalhes
-  - [ ] -> Adicionar coleções nos detalhes
   - [x] -> Adicionar recomendações nos detalhes
+  - [ ] -> Adicionar coleções nos detalhes
   - [ ] -> Criar um menu de navegação para séries, filmes e TV
-  - [ ] -> Adicionar minhas redes sociais
+  - [x] -> Adicionar minhas redes sociais
 - [ ] -> Testes
 - [ ] -> Testes unitários
 - [ ] -> Teste de ponta a ponta

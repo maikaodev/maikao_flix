@@ -1,55 +1,32 @@
 nav {
   display: flex;
-  flex-direction: column;
   align-items: center;
-
-  margin-top: 16px;
+  justify-content: space-between;
 }
 
 nav h2 {
   font-size: 2rem;
-}
-
-nav form {
-  display: flex;
-  align-items: center;
-
-  position: relative;
-
   margin: 16px 0;
 }
 
-nav form input {
-  padding: 10px 16px;
+#social_network_list {
+  display: flex;
+  flex-direction: column;
 
-  width: 250px;
+  margin-right: 16px;
+  list-style: none;
+}
+#social_network_list .social_network {
+  margin-top: 8px;
+}
+#social_network_list .social_network a {
+  padding: 8px;
 
-  font-weight: 700;
-
-  border-radius: 4px;
-
-  border: 2px solid gray;
+  display: flex;
 }
 
-nav form input:focus {
-  outline: none;
-}
-
-nav form button {
-  padding: 10px;
-
-  background-color: transparent;
-
-  border: none;
-
-  color: #222;
-
-  position: absolute;
-
-  top: 2px;
-  right: 4px;
-
-  cursor: pointer;
+#social_network_list .social_network a svg {
+  font-size: 20px;
 }
 
 @media (min-width: 768px) {
@@ -58,5 +35,20 @@ nav form button {
     justify-content: space-between;
 
     margin: 0 40px;
+  }
+
+  nav h2 #icon {
+    display: inline-block;
+  }
+  #social_network_list {
+    flex-direction: row;
+  }
+  #social_network_list .social_network a {
+    padding: 16px;
+
+    display: flex;
+  }
+  #social_network_list .social_network a svg {
+    font-size: 20px;
   }
 }

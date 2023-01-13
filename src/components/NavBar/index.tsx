@@ -5,7 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 
 // Icons
-import { BiCameraMovie, BiSearchAlt2 } from "react-icons/bi";
+import { BiCameraMovie } from "react-icons/bi";
+import { FiGithub } from "react-icons/fi";
+import { MdContactPage } from "react-icons/md";
+import { SiGmail } from "react-icons/si";
+import { SlSocialLinkedin } from "react-icons/sl";
 
 // TS
 import { FormEvent, useRef } from "react";
@@ -35,21 +39,32 @@ export const NavBar = () => {
     <nav id="topo">
       <Link to="/?page=1">
         <h2>
-          <BiCameraMovie />
+          <BiCameraMovie id="icon" />
           MaikaoFlix
         </h2>
       </Link>
-      <form onSubmit={handleSubmit}>
-        <input
-          ref={input}
-          type="text"
-          name="name_movie"
-          placeholder="Buscar..."
-        />
-        <button type="submit">
-          <BiSearchAlt2 id="icon" />
-        </button>
-      </form>
+      <div id="social_network_list">
+        <li className="social_network">
+          <a href="https://www.linkedin.com/in/maikaodev/" target="_blank">
+            <SlSocialLinkedin />
+          </a>
+        </li>
+        <li className="social_network">
+          <a href="https://github.com/maikaodev" target="_blank">
+            <FiGithub />
+          </a>
+        </li>
+        <li className="social_network">
+          <a href="mailto:maikao.dev@gmail.com" target="_blank">
+            <SiGmail />
+          </a>
+        </li>
+        <li className="social_network">
+          <a href="https://portfolio-maikaodev.netlify.app/" target="_blank">
+            <MdContactPage />
+          </a>
+        </li>
+      </div>
     </nav>
   );
 };
