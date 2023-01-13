@@ -1,8 +1,6 @@
 .content_details {
   display: flex;
   flex-direction: column;
-  align-items: center;
-
   width: 100vw;
 }
 
@@ -27,9 +25,12 @@
 }
 .content_details section #header_movie #genre_list {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
 }
+.content_details section #header_movie #genre_list div {
+  display: flex;
+  gap: 4px;
+}
+
 .content_details section #header_movie #genre_list #runtime {
   display: flex;
   align-items: center;

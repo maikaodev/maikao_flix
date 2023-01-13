@@ -81,7 +81,6 @@ export const Details = ({
                   );
                 })}
             </>
-
             <div id="runtime">
               <CgSandClock />
               <span> {converterMinutesInHoures(runTime)}</span>
@@ -92,20 +91,25 @@ export const Details = ({
 
         {/* DESCRIPTION */}
         <ul id="details_list">
-          <li className="item_details">
-            <div>
-              <SlWallet />
-              <strong>Orçamento :</strong>
-            </div>
-            <span>{formatCurrency(budget)}</span>
-          </li>
-          <li className="item_details">
-            <div>
-              <BsGraphUp />
-              <strong>Receita :</strong>
-            </div>
-            <span>{formatCurrency(revenue)}</span>
-          </li>
+          {budget > 0 && (
+            <li className="item_details">
+              <div>
+                <SlWallet />
+                <strong>Orçamento :</strong>
+              </div>
+              <span>{formatCurrency(budget)}</span>
+            </li>
+          )}
+          {revenue > 0 && (
+            <li className="item_details">
+              <div>
+                <BsGraphUp />
+                <strong>Receita :</strong>
+              </div>
+              <span>{formatCurrency(revenue)}</span>
+            </li>
+          )}
+
           <li className="item_details">
             <div>
               <MdDescription />
