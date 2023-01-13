@@ -16,7 +16,7 @@ export const Card = ({
   title: string;
   vote_average: number;
   id_movie: number;
-  search_topic: string;
+  search_topic?: string;
 }) => {
   //
 
