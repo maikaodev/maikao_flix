@@ -1,94 +1,78 @@
-@keyframes changeBg {
-  0% {
-    background: #2e9abf;
-  }
-  25% {
-    background: #60d394;
-  }
-  50% {
-    background: #51e293;
-  }
-  75% {
-    background: #0aabe3;
-  }
-  100% {
-    background: #04ade9;
-  }
-}
-
 #container {
   width: 100vw;
   height: 100vh;
 
   margin: 0 auto;
+  overflow-y: auto;
 }
-header {
+#header {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  color: black;
+  color: #ffffff;
+
+  width: 280px;
+
+  margin: 32px auto;
+
+  text-align: center;
 
   gap: 16px;
-
-  animation: changeBg 5s infinite alternate linear;
-
-  padding: 16px;
-  margin-bottom: 16px;
 }
-header h1 {
-  font-weight: 700;
+#header h2 {
+  font-size: 1.3rem;
 }
 
-header h2 {
-  font-weight: 400;
-}
-
-header form {
+#header form {
   display: flex;
   align-items: center;
 }
 
-header form input {
-  width: 280px;
+#header form input {
+  width: 200px;
 
   font-weight: 400;
-  font-size: 1.1rem;
+  font-size: 0.75rem;
 
   border: none;
 
   padding: 12px 16px;
 
-  -webkit-box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px,
-    5px 5px 15px 5px rgba(0, 0, 0, 0);
-  box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+  -webkit-box-shadow: rgb(0, 0, 0) -10px 0px 13px -7px,
+    rgb(0, 0, 0) 10px 0px 13px -7px, 0px 0px 9px -2px rgba(255, 255, 255, 0.97);
+  box-shadow: rgb(0, 0, 0) -10px 0px 13px -7px, rgb(0, 0, 0) 10px 0px 13px -7px,
+    0px 0px 9px -2px rgba(255, 255, 255, 0.97);
 }
-header form input:focus-visible {
+
+#header form input:focus-visible {
   outline: none;
 }
 
-header form button {
+#header form button {
   background: transparent;
   border: none;
   padding: 8px;
 
+  color: #ffffff;
+
   cursor: pointer;
 }
-header form button:hover {
+#header form button:hover {
   background: transparent;
   border: none;
-
-  color: #222222;
 }
 
-header form #icon {
+#header form #icon {
   width: 26px;
   height: 26px;
 }
 
-main #overview_top_rated {
+#overview_top_rated {
   padding: 16px;
 }
-main #overview_top_rated div #nav {
+#overview_top_rated div #nav {
   display: flex;
   align-items: center;
 
@@ -96,7 +80,7 @@ main #overview_top_rated div #nav {
 
   margin: 8px 0;
 }
-main #overview_top_rated div #nav li button {
+#overview_top_rated div #nav li button {
   background-color: #2e9abf;
   color: #222222;
 
@@ -112,25 +96,18 @@ main #overview_top_rated div #nav li button {
 
   transition: all 0.75s;
 }
-main #overview_top_rated div #nav li button:hover {
+#overview_top_rated div #nav li button:hover {
   background-color: #02f2ff;
   color: #222222;
 
   border: 2px solid #02f2ff;
 }
 
-footer {
-  text-align: center;
-
-  font-size: 1.1rem;
-}
-
-footer a {
-  margin-right: 8px;
-}
-
 @media (min-width: 768px) {
-  #container {
-    width: 80vw;
+  #header {
+    width: 500px;
+  }
+  #header form input {
+    width: 300px;
   }
 }

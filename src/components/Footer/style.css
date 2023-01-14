@@ -1,0 +1,41 @@
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 16px 0;
+}
+
+#social_network_list {
+  display: flex;
+  align-items: center;
+
+  list-style: none;
+}
+
+#social_network_list .social_network a {
+  padding: 8px;
+
+  display: flex;
+}
+
+#social_network_list .social_network a svg {
+  font-size: 20px;
+}
+
+@media (min-width: 768px) {
+  nav h2 #icon {
+    display: inline-block;
+  }
+  #social_network_list {
+    flex-direction: row;
+  }
+  #social_network_list .social_network a {
+    padding: 16px;
+
+    display: flex;
+  }
+  #social_network_list .social_network a svg {
+    font-size: 20px;
+  }
+}
