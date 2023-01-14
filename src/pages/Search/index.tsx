@@ -5,10 +5,11 @@ import { Card, Loading } from "../../components";
 
 import "./style.css";
 
-const movies_url_search = import.meta.env.VITE_API_URL_SEARCH;
+const movies_url_default = import.meta.env.VITE_API_URL_DEFAULT;
 const api_key = import.meta.env.VITE_API_KEY;
 
 type FilmResearchedData = {
+  name: string;
   poster_path: string;
   backdrop_path: string;
   title: string;
@@ -32,7 +33,7 @@ const Search = () => {
   const getTopRatedMovies = async () => {
     setIsLoading(true);
 
-    const movies = `${movies_url_search}/?${api_key}&language=pt-BR&query=${name}&page=${currentPage.get(
+    const movies = `${movies_url_default}search/multi?${api_key}&language=pt-BR&query=${name}&page=${currentPage.get(
       "page"
     )}&include_adult=false&region=BR`;
 
@@ -43,6 +44,7 @@ const Search = () => {
       if (response.ok) {
         setFilmResearched(data.results);
         setTotalPages(data.total_pages);
+        console.log(data.results);
       } else {
         throw new Error("Ocorreu um erro inesperado!");
       }
@@ -101,7 +103,7 @@ const Search = () => {
                         ? movie.backdrop_path
                         : movie.poster_path
                     }
-                    title={movie.title}
+                    title={movie.title || movie.name}
                     vote_average={movie.vote_average}
                     id_movie={movie.id}
                   />
