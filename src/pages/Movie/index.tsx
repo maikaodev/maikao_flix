@@ -132,7 +132,7 @@ const Movie = () => {
                       title={movie.title || movie.name}
                       vote_average={movie.vote_average}
                       id_movie={movie.id}
-                      search_topic={searchTopic}
+                      search_topic={searchTopic || movie.media_type}
                     />
                   );
                 })}
