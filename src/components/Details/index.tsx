@@ -71,7 +71,7 @@ export const Details = ({
           </h2>
           <ul id="genre_list">
             <>
-              {genres.length > 0 &&
+              {genres &&
                 genres.map((genre) => {
                   return (
                     <>
@@ -117,7 +117,7 @@ export const Details = ({
               <MdDescription />
               <strong>Sinopse :</strong>
             </div>
-            <p id="synopsis">{overView}</p>
+            <p id="synopsis">{overView === "" && "Não tem sinopse... "}</p>
           </li>
         </ul>
         {/* DESCRIPTION */}
