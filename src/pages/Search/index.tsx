@@ -9,6 +9,7 @@ const movies_url_default = import.meta.env.VITE_API_URL_DEFAULT;
 const api_key = import.meta.env.VITE_API_KEY;
 
 type FilmResearchedData = {
+  media_type: string;
   name: string;
   poster_path: string;
   backdrop_path: string;
@@ -106,6 +107,7 @@ const Search = () => {
                     title={movie.title || movie.name}
                     vote_average={movie.vote_average}
                     id_movie={movie.id}
+                    search_topic={"movie"}
                   />
                 );
               })}
