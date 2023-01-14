@@ -71,7 +71,7 @@ export const Details = ({
           </h2>
           <ul id="genre_list">
             <>
-              {genres &&
+              {genres.length > 0 &&
                 genres.map((genre) => {
                   return (
                     <>
@@ -81,10 +81,12 @@ export const Details = ({
                   );
                 })}
             </>
-            <div id="runtime">
-              <CgSandClock />
-              <span> {converterMinutesInHoures(runTime)}</span>
-            </div>
+            {runTime > 0 && (
+              <div id="runtime">
+                <CgSandClock />
+                <span> {converterMinutesInHoures(runTime)}</span>
+              </div>
+            )}
           </ul>
         </div>
         {/* HEADER */}
