@@ -58,8 +58,9 @@ https://www.linkedin.com/in/maikaodev/
   - [x] -> Adicionar mais informações nos detalhes
   - [x] -> Adicionar recomendações nos detalhes
   - [ ] -> Adicionar coleções nos detalhes
-  - [ ] -> Criar um menu de navegação para séries, filmes e TV
+  - [ ] -> Criar um menu de navegação para filmes e TV
   - [x] -> Adicionar minhas redes sociais
+  - [x] -> Remover as redes sociais do header e por no footer como layout padrão
 - [ ] -> Testes
 - [ ] -> Testes unitários
 - [ ] -> Teste de ponta a ponta
