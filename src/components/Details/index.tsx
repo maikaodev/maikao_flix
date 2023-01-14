@@ -81,10 +81,12 @@ export const Details = ({
                   );
                 })}
             </>
-            <div id="runtime">
-              <CgSandClock />
-              <span> {converterMinutesInHoures(runTime)}</span>
-            </div>
+            {runTime > 0 && (
+              <div id="runtime">
+                <CgSandClock />
+                <span> {converterMinutesInHoures(runTime)}</span>
+              </div>
+            )}
           </ul>
         </div>
         {/* HEADER */}
@@ -115,7 +117,7 @@ export const Details = ({
               <MdDescription />
               <strong>Sinopse :</strong>
             </div>
-            <p id="synopsis">{overView}</p>
+            <p id="synopsis">{overView === "" && "Não tem sinopse... "}</p>
           </li>
         </ul>
         {/* DESCRIPTION */}

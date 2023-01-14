@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 export type TopMoviesData = {
+  media_type: string;
   name: string;
   backdrop_path: string;
   poster_path: string;
@@ -123,7 +124,7 @@ const Home = () => {
                     title={movie.title || movie.name}
                     vote_average={movie.vote_average}
                     id_movie={movie.id}
-                    search_topic={searchTopic}
+                    search_topic={searchTopic || movie.media_type}
                   />
                 );
               })}

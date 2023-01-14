@@ -120,11 +120,11 @@ const Movie = () => {
               genres={details.genres}
             />
           </section>
-          <section id="recommendations">
-            <h2>Recomendações</h2>
-            <ul>
-              {recommendations &&
-                recommendations.map((movie, index) => {
+          {recommendations.length > 0 && (
+            <section id="recommendations">
+              <h2>Recomendações</h2>
+              <ul>
+                {recommendations.map((movie, index) => {
                   return (
                     <Card
                       key={index + 1}
@@ -132,12 +132,13 @@ const Movie = () => {
                       title={movie.title || movie.name}
                       vote_average={movie.vote_average}
                       id_movie={movie.id}
-                      search_topic={searchTopic}
+                      search_topic={searchTopic || movie.media_type}
                     />
                   );
                 })}
-            </ul>
-          </section>
+              </ul>
+            </section>
+          )}
         </>
       )}
     </>
