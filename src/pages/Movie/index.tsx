@@ -120,11 +120,11 @@ const Movie = () => {
               genres={details.genres}
             />
           </section>
-          <section id="recommendations">
-            <h2>Recomendações</h2>
-            <ul>
-              {recommendations &&
-                recommendations.map((movie, index) => {
+          {recommendations.length > 0 && (
+            <section id="recommendations">
+              <h2>Recomendações</h2>
+              <ul>
+                {recommendations.map((movie, index) => {
                   return (
                     <Card
                       key={index + 1}
@@ -136,8 +136,9 @@ const Movie = () => {
                     />
                   );
                 })}
-            </ul>
-          </section>
+              </ul>
+            </section>
+          )}
         </>
       )}
     </>
