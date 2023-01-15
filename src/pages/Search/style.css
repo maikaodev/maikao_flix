@@ -5,42 +5,52 @@
 
   width: 100vw;
 
-  margin: 0 auto;
+  margin: 16px auto;
 }
 
 .content #pagination {
   margin: 32px 0;
 }
-.content #pagination ul {
+.content #pagination {
   margin: 0 16px;
 }
 
-.content #pagination ul li {
-  background-color: #f7d354;
+.content ul {
+  width: 800px;
+}
+.content #pagination .ant-pagination {
+  justify-content: center;
+
+  margin: 16px 0;
+}
+.content #pagination li {
+  background-color: #2e9abf;
   color: #222222;
 
+  border: 2px solid #2e9abf;
   margin-bottom: 16px;
   border: none;
 }
-.content #pagination ul li div {
+
+.content #pagination li div {
   display: none;
 }
 
-.content #pagination ul li span svg {
-  color: #222222;
+.content #pagination li span svg {
+  color: #ffff;
 }
-.content #pagination ul li a {
+.content #pagination li a {
   font-size: 1.15rem;
 }
-.content #pagination ul .ant-pagination-item-active {
-  background-color: #222222;
-  color: #f7d354;
+.content #pagination .ant-pagination-item-active {
+  background-color: #02f2ff;
+  color: #222222;
 
-  border: 2px solid #ffffff;
+  border: 2px solid #02f2ff;
 }
 
-.content #pagination ul .ant-pagination-item-active a {
-  color: #ffffff;
+.content #pagination .ant-pagination-item-active a {
+  color: #222222;
 }
 
 #nothingToSeeHere {
@@ -55,15 +65,13 @@
   gap: 16px;
 }
 
-#nothingToSeeHere h1 {
-}
-
 #nothingToSeeHere a {
   width: 250px;
 
-  background-color: #f7d354;
+  background-color: #2e9abf;
   color: #222222;
-  border: 2px solid #222222;
+
+  border: 2px solid #2e9abf;
 
   padding: 16px;
 
@@ -76,8 +84,8 @@
 }
 
 #nothingToSeeHere a:hover {
-  background-color: #222222;
-  color: #f7d354;
+  background-color: #02f2ff;
+  color: #222222;
 
-  border: 2px solid #fff;
+  border: 2px solid #02f2ff;
 }

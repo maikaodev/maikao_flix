@@ -72,74 +72,76 @@ const Search = () => {
   }, [name, currentPage.get("page")]);
 
   return (
-    <section className="content">
-      {isLoading && <Loading />}
-      {!isLoading && filmResearched && (
-        <>
-          {totalPages > 1 && (
-            <div id="pagination">
-              <Pagination
-                defaultCurrent={Number(currentPage.get("page"))}
-                current={Number(currentPage.get("page"))}
-                total={totalPages * 10}
-                onChange={(event) => {
-                  //
-                  const current_page = {
-                    page: event.toString(),
-                  };
+    <main>
+      <section className="content">
+        {isLoading && <Loading />}
+        {!isLoading && filmResearched && (
+          <>
+            {totalPages > 1 && (
+              <div id="pagination">
+                <Pagination
+                  defaultCurrent={Number(currentPage.get("page"))}
+                  current={Number(currentPage.get("page"))}
+                  total={totalPages * 10}
+                  onChange={(event) => {
+                    //
+                    const current_page = {
+                      page: event.toString(),
+                    };
 
-                  setCurrentPage(current_page);
-                }}
-              />
-            </div>
-          )}
-          <ul>
-            {filmResearched &&
-              filmResearched.map((movie, index) => {
-                return (
-                  <Card
-                    key={index}
-                    url_image={
-                      movie.backdrop_path
-                        ? movie.backdrop_path
-                        : movie.poster_path
-                    }
-                    title={movie.title || movie.name}
-                    vote_average={movie.vote_average}
-                    id_movie={movie.id}
-                    search_topic={"movie"}
-                  />
-                );
-              })}
-          </ul>
-          {totalPages > 1 && (
-            <div id="pagination">
-              <Pagination
-                defaultCurrent={Number(currentPage.get("page"))}
-                current={Number(currentPage.get("page"))}
-                total={totalPages * 10}
-                onChange={(event) => {
-                  //
-                  const current_page = {
-                    page: event.toString(),
-                  };
+                    setCurrentPage(current_page);
+                  }}
+                />
+              </div>
+            )}
+            <ul>
+              {filmResearched &&
+                filmResearched.map((movie, index) => {
+                  return (
+                    <Card
+                      key={index}
+                      url_image={
+                        movie.backdrop_path
+                          ? movie.backdrop_path
+                          : movie.poster_path
+                      }
+                      title={movie.title || movie.name}
+                      vote_average={movie.vote_average}
+                      id_movie={movie.id}
+                      search_topic={"movie"}
+                    />
+                  );
+                })}
+            </ul>
+            {totalPages > 1 && (
+              <div id="pagination">
+                <Pagination
+                  defaultCurrent={Number(currentPage.get("page"))}
+                  current={Number(currentPage.get("page"))}
+                  total={totalPages * 10}
+                  onChange={(event) => {
+                    //
+                    const current_page = {
+                      page: event.toString(),
+                    };
 
-                  setCurrentPage(current_page);
-                }}
-              />
+                    setCurrentPage(current_page);
+                  }}
+                />
+              </div>
+            )}
+          </>
+        )}
+        {filmResearched.length === 0 && (
+          <>
+            <div id="nothingToSeeHere">
+              <h1>Filme não encontrado...</h1>
+              <Link to="/">Voltar para página principal</Link>
             </div>
-          )}
-        </>
-      )}
-      {filmResearched.length === 0 && (
-        <>
-          <div id="nothingToSeeHere">
-            <h1>Filme não encontrado...</h1>
-            <Link to="/">Voltar para página principal</Link>
-          </div>
-        </>
-      )}
-    </section>
+          </>
+        )}
+      </section>
+    </main>
   );
 };
 
