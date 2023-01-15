@@ -68,9 +68,10 @@
 #nothingToSeeHere a {
   width: 250px;
 
-  background-color: #f7d354;
+  background-color: #2e9abf;
   color: #222222;
-  border: 2px solid #222222;
+
+  border: 2px solid #2e9abf;
 
   padding: 16px;
 
@@ -83,8 +84,8 @@
 }
 
 #nothingToSeeHere a:hover {
-  background-color: #222222;
-  color: #f7d354;
+  background-color: #02f2ff;
+  color: #222222;
 
-  border: 2px solid #fff;
+  border: 2px solid #02f2ff;
 }
