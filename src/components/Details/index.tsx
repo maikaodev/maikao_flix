@@ -117,7 +117,7 @@ export const Details = ({
               <MdDescription />
               <strong>Sinopse :</strong>
             </div>
-            <p id="synopsis">{overView === "" && "Não tem sinopse... "}</p>
+            <p id="synopsis">{overView || "Não tem sinopse... "}</p>
           </li>
         </ul>
         {/* DESCRIPTION */}
