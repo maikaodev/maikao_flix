@@ -35,7 +35,7 @@ export const Card = ({
 
               <div className="vote_average">
                 <AiFillStar id="star_icon" />
-                <span>{vote_average}</span>
+                <span>{vote_average.toFixed(1)}</span>
               </div>
             </div>
 
