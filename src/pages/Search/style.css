@@ -1,11 +1,11 @@
 .content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 
   width: 100vw;
-
-  margin: 16px auto;
+  height: 100%;
 }
 
 .content #pagination {
@@ -16,7 +16,7 @@
 }
 
 .content ul {
-  width: 800px;
+  width: 80vw;
 }
 .content #pagination .ant-pagination {
   justify-content: center;

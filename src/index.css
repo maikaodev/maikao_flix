@@ -25,3 +25,14 @@ a {
 a:hover {
   color: var(--link-color-hover);
 }
+
+header {
+  height: 10vh;
+}
+main {
+  height: 75vh;
+}
+
+footer {
+  height: 10vh;
+}
