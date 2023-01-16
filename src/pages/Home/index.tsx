@@ -4,6 +4,8 @@ import { BiSearchAlt2 } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 
+import { fetchData } from "@/utils/fetchData";
+
 export type TopMoviesData = {
   media_type: string;
   name: string;
@@ -25,29 +27,18 @@ const Home = () => {
     //
     const topRatedUrl = `${movies_url}${searchTopic}/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
 
-    const response = await fetch(topRatedUrl);
-    const data = await response.json();
+    const data = await fetchData(topRatedUrl);
 
-    try {
-      if (response.ok) {
-        setTopRated(data.results);
-        console.log(data.results);
-      } else {
-        throw new Error("Ocorreu um erro inesperado!");
-      }
-    } catch (error: any) {
-      if (error) {
-        alert(error.message);
-      }
-    }
+    setTopRated(data.results);
   };
 
-  const handleClick = (event: any) => {
-    const value = event.target.attributes[0].value;
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    // const value:HTMLButtonElement = event.target.attributes[0].value;
+    const value: HTMLButtonElement = event.currentTarget;
 
-    if (value === searchTopic) return;
+    if (value.name === searchTopic) return;
 
-    setSearchTopic(value);
+    setSearchTopic(value.name);
   };
 
   const navigate = useNavigate();
@@ -102,12 +93,12 @@ const Home = () => {
           <h2>Os mais populares</h2>
           <ul id="nav">
             <li>
-              <button onClick={handleClick} data-value="tv">
+              <button onClick={handleClick} name="tv">
                 Na TV
               </button>
             </li>
             <li>
-              <button onClick={handleClick} data-value="movie">
+              <button onClick={handleClick} name="movie">
                 Nos Cinemas
               </button>
             </li>
