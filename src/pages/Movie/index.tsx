@@ -85,7 +85,6 @@ const Movie = () => {
               href="#topo"
               onClick={() => {
                 setNavigations((prevCount) => (prevCount += -1));
-                console.log(navigations);
               }}
             >
               ⬆
@@ -110,7 +109,7 @@ const Movie = () => {
                 {recommendations.map((movie, index) => {
                   return (
                     <Card
-                      key={index + 1}
+                      key={index}
                       url_image={movie.backdrop_path || movie.poster_path}
                       title={movie.title || movie.name}
                       vote_average={movie.vote_average}
