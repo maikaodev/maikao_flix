@@ -4,11 +4,15 @@ import { CgSandClock } from "react-icons/cg";
 import { MdDescription } from "react-icons/md";
 import { SlWallet } from "react-icons/sl";
 
+// CSS
 import "./style.css";
 
-const api_image = import.meta.env.VITE_API_IMG;
+// Functions - utils
+import { convertMinutesToHours } from "@/utils/convertMinutesToHours";
+import { formatCurrency } from "@/utils/formatCurrency";
+import { releaseData } from "@/utils/releaseData";
 
-type genres = {};
+const api_image = import.meta.env.VITE_API_IMG;
 
 type DetailsProps = {
   background_img: string;
@@ -32,27 +36,6 @@ export const Details = ({
   genres,
 }: DetailsProps) => {
   //
-  const formatCurrency = (number: number) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(number);
-  };
-
-  const releaseData = (date: any) => {
-    const convertDate = new Date(date).getFullYear();
-
-    return convertDate;
-  };
-
-  const converterMinutesInHoures = (minutes: number) => {
-    const hours = Math.floor(minutes / 60);
-    const min = minutes % 60;
-    const textHours = `${hours}hr`;
-    const textMinutes = `${min}min`;
-
-    return `${textHours} ${textMinutes}`;
-  };
 
   return (
     <div className="content_details">
@@ -67,7 +50,7 @@ export const Details = ({
         {/* HEADER */}
         <div id="header_movie">
           <h2>
-            {title} ({releaseData(release_date)})
+            {title} ({releaseData(new Date(release_date))})
           </h2>
           <ul id="genre_list">
             <>
@@ -84,7 +67,7 @@ export const Details = ({
             {runTime > 0 && (
               <div id="runtime">
                 <CgSandClock />
-                <span> {converterMinutesInHoures(runTime)}</span>
+                <span> {convertMinutesToHours(runTime)}</span>
               </div>
             )}
           </ul>
