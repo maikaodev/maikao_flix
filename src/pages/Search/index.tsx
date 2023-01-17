@@ -66,24 +66,7 @@ const Search = () => {
         {isLoading && <Loading />}
         {!isLoading && filmResearched && (
           <>
-            {totalPages > 1 && (
-              <div id="pagination">
-                <Pagination
-                  defaultCurrent={Number(currentPage.get("page"))}
-                  current={Number(currentPage.get("page"))}
-                  total={totalPages * 10}
-                  onChange={(event) => {
-                    //
-                    const current_page = {
-                      page: event.toString(),
-                    };
-
-                    setCurrentPage(current_page);
-                  }}
-                />
-              </div>
-            )}
-            <ul>
+            <ul id="card_list">
               {filmResearched &&
                 filmResearched.map((movie, index) => {
                   return (
@@ -105,6 +88,7 @@ const Search = () => {
             {totalPages > 1 && (
               <div id="pagination">
                 <Pagination
+                  simple
                   defaultCurrent={Number(currentPage.get("page"))}
                   current={Number(currentPage.get("page"))}
                   total={totalPages * 10}

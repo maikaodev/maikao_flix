@@ -2,51 +2,49 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
-  width: 90vw;
+  width: 80vw;
   height: 100%;
 
-  margin: 0 auto;
+  margin: auto;
 }
 
-.content ul {
-  width: 80vw;
-}
 .content #pagination .ant-pagination {
   justify-content: center;
 
-  margin: 16px 0;
+  margin-top: 16px;
 }
 .content #pagination li {
+  color: #ffffff;
+}
+.content #pagination li input,
+.content #pagination li button {
   background-color: #2e9abf;
   color: #222222;
 
   border: 2px solid #2e9abf;
-  margin-bottom: 16px;
-  border: none;
-}
 
-.content #pagination li div {
-  display: none;
+  transition: 0.75s;
 }
-
-.content #pagination li span svg {
-  color: #ffff;
-}
-.content #pagination li a {
-  font-size: 1.15rem;
-}
-.content #pagination .ant-pagination-item-active {
+.content #pagination li button:hover {
   background-color: #02f2ff;
-  color: #222222;
 
   border: 2px solid #02f2ff;
 }
 
-.content #pagination .ant-pagination-item-active a {
-  color: #222222;
+.content #pagination li input {
+  pointer-events: none;
 }
 
+.content #pagination li button span svg {
+  color: #ffff;
+}
+.content #card_list {
+  width: 80vw;
+
+  margin-top: 16px;
+}
 #nothingToSeeHere {
   height: 80vh;
   width: 100vw;

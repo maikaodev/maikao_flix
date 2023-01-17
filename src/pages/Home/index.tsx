@@ -72,7 +72,7 @@ const Home = () => {
   return (
     <main id="container">
       {/* HEADER */}
-      <header id="header">
+      <div id="header">
         <h2>Milhares de filmes, séries para descobrir. Explore já!</h2>
         <form onSubmit={handleSubmit}>
           <input
@@ -84,7 +84,7 @@ const Home = () => {
             <BiSearchAlt2 id="icon" />
           </button>
         </form>
-      </header>
+      </div>
       {/* HEADER */}
 
       {/* CONTENT */}
@@ -104,23 +104,21 @@ const Home = () => {
             </li>
           </ul>
         </div>
-        <div id="card_list">
-          <ul>
-            {topRated &&
-              topRated.map((movie, index) => {
-                return (
-                  <Card
-                    key={index}
-                    url_image={movie.backdrop_path || movie.poster_path}
-                    title={movie.title || movie.name}
-                    vote_average={movie.vote_average}
-                    id_movie={movie.id}
-                    search_topic={searchTopic || movie.media_type}
-                  />
-                );
-              })}
-          </ul>
-        </div>
+        <ul id="#card_list">
+          {topRated &&
+            topRated.map((movie, index) => {
+              return (
+                <Card
+                  key={index}
+                  url_image={movie.backdrop_path || movie.poster_path}
+                  title={movie.title || movie.name}
+                  vote_average={movie.vote_average}
+                  id_movie={movie.id}
+                  search_topic={searchTopic || movie.media_type}
+                />
+              );
+            })}
+        </ul>
       </section>
       {/* MAIN */}
     </main>
