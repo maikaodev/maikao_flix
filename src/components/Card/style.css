@@ -3,7 +3,7 @@ ul {
 
   display: flex;
   gap: 16px;
-  overflow: auto;
+  overflow: auto hidden;
 }
 ul .item_movie .card img {
   object-fit: cover;

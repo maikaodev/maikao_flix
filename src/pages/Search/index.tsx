@@ -1,3 +1,4 @@
+import { fetchData } from "@/utils/fetchData";
 import { Pagination } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
@@ -38,22 +39,10 @@ const Search = () => {
       "page"
     )}&include_adult=false&region=BR`;
 
-    const response = await fetch(movies);
-    const data = await response.json();
+    const data = await fetchData(movies);
+    setFilmResearched(data.results);
+    setTotalPages(data.total_pages);
 
-    try {
-      if (response.ok) {
-        setFilmResearched(data.results);
-        setTotalPages(data.total_pages);
-        console.log(data.results);
-      } else {
-        throw new Error("Ocorreu um erro inesperado!");
-      }
-    } catch (error: any) {
-      if (error) {
-        alert(error.message);
-      }
-    }
     setIsLoading(false);
   };
 

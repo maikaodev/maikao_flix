@@ -59,7 +59,7 @@ export const Details = ({
                   return (
                     <>
                       <li key={genre.name}>{genre.name}</li>
-                      <span>-</span>
+                      {genres.length > 1 && <span>-</span>}
                     </>
                   );
                 })}

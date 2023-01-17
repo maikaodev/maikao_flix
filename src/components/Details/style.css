@@ -1,13 +1,12 @@
 .content_details {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100vw;
 }
 
 .content_details img {
   border-radius: 8px;
-
-  margin-top: 16px;
 
   -webkit-box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px,
     5px 5px 15px 5px rgba(0, 0, 0, 0);
@@ -25,6 +24,8 @@
 }
 .content_details section #header_movie #genre_list {
   display: flex;
+
+  margin-left: 16px;
 }
 .content_details section #header_movie #genre_list div {
   display: flex;
@@ -59,6 +60,7 @@
 @media (min-width: 768px) {
   .content_details {
     flex-direction: row;
+    align-items: flex-start;
   }
   .content_details section #header_movie h2 {
     text-align: left;

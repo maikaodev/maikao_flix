@@ -39,7 +39,7 @@ export const Card = ({
               </div>
             </div>
 
-            <Link to={`/${search_topic}/${id_movie}`}>{title}</Link>
+            <Link to={`/detalhes/${search_topic}/${id_movie}`}>{title}</Link>
           </div>
         </li>
       )}

@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // Components
 import App from "./App";
+import About from "./pages/About";
 import Home from "./pages/Home";
-import Movie from "./pages/Movie";
 import NotFound from "./pages/NotFound";
 import Search from "./pages/Search";
 
@@ -18,8 +18,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <Routes>
         <Route element={<App />}>
           <Route path="/" element={<Home />} />
-          <Route path="/:name" element={<Search />} />
-          <Route path="/:searchTopic/:id" element={<Movie />} />
+          <Route path="/procurando/:name" element={<Search />} />
+          <Route path="/detalhes/:searchTopic/:id" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
