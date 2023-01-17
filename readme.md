@@ -57,8 +57,9 @@ https://www.linkedin.com/in/maikaodev/
   - [x] -> Colocar na página inicial uma pré-visualização dos mais avaliados(filmes e séries)
   - [x] -> Adicionar mais informações nos detalhes
   - [x] -> Adicionar recomendações nos detalhes
-  - [ ] -> Adicionar coleções nos detalhes
-  - [ ] -> Criar um menu de navegação para filmes e TV
+  - [x] -> Adicionar coleções nos detalhes
+  - [ ] -> Adicionar vídeos nos detalhes
+  - [ ] -> Criar um menu de navegação para filmes, tv
   - [x] -> Adicionar minhas redes sociais
   - [x] -> Remover as redes sociais do header e por no footer como layout padrão
 - [ ] -> Testes
