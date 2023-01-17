@@ -56,7 +56,7 @@ const Home = () => {
       alert("Insira um nome válido");
     }
     if (searching) {
-      navigate(`/${searching}`);
+      navigate(`/procurando/${searching}`);
     }
     input.current!.value = "";
   };
