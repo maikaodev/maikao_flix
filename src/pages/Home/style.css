@@ -1,9 +1,5 @@
 #container {
-  width: 100vw;
-  height: 100vh;
-
   margin: 0 auto;
-  overflow-y: auto;
 }
 #header {
   display: flex;
@@ -71,6 +67,9 @@
 
 #overview_top_rated {
   padding: 16px;
+  width: 80vw;
+
+  margin: 0 auto;
 }
 #overview_top_rated div #nav {
   display: flex;
