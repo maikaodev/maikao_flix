@@ -17,6 +17,8 @@ import { fetchData } from "@/utils/fetchData";
 import { TopMoviesData } from "../Home";
 
 type DetailsData = {
+  first_air_date: string;
+  name: string;
   genres: [{ name: string }];
   release_date: string;
   title: string;
@@ -27,7 +29,7 @@ type DetailsData = {
   overview: string;
 };
 
-const Movie = () => {
+const About = () => {
   //
   const [details, setDetails] = useState({} as DetailsData);
   const [recommendations, setRecommendations] = useState([{} as TopMoviesData]);
@@ -45,6 +47,8 @@ const Movie = () => {
     const data = await fetchData(detailsURL);
 
     setDetails(data);
+
+    console.log("[DATA] ", data);
 
     setIsLoading(false);
   };
@@ -92,13 +96,13 @@ const Movie = () => {
           </div>
           <section>
             <Details
-              title={details.title}
+              title={details.title || details.name}
               background_img={details.poster_path}
               budget={details.budget}
               revenue={details.revenue}
               runTime={details.runtime}
               overView={details.overview}
-              release_date={details.release_date}
+              release_date={details.release_date || details.first_air_date}
               genres={details.genres}
             />
           </section>
@@ -127,4 +131,4 @@ const Movie = () => {
   );
 };
 
-export default Movie;
+export default About;
