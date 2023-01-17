@@ -2,10 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-}
 
+  width: 80%;
+
+  margin: 0 auto;
+}
 .content_details img {
+  margin-top: 16px;
+
   border-radius: 8px;
 
   -webkit-box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px,
@@ -18,70 +22,52 @@
 }
 
 .content_details section #header_movie h2 {
-  text-align: center;
-
-  margin: 16px 0 8px 0;
+  margin-top: 16px;
+  margin-bottom: 8px;
 }
+
 .content_details section #header_movie #genre_list {
-  display: flex;
-
-  margin-left: 16px;
-}
-.content_details section #header_movie #genre_list div {
-  display: flex;
-  gap: 4px;
+  align-items: center;
 }
 
 .content_details section #header_movie #genre_list #runtime {
   display: flex;
   align-items: center;
+  width: 100px;
 }
+
+.content_details section #header_movie #genre_list #runtime svg {
+  font-size: 1.5rem;
+}
+
 .content_details section #details_list {
   display: flex;
   flex-direction: column;
-
-  margin-top: 32px;
-  margin-left: 16px;
 }
+
 .content_details section #details_list .item_details div {
   display: flex;
   align-items: center;
 
   margin-bottom: 4px;
 }
-.content_details section #details_list .item_details div svg {
-  font-size: 1.2rem;
 
-  margin-right: 8px;
+.content_details section #details_list .item_details div svg {
+  font-size: 1.5rem;
+
+  margin-right: 4px;
 
   color: #02f2ff;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .content_details {
     flex-direction: row;
     align-items: flex-start;
-  }
-  .content_details section #header_movie h2 {
-    text-align: left;
-    margin-left: 16px;
-  }
-  .content_details section #header_movie #genre_list {
-    justify-content: start;
 
-    margin-left: 16px;
-  }
-  .content_details section #details_list {
-    margin-top: 0;
-  }
+    width: 1000px;
 
-  .content_details section #details_list .item_details #synopsis {
-    width: 480px;
-  }
-}
-@media (min-width: 1024px) {
-  .content_details {
-    width: 80vw;
+    gap: 16px;
 
     margin: 0 auto;
   }
@@ -89,6 +75,4 @@
   .content_details section #details_list .item_details #synopsis {
     width: 600px;
   }
-}
-@media (min-width: 1440px) {
 }

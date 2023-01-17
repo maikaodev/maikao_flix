@@ -33,10 +33,12 @@ export const Card = ({
                 height={200}
               />
 
-              <div className="vote_average">
-                <AiFillStar id="star_icon" />
-                <span>{vote_average.toFixed(1)}</span>
-              </div>
+              {vote_average && (
+                <div className="vote_average">
+                  <AiFillStar id="star_icon" />
+                  <span>{vote_average.toFixed(1)}</span>
+                </div>
+              )}
             </div>
 
             <Link to={`/detalhes/${search_topic}/${id_movie}`}>{title}</Link>

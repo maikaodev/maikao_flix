@@ -33,6 +33,7 @@ const About = () => {
   //
   const [details, setDetails] = useState({} as DetailsData);
   const [recommendations, setRecommendations] = useState([{} as TopMoviesData]);
+  const [collections, setCollections] = useState([{} as TopMoviesData]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [navigations, setNavigations] = useState<number>(-1);
 
@@ -48,7 +49,12 @@ const About = () => {
 
     setDetails(data);
 
-    console.log("[DATA] ", data);
+    console.log("DATA", data);
+
+    getTheRecommendations();
+    if (data.belongs_to_collection.id) {
+      getTheCollections(data.belongs_to_collection.id);
+    }
 
     setIsLoading(false);
   };
@@ -61,18 +67,25 @@ const About = () => {
     setRecommendations(data.results);
   };
 
+  const getTheCollections = async (collectionsId: number) => {
+    const collectionsURL = `${movies_url}collection/${collectionsId}?${api_key}&language=pt-BR`;
+
+    const data = await fetchData(collectionsURL);
+
+    setCollections(data.parts);
+    console.log("[COLLECTIONS]", data.parts);
+  };
+
   useEffect(() => {
     setIsLoading(true);
 
     getDetailsMovies();
-    getTheRecommendations();
   }, []);
 
   useEffect(() => {
     setIsLoading(true);
 
     getDetailsMovies();
-    getTheRecommendations();
   }, [id]);
 
   return (
@@ -106,14 +119,36 @@ const About = () => {
               genres={details.genres}
             />
           </section>
+
+          {collections.length > 0 && (
+            <section id="collections">
+              <h2>Coleções</h2>
+
+              <ul>
+                {collections.map((movie) => {
+                  return (
+                    <Card
+                      key={movie.id}
+                      url_image={movie.backdrop_path || movie.poster_path}
+                      title={movie.title || movie.name}
+                      vote_average={movie.vote_average}
+                      id_movie={movie.id}
+                      search_topic={searchTopic || movie.media_type}
+                    />
+                  );
+                })}
+              </ul>
+            </section>
+          )}
+
           {recommendations.length > 0 && (
             <section id="recommendations">
               <h2>Recomendações</h2>
               <ul>
-                {recommendations.map((movie, index) => {
+                {recommendations.map((movie) => {
                   return (
                     <Card
-                      key={index}
+                      key={movie.id}
                       url_image={movie.backdrop_path || movie.poster_path}
                       title={movie.title || movie.name}
                       vote_average={movie.vote_average}
