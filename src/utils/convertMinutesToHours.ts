@@ -3,6 +3,9 @@ export const convertMinutesToHours = (minutes: number) => {
   const min = minutes % 60;
   const textHours = `${hours}hr`;
   const textMinutes = `${min}min`;
-
-  return `${textHours} ${textMinutes}`;
+  if (hours === 0) {
+    return `${textMinutes}`;
+  } else {
+    return `${textHours} ${textMinutes}`;
+  }
 };
