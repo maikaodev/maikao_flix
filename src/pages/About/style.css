@@ -49,14 +49,20 @@ div #float_button:hover {
   border: 2px solid #02f2ff;
 }
 
-#recommendations {
+#recommendations,
+#collections {
   margin-left: 16px;
 }
-#recommendations h2 {
+#recommendations h2,
+#collections h2 {
   margin: 16px 0;
 }
+#collections li {
+  width: 150px;
+}
 @media (min-width: 1024px) {
-  #recommendations {
+  #recommendations,
+  #collections {
     width: 80vw;
 
     margin: 0 auto;
