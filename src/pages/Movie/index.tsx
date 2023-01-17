@@ -75,7 +75,7 @@ const Movie = () => {
     <>
       {isLoading && <Loading />}
       {!isLoading && (
-        <>
+        <main>
           <div>
             <button id="back" onClick={() => navigate(navigations)}>
               Voltar
@@ -121,7 +121,7 @@ const Movie = () => {
               </ul>
             </section>
           )}
-        </>
+        </main>
       )}
     </>
   );

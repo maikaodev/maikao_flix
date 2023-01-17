@@ -31,6 +31,8 @@ header {
 }
 main {
   height: 75vh;
+
+  overflow: auto;
 }
 
 footer {
