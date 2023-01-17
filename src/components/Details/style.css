@@ -24,8 +24,13 @@
 }
 .content_details section #header_movie #genre_list {
   display: flex;
+  align-items: center;
 
-  margin-left: 16px;
+  width: 80%;
+
+  margin: 0 auto;
+
+  overflow: auto;
 }
 .content_details section #header_movie #genre_list div {
   display: flex;
@@ -35,6 +40,9 @@
 .content_details section #header_movie #genre_list #runtime {
   display: flex;
   align-items: center;
+}
+.content_details section #header_movie #genre_list #runtime svg {
+  font-size: 1.2rem;
 }
 .content_details section #details_list {
   display: flex;

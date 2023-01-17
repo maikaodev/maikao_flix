@@ -65,10 +65,10 @@ export const Details = ({
                 })}
             </>
             {runTime > 0 && (
-              <div id="runtime">
+              <li id="runtime">
                 <CgSandClock />
                 <span> {convertMinutesToHours(runTime)}</span>
-              </div>
+              </li>
             )}
           </ul>
         </div>
