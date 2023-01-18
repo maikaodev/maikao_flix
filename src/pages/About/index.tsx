@@ -52,7 +52,7 @@ const About = () => {
     console.log("DATA", data);
 
     getTheRecommendations();
-    if (data.belongs_to_collection.id) {
+    if (data?.belongs_to_collection?.id) {
       getTheCollections(data.belongs_to_collection.id);
     }
 
@@ -120,7 +120,7 @@ const About = () => {
             />
           </section>
 
-          {collections.length > 0 && (
+          {collections[0].title && (
             <section id="collections">
               <h2>Coleções</h2>
 
