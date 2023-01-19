@@ -147,7 +147,7 @@ const About = () => {
             <section id="collections">
               <h2>Coleções</h2>
 
-              <ul>
+              <ul id="card_list">
                 {collections.map((movie) => {
                   return (
                     <Card
@@ -167,7 +167,7 @@ const About = () => {
           {recommendations.length > 0 && (
             <section id="recommendations">
               <h2>Recomendações</h2>
-              <ul>
+              <ul id="card_list">
                 {recommendations.map((movie) => {
                   return (
                     <Card

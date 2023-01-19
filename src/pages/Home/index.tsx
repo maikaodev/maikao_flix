@@ -74,7 +74,7 @@ const Home = () => {
             </li>
           </ul>
         </div>
-        <ul id="#card_list">
+        <ul id="card_list">
           {topRated &&
             topRated.map((movie, index) => {
               return (

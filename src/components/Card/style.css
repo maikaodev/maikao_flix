@@ -1,11 +1,11 @@
-ul {
+#card_list {
   list-style: none;
 
   display: flex;
   gap: 16px;
   overflow: auto hidden;
 }
-ul .item_movie .card img {
+#card_list .item_movie .card img {
   object-fit: cover;
 
   -webkit-box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px,
@@ -13,11 +13,11 @@ ul .item_movie .card img {
   box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 
-ul .item_movie .card #background {
+#card_list .item_movie .card #background {
   position: relative;
 }
 
-ul .item_movie .card #background .vote_average {
+#card_list .item_movie .card #background .vote_average {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,12 +39,12 @@ ul .item_movie .card #background .vote_average {
   right: 6px;
   bottom: 14px;
 }
-ul .item_movie .card #background .vote_average #star_icon {
+#card_list .item_movie .card #background .vote_average #star_icon {
   margin-right: 4px;
 
   color: #02f2ff;
 }
-ul .item_movie .card a {
+#card_list .item_movie .card a {
   display: block;
 
   color: #ffffff;
@@ -55,7 +55,7 @@ ul .item_movie .card a {
 
   cursor: pointer;
 }
-ul .item_movie .card a:hover {
+#card_list .item_movie .card a:hover {
   color: #ffffff;
 }
 
