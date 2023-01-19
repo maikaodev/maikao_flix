@@ -48,21 +48,30 @@ div #float_button:hover {
 
   border: 2px solid #02f2ff;
 }
-
 #recommendations,
 #collections {
   margin-left: 16px;
 }
 #recommendations h2,
-#collections h2 {
+#collections h2,
+#trailer h2 {
   margin: 16px 0;
 }
 #collections li {
   width: 150px;
 }
+
+@media (min-width: 768px) {
+  main #trailer iframe {
+    width: 500px;
+    height: 300px;
+  }
+}
+
 @media (min-width: 1024px) {
   #recommendations,
-  #collections {
+  #collections,
+  #trailer {
     width: 80vw;
 
     margin: 0 auto;

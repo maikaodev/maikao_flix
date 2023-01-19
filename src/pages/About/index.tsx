@@ -35,6 +35,12 @@ const About = () => {
   const [recommendations, setRecommendations] = useState([{} as TopMoviesData]);
   const [collections, setCollections] = useState([{} as TopMoviesData]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [trailer, setTrailer] = useState([
+    {} as {
+      name: string;
+      key: string;
+    },
+  ]);
   const [navigations, setNavigations] = useState<number>(-1);
 
   let { id, searchTopic } = useParams();
@@ -48,8 +54,6 @@ const About = () => {
     const data = await fetchData(detailsURL);
 
     setDetails(data);
-
-    console.log("DATA", data);
 
     getTheRecommendations();
     if (data?.belongs_to_collection?.id) {
@@ -73,13 +77,21 @@ const About = () => {
     const data = await fetchData(collectionsURL);
 
     setCollections(data.parts);
-    console.log("[COLLECTIONS]", data.parts);
+  };
+
+  const getTheVideos = async () => {
+    const videosURL = `${movies_url}${searchTopic}/${id}/videos?${api_key}&language=pt-BR`;
+
+    const data = await fetchData(videosURL);
+
+    setTrailer(data.results);
   };
 
   useEffect(() => {
     setIsLoading(true);
 
     getDetailsMovies();
+    getTheVideos();
   }, []);
 
   useEffect(() => {
@@ -119,7 +131,18 @@ const About = () => {
               genres={details.genres}
             />
           </section>
-
+          <section>
+            {
+              <section id="trailer">
+                <h2>Trailer</h2>
+                <iframe
+                  title={trailer[0].name}
+                  sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-presentation"
+                  src={`https://youtube.com/embed/${trailer[0].key}?autoplay=0`}
+                ></iframe>
+              </section>
+            }
+          </section>
           {collections[0].title && (
             <section id="collections">
               <h2>Coleções</h2>
