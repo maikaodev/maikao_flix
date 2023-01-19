@@ -31,6 +31,7 @@ export const InputText = () => {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        ref={input}
         type="text"
         name="searching"
         placeholder="Buscar por um Filme ou Série..."
