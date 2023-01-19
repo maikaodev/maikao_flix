@@ -1,9 +1,8 @@
 import { Card } from "@/components";
-import { FormEvent, useEffect, useRef, useState } from "react";
-import { BiSearchAlt2 } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./style.css";
 
+import { InputText } from "@/components/InputText";
 import { fetchData } from "@/utils/fetchData";
 
 export type TopMoviesData = {
@@ -41,26 +40,6 @@ const Home = () => {
     setSearchTopic(value.name);
   };
 
-  const navigate = useNavigate();
-
-  const input = useRef<HTMLInputElement>(null);
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-
-    const { searching } = Object.fromEntries(formData.entries());
-
-    if (searching === "") {
-      alert("Insira um nome válido");
-    }
-    if (searching) {
-      navigate(`/procurando/${searching}`);
-    }
-    input.current!.value = "";
-  };
-
   useEffect(() => {
     getTopRated();
   }, []);
@@ -74,16 +53,7 @@ const Home = () => {
       {/* HEADER */}
       <div id="header">
         <h2>Milhares de filmes, séries para descobrir. Explore já!</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="searching"
-            placeholder="Buscar por um Filme ou Série..."
-          />
-          <button type="submit">
-            <BiSearchAlt2 id="icon" />
-          </button>
-        </form>
+        <InputText />
       </div>
       {/* HEADER */}
 
