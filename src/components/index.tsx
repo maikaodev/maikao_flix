@@ -3,3 +3,4 @@ export * from "./Details";
 export * from "./Footer";
 export * from "./Loading";
 export * from "./NavBar";
+export * from "./Sidebar";
