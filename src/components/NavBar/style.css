@@ -49,15 +49,33 @@ header {
 }
 
 #topo a {
-  font-size: 2rem;
+  display: flex;
+  align-items: center;
 
   margin: 16px 0 16px 8px;
 
   color: #222222;
 }
+#topo a svg,
+#topo a span {
+  font-size: 2rem;
+}
 
+header form {
+  display: none;
+}
 @media (min-width: 768px) {
+  #topo {
+    justify-content: flex-start;
+  }
+  #topo a {
+    width: 200px;
+    margin-right: 16px;
+  }
   #topo button {
     display: none;
+  }
+  header form {
+    display: flex;
   }
 }

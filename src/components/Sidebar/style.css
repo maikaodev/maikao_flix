@@ -76,11 +76,8 @@ aside nav #menu_list {
   }
   #laptop {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
-
-    width: 80%;
   }
   #laptop nav ul {
     display: flex;
