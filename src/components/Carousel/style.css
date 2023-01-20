@@ -1,0 +1,11 @@
+#carousel {
+  list-style: none;
+}
+
+#card {
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  height: 100px;
+  width: 100px;
+}
