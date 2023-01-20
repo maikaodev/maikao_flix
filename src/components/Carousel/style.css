@@ -1,0 +1,25 @@
+#carousel {
+  width: 260px;
+  height: 160px;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: flex-end;
+
+  margin: 0 auto;
+}
+
+#carousel #carousel_content h3 {
+  background-color: rgba(128, 128, 128, 0.5);
+  padding: 8px;
+  margin: 8px;
+}
+
+@media (min-width: 768px) {
+  #carousel {
+    width: 400px;
+    height: 200px;
+  }
+}

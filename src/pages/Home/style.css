@@ -19,59 +19,22 @@
 #header h2 {
   font-size: 1.3rem;
 }
-
-#header form {
-  display: flex;
-  align-items: center;
+#carousel_section {
+  width: 100vw;
 }
-
-#header form input {
-  width: 200px;
-
-  font-weight: 400;
-  font-size: 0.75rem;
-
-  border: none;
-
-  padding: 12px 16px;
-
-  -webkit-box-shadow: rgb(0, 0, 0) -10px 0px 13px -7px,
-    rgb(0, 0, 0) 10px 0px 13px -7px, 0px 0px 9px -2px rgba(255, 255, 255, 0.97);
-  box-shadow: rgb(0, 0, 0) -10px 0px 13px -7px, rgb(0, 0, 0) 10px 0px 13px -7px,
-    0px 0px 9px -2px rgba(255, 255, 255, 0.97);
-}
-
-#header form input:focus-visible {
-  outline: none;
-}
-
-#header form button {
-  background: transparent;
-  border: none;
-  padding: 8px;
-
-  color: #ffffff;
-
-  cursor: pointer;
-}
-#header form button:hover {
-  background: transparent;
-  border: none;
-}
-
-#header form #icon {
-  width: 26px;
-  height: 26px;
-}
-
 #overview_top_rated {
   width: 80vw;
 
   margin: 0 auto;
+
+  text-align: center;
+  margin-bottom: 16px;
 }
 #overview_top_rated div #nav {
   display: flex;
   align-items: center;
+
+  list-style: none;
 
   gap: 16px;
 
@@ -103,8 +66,5 @@
 @media (min-width: 768px) {
   #header {
     width: 500px;
-  }
-  #header form input {
-    width: 300px;
   }
 }
