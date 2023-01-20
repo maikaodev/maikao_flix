@@ -21,7 +21,7 @@ export type TopMoviesData = {
   title: string;
   vote_average: number;
   id: number;
-  tagline: string;
+  release_date: string;
 };
 
 const movies_url = import.meta.env.VITE_API_URL_DEFAULT;
@@ -31,9 +31,7 @@ const Home = () => {
   const [topRated, setTopRated] = useState([{} as TopMoviesData]);
   const [propsCarousel, setPropsCarousel] = useState({} as CarouselProps);
   const [searchTopic, setSearchTopic] = useState<string>("movie");
-
-  //
-  const [counter, setCounter] = useState<number>(5);
+  const [counter, setCounter] = useState<number>(0);
   const [index, setIndex] = useState<number>(0);
 
   const getTopRated = async () => {
@@ -43,6 +41,13 @@ const Home = () => {
     const data = await fetchData(topRatedUrl);
 
     setTopRated(data.results);
+    setPropsCarousel({
+      title: data.results[index]?.title || data.results[index]?.name,
+      release_date: data.results[index]?.release_date,
+
+      background_url:
+        data.results[index]?.backdrop_path || data.results[index]?.poster_path,
+    });
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -65,15 +70,22 @@ const Home = () => {
     if (counter > 0) {
       setTimeout(() => setCounter(counter - 1), 1000);
     }
+
     if (counter === 0) {
       setPropsCarousel({
-        title: topRated[index].title,
-        tagline: topRated[index].tagline,
+        title: topRated[index]?.title || topRated[index]?.name,
+        release_date: topRated[index]?.release_date,
+
         background_url:
-          topRated[index].backdrop_path || topRated[index].poster_path,
+          topRated[index]?.backdrop_path || topRated[index]?.poster_path,
       });
+
+      if (index === topRated.length) {
+        setIndex(0);
+      } else {
+        setIndex((prevState) => prevState + 1);
+      }
       setCounter(5);
-      setIndex((prevState) => prevState + 1);
     }
   };
 
@@ -91,8 +103,8 @@ const Home = () => {
 
       {/* CONTENT */}
       <section id="overview_top_rated">
-        <div>
-          <h2>Os mais populares</h2>
+        <h2>Os mais populares</h2>
+        {/* <div>
           <ul id="nav">
             <li>
               <button onClick={handleClick} name="tv">
@@ -105,11 +117,11 @@ const Home = () => {
               </button>
             </li>
           </ul>
-        </div>
+        </div>  */}
+      </section>
 
-        <section id="carousel">
-          {topRated && <Carousel data={propsCarousel} />}
-        </section>
+      <section id="carousel_section">
+        {topRated && <Carousel data={propsCarousel} />}
       </section>
       {/* MAIN */}
     </main>
