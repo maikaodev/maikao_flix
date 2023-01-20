@@ -10,7 +10,7 @@ import "./style.css";
 // Functions - utils
 import { convertMinutesToHours } from "@/utils/convertMinutesToHours";
 import { formatCurrency } from "@/utils/formatCurrency";
-import { releaseData } from "@/utils/releaseData";
+import { releaseDate } from "@/utils/releaseDate";
 
 const api_image = import.meta.env.VITE_API_IMG;
 
@@ -50,7 +50,7 @@ export const Details = ({
         {/* HEADER */}
         <div id="header_movie">
           <h2>
-            {title} ({releaseData(new Date(release_date))})
+            {title} ({releaseDate(new Date(release_date))})
           </h2>
           <ul id="genre_list">
             <>
