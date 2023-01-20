@@ -1,9 +1,17 @@
-import { Card } from "@/components";
+// Functions - Native
 import { useEffect, useState } from "react";
+
+// Functions - utils
+import { fetchData } from "@/utils/fetchData";
+
+// Component
+import { Carousel, InputText } from "@/components";
+
+// CSS
 import "./style.css";
 
-import { InputText } from "@/components/InputText";
-import { fetchData } from "@/utils/fetchData";
+// TypeScript
+import { CarouselProps } from "@/components/Carousel";
 
 export type TopMoviesData = {
   media_type: string;
@@ -13,6 +21,7 @@ export type TopMoviesData = {
   title: string;
   vote_average: number;
   id: number;
+  tagline: string;
 };
 
 const movies_url = import.meta.env.VITE_API_URL_DEFAULT;
@@ -20,7 +29,12 @@ const api_key = import.meta.env.VITE_API_KEY;
 
 const Home = () => {
   const [topRated, setTopRated] = useState([{} as TopMoviesData]);
+  const [propsCarousel, setPropsCarousel] = useState({} as CarouselProps);
   const [searchTopic, setSearchTopic] = useState<string>("movie");
+
+  //
+  const [counter, setCounter] = useState<number>(5);
+  const [index, setIndex] = useState<number>(0);
 
   const getTopRated = async () => {
     //
@@ -32,7 +46,6 @@ const Home = () => {
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    // const value:HTMLButtonElement = event.target.attributes[0].value;
     const value: HTMLButtonElement = event.currentTarget;
 
     if (value.name === searchTopic) return;
@@ -48,6 +61,25 @@ const Home = () => {
     getTopRated();
   }, [searchTopic]);
 
+  const countDown = () => {
+    if (counter > 0) {
+      setTimeout(() => setCounter(counter - 1), 1000);
+    }
+    if (counter === 0) {
+      setPropsCarousel({
+        title: topRated[index].title,
+        tagline: topRated[index].tagline,
+        background_url:
+          topRated[index].backdrop_path || topRated[index].poster_path,
+      });
+      setCounter(5);
+      setIndex((prevState) => prevState + 1);
+    }
+  };
+
+  useEffect(() => {
+    countDown();
+  }, [counter]);
   return (
     <main id="container">
       {/* HEADER */}
@@ -74,21 +106,10 @@ const Home = () => {
             </li>
           </ul>
         </div>
-        <ul id="card_list">
-          {topRated &&
-            topRated.map((movie, index) => {
-              return (
-                <Card
-                  key={index}
-                  url_image={movie.backdrop_path || movie.poster_path}
-                  title={movie.title || movie.name}
-                  vote_average={movie.vote_average}
-                  id_movie={movie.id}
-                  search_topic={searchTopic || movie.media_type}
-                />
-              );
-            })}
-        </ul>
+
+        <section id="carousel">
+          {topRated && <Carousel data={propsCarousel} />}
+        </section>
       </section>
       {/* MAIN */}
     </main>
