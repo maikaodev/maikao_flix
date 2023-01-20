@@ -19,11 +19,16 @@
 #header h2 {
   font-size: 1.3rem;
 }
-
+#carousel_section {
+  width: 100vw;
+}
 #overview_top_rated {
   width: 80vw;
 
   margin: 0 auto;
+
+  text-align: center;
+  margin-bottom: 16px;
 }
 #overview_top_rated div #nav {
   display: flex;
