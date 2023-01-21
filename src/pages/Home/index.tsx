@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { fetchData } from "@/utils/fetchData";
 
 // Component
-import { Carousel, InputText, Loading } from "@/components";
+import { Card, Carousel, InputText, Loading } from "@/components";
 
 // CSS
 import "./style.css";
@@ -29,19 +29,21 @@ const api_key = import.meta.env.VITE_API_KEY;
 
 const Home = () => {
   const [topRated, setTopRated] = useState([{} as TopMoviesData]);
+  const [topRatedTvSeries, setTopRatedTvSeries] = useState([
+    {} as TopMoviesData,
+  ]);
   const [propsCarousel, setPropsCarousel] = useState({} as CarouselProps);
   const [counter, setCounter] = useState<number>(0);
   const [index, setIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const getTopRated = async () => {
+  const getTopRatedMovie = async () => {
     //
     const topRatedUrl = `${movies_url}movie/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
 
     const data = await fetchData(topRatedUrl);
 
     setTopRated(data.results);
-    console.log(topRated[index]?.title || topRated[index]?.name);
 
     setPropsCarousel({
       title: data.results[index]?.title || data.results[index]?.name,
@@ -53,12 +55,11 @@ const Home = () => {
 
     setIsLoading(false);
   };
+  //
   const countDown = () => {
     if (counter > 0) {
       setTimeout(() => setCounter(counter - 1), 1000);
     }
-    console.log("[COUNTER]", counter);
-    console.log("[INDEX]", index);
 
     if (counter === 0) {
       setPropsCarousel({
@@ -77,9 +78,18 @@ const Home = () => {
       setCounter(5);
     }
   };
+  const getTopRatedTVSeries = async () => {
+    //
+    const topRatedUrl = `${movies_url}tv/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
 
+    const data = await fetchData(topRatedUrl);
+
+    setTopRatedTvSeries(data.results);
+    console.log(data.results);
+  };
   useEffect(() => {
-    getTopRated();
+    getTopRatedMovie();
+    getTopRatedTVSeries();
   }, []);
 
   useEffect(() => {
@@ -88,16 +98,35 @@ const Home = () => {
   return (
     <main id="container">
       {/* HEADER */}
-      {!isLoading && (
-        <div id="header">
-          <section id="carousel_section">
-            {topRated && <Carousel data={propsCarousel} />}
-          </section>
-          <h2>Milhares de filmes, séries para descobrir. Explore já!</h2>
-          <InputText />
-        </div>
-      )}
       {isLoading && <Loading />}
+      {!isLoading && (
+        <>
+          <div id="header">
+            <section id="carousel_section">
+              {topRated && <Carousel data={propsCarousel} />}
+            </section>
+            <h2>Milhares de filmes, séries para descobrir. Explore já!</h2>
+            <InputText />
+          </div>
+          <section>
+            <h2>As melhores séries de TV</h2>
+            <ul id="card_list">
+              {topRatedTvSeries &&
+                topRatedTvSeries.map((tvSerie) => {
+                  return (
+                    <Card
+                      title={tvSerie.title || tvSerie.name}
+                      url_image={tvSerie.backdrop_path || tvSerie.poster_path}
+                      vote_average={tvSerie.vote_average}
+                      id_movie={tvSerie.id}
+                      search_topic="tv"
+                    />
+                  );
+                })}
+            </ul>
+          </section>
+        </>
+      )}
       {/* HEADER */}
 
       {/* MAIN */}

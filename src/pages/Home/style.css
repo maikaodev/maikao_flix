@@ -20,8 +20,32 @@
   font-size: 1.3rem;
 }
 
+#card_list {
+  width: 50vw;
+
+  margin: auto;
+}
+main section h2 {
+  text-align: center;
+  margin-bottom: 16px;
+}
 @media (min-width: 768px) {
   #header {
     width: 500px;
+  }
+
+  #card_list {
+    width: 85vw;
+  }
+}
+@media (min-width: 1024px) {
+  #header {
+    flex-direction: column-reverse;
+  }
+  #header form {
+    display: none;
+  }
+  #card_list {
+    width: 80vw;
   }
 }
