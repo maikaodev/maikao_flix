@@ -48,7 +48,7 @@ header {
   cursor: pointer;
 }
 
-#topo a {
+#topo #link {
   display: flex;
   align-items: center;
 
@@ -56,8 +56,8 @@ header {
 
   color: #222222;
 }
-#topo a svg,
-#topo a span {
+#topo #link svg,
+#topo #link span {
   font-size: 2rem;
 }
 
@@ -68,7 +68,7 @@ header form {
   #topo {
     justify-content: flex-start;
   }
-  #topo a {
+  #topo #link {
     width: 200px;
     margin-right: 16px;
   }
