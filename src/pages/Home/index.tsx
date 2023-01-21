@@ -41,12 +41,12 @@ const Home = () => {
     const data = await fetchData(topRatedUrl);
 
     setTopRated(data.results);
-    setPropsCarousel({
-      title: data.results[index]?.title || data.results[index]?.name,
-      release_date: data.results[index]?.release_date,
 
+    setPropsCarousel({
+      title: data.results[0]?.title || data.results[0]?.name,
+      release_date: data.results[0]?.release_date,
       background_url:
-        data.results[index]?.backdrop_path || data.results[index]?.poster_path,
+        data.results[0]?.backdrop_path || data.results[0]?.poster_path,
     });
   };
 
@@ -80,7 +80,9 @@ const Home = () => {
           topRated[index]?.backdrop_path || topRated[index]?.poster_path,
       });
 
-      if (index === topRated.length) {
+      console.log("[INDEX] ", index);
+
+      if (index === topRated.length - 1) {
         setIndex(0);
       } else {
         setIndex((prevState) => prevState + 1);
@@ -96,33 +98,14 @@ const Home = () => {
     <main id="container">
       {/* HEADER */}
       <div id="header">
+        <section id="carousel_section">
+          {topRated && <Carousel data={propsCarousel} />}
+        </section>
         <h2>Milhares de filmes, séries para descobrir. Explore já!</h2>
         <InputText />
       </div>
       {/* HEADER */}
 
-      {/* CONTENT */}
-      <section id="overview_top_rated">
-        <h2>Os mais populares</h2>
-        {/* <div>
-          <ul id="nav">
-            <li>
-              <button onClick={handleClick} name="tv">
-                Na TV
-              </button>
-            </li>
-            <li>
-              <button onClick={handleClick} name="movie">
-                Nos Cinemas
-              </button>
-            </li>
-          </ul>
-        </div>  */}
-      </section>
-
-      <section id="carousel_section">
-        {topRated && <Carousel data={propsCarousel} />}
-      </section>
       {/* MAIN */}
     </main>
   );
