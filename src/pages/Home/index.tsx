@@ -30,7 +30,6 @@ const api_key = import.meta.env.VITE_API_KEY;
 const Home = () => {
   const [topRated, setTopRated] = useState([{} as TopMoviesData]);
   const [propsCarousel, setPropsCarousel] = useState({} as CarouselProps);
-  const [searchTopic, setSearchTopic] = useState<string>("movie");
   const [counter, setCounter] = useState<number>(0);
   const [index, setIndex] = useState<number>(0);
 
@@ -42,6 +41,8 @@ const Home = () => {
 
     setTopRated(data.results);
 
+    console.log(data.results[0]);
+
     setPropsCarousel({
       title: topRated[index]?.title || topRated[index]?.name,
       release_date: topRated[index]?.release_date,
@@ -51,23 +52,6 @@ const Home = () => {
       id_movie: topRated[index].id,
     });
   };
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const value: HTMLButtonElement = event.currentTarget;
-
-    if (value.name === searchTopic) return;
-
-    setSearchTopic(value.name);
-  };
-
-  useEffect(() => {
-    getTopRated();
-  }, []);
-
-  useEffect(() => {
-    getTopRated();
-  }, [searchTopic]);
-
   const countDown = () => {
     if (counter > 0) {
       setTimeout(() => setCounter(counter - 1), 1000);
@@ -83,8 +67,6 @@ const Home = () => {
         id_movie: topRated[index].id,
       });
 
-      console.log("[INDEX] ", index);
-
       if (index === topRated.length - 1) {
         setIndex(0);
       } else {
@@ -93,6 +75,10 @@ const Home = () => {
       setCounter(5);
     }
   };
+
+  useEffect(() => {
+    getTopRated();
+  }, []);
 
   useEffect(() => {
     countDown();
