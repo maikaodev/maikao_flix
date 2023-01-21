@@ -13,14 +13,16 @@
     5px 5px 15px 5px rgba(0, 0, 0, 0);
   box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 
-  margin: 0 auto;
-
-  transition: all 3s;
+  -webkit-transition: background 3s;
+  -moz-transition: background 3s;
+  -o-transition: background 3s;
+  transition: background 3s;
 }
 
 #carousel #carousel_content h4 {
   padding: 8px;
   margin: 8px;
+  text-align: left;
 
   background: rgba(0, 0, 0, 0.2);
   color: #ffffff;
