@@ -15,19 +15,16 @@ import { Sidebar } from "../Sidebar";
 
 export const NavBar = () => {
   //
-  const [classMenu, setClassMenu] = useState<string>("hide");
   const [isActive, setIsActive] = useState<boolean>(false);
 
   const handleClick = () => {
     setIsActive(!isActive);
-    if (classMenu === "hide") return setClassMenu("show");
-    setClassMenu("hide");
   };
 
   return (
     <header>
       <nav id="topo">
-        <Link to="/">
+        <Link id="link" to="/">
           <BiCameraMovie id="icon" />
           <span>MaikaoFlix</span>
         </Link>
@@ -35,7 +32,7 @@ export const NavBar = () => {
           {!isActive && <AiOutlineMenu />}
           {isActive && <AiOutlineClose />}
         </button>
-        <Sidebar classNav={classMenu} />
+        {isActive && <Sidebar />}
       </nav>
       <InputText />
     </header>
