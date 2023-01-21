@@ -43,10 +43,12 @@ const Home = () => {
     setTopRated(data.results);
 
     setPropsCarousel({
-      title: data.results[0]?.title || data.results[0]?.name,
-      release_date: data.results[0]?.release_date,
+      title: topRated[index]?.title || topRated[index]?.name,
+      release_date: topRated[index]?.release_date,
       background_url:
-        data.results[0]?.backdrop_path || data.results[0]?.poster_path,
+        topRated[index]?.backdrop_path || topRated[index]?.poster_path,
+      search_topic: topRated[index].media_type,
+      id_movie: topRated[index].id,
     });
   };
 
@@ -75,9 +77,10 @@ const Home = () => {
       setPropsCarousel({
         title: topRated[index]?.title || topRated[index]?.name,
         release_date: topRated[index]?.release_date,
-
         background_url:
           topRated[index]?.backdrop_path || topRated[index]?.poster_path,
+        search_topic: topRated[index].media_type,
+        id_movie: topRated[index].id,
       });
 
       console.log("[INDEX] ", index);
