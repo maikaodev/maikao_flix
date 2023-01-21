@@ -19,49 +19,6 @@
 #header h2 {
   font-size: 1.3rem;
 }
-#carousel_section {
-  width: 100vw;
-}
-#overview_top_rated {
-  width: 80vw;
-
-  margin: 0 auto;
-
-  text-align: center;
-  margin-bottom: 16px;
-}
-#overview_top_rated div #nav {
-  display: flex;
-  align-items: center;
-
-  list-style: none;
-
-  gap: 16px;
-
-  margin: 8px 0;
-}
-#overview_top_rated div #nav li button {
-  background-color: #2e9abf;
-  color: #222222;
-
-  border: 2px solid #2e9abf;
-
-  padding: 8px 16px;
-
-  border-radius: 4px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: all 0.75s;
-}
-#overview_top_rated div #nav li button:hover {
-  background-color: #02f2ff;
-  color: #222222;
-
-  border: 2px solid #02f2ff;
-}
 
 @media (min-width: 768px) {
   #header {
