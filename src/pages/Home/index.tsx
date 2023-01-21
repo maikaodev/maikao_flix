@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { fetchData } from "@/utils/fetchData";
 
 // Component
-import { Carousel, InputText } from "@/components";
+import { Carousel, InputText, Loading } from "@/components";
 
 // CSS
 import "./style.css";
@@ -32,30 +32,33 @@ const Home = () => {
   const [propsCarousel, setPropsCarousel] = useState({} as CarouselProps);
   const [counter, setCounter] = useState<number>(0);
   const [index, setIndex] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getTopRated = async () => {
     //
-    const topRatedUrl = `${movies_url}${searchTopic}/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
+    const topRatedUrl = `${movies_url}movie/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
 
     const data = await fetchData(topRatedUrl);
 
     setTopRated(data.results);
-
-    console.log(data.results[0]);
+    console.log(topRated[index]?.title || topRated[index]?.name);
 
     setPropsCarousel({
-      title: topRated[index]?.title || topRated[index]?.name,
-      release_date: topRated[index]?.release_date,
+      title: data.results[index]?.title || data.results[index]?.name,
+      release_date: data.results[index]?.release_date,
       background_url:
-        topRated[index]?.backdrop_path || topRated[index]?.poster_path,
-      search_topic: topRated[index].media_type,
-      id_movie: topRated[index].id,
+        data.results[index]?.backdrop_path || data.results[index]?.poster_path,
+      id_movie: data.results[index].id,
     });
+
+    setIsLoading(false);
   };
   const countDown = () => {
     if (counter > 0) {
       setTimeout(() => setCounter(counter - 1), 1000);
     }
+    console.log("[COUNTER]", counter);
+    console.log("[INDEX]", index);
 
     if (counter === 0) {
       setPropsCarousel({
@@ -63,7 +66,6 @@ const Home = () => {
         release_date: topRated[index]?.release_date,
         background_url:
           topRated[index]?.backdrop_path || topRated[index]?.poster_path,
-        search_topic: topRated[index].media_type,
         id_movie: topRated[index].id,
       });
 
@@ -86,13 +88,16 @@ const Home = () => {
   return (
     <main id="container">
       {/* HEADER */}
-      <div id="header">
-        <section id="carousel_section">
-          {topRated && <Carousel data={propsCarousel} />}
-        </section>
-        <h2>Milhares de filmes, séries para descobrir. Explore já!</h2>
-        <InputText />
-      </div>
+      {!isLoading && (
+        <div id="header">
+          <section id="carousel_section">
+            {topRated && <Carousel data={propsCarousel} />}
+          </section>
+          <h2>Milhares de filmes, séries para descobrir. Explore já!</h2>
+          <InputText />
+        </div>
+      )}
+      {isLoading && <Loading />}
       {/* HEADER */}
 
       {/* MAIN */}
