@@ -137,47 +137,49 @@ const About = () => {
               genres={details.genres}
             />
           </section>
-          <section>
-            <ul id="menu_show_it">
-              {trailer && (
-                <li>
-                  <button
-                    onClick={() => {
-                      setContent("trailer");
-                    }}
-                  >
-                    Trailer
-                  </button>
-                </li>
-              )}
-              {collections && (
-                <li>
-                  <button
-                    onClick={() => {
-                      setContent("collections");
-                    }}
-                  >
-                    Coleções
-                  </button>
-                </li>
-              )}
-              {recommendations && (
-                <li>
-                  <button
-                    onClick={() => {
-                      setContent("recommendations");
-                    }}
-                  >
-                    Recomendações
-                  </button>
-                </li>
-              )}
-            </ul>
-          </section>
+          {searchTopic === "movie" && (
+            <section>
+              <ul id="menu_show_it">
+                {trailer && (
+                  <li>
+                    <button
+                      onClick={() => {
+                        setContent("trailer");
+                      }}
+                    >
+                      Trailer
+                    </button>
+                  </li>
+                )}
+                {collections && (
+                  <li>
+                    <button
+                      onClick={() => {
+                        setContent("collections");
+                      }}
+                    >
+                      Coleções
+                    </button>
+                  </li>
+                )}
+                {recommendations && (
+                  <li>
+                    <button
+                      onClick={() => {
+                        setContent("recommendations");
+                      }}
+                    >
+                      Recomendações
+                    </button>
+                  </li>
+                )}
+              </ul>
+            </section>
+          )}
           {/* TRAILER */}
           {showIt === "trailer" && (
             <section>
-              {trailer && (
+              {searchTopic === "movie" && (
                 <section id="trailer">
                   <h2>Trailer</h2>
                   <iframe
