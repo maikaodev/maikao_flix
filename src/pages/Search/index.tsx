@@ -24,7 +24,7 @@ const Search = () => {
   let { name } = useParams();
   const [currentPage, setCurrentPage] = useSearchParams();
 
-  const getTopRatedMovies = async () => {
+  const getTheMostRated = async () => {
     setIsLoading(true);
 
     const movies = `${movies_url_default}search/multi?${api_key}&language=pt-BR&query=${name}&page=${currentPage.get(
@@ -45,11 +45,11 @@ const Search = () => {
       };
       setCurrentPage(current_page);
     }
-    getTopRatedMovies();
+    getTheMostRated();
   }, []);
 
   useEffect(() => {
-    getTopRatedMovies();
+    getTheMostRated();
   }, [name, currentPage.get("page")]);
 
   return (
