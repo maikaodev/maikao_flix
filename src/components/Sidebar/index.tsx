@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "./style.css";
 
 export const Sidebar = () => {
@@ -7,13 +6,13 @@ export const Sidebar = () => {
       <aside>
         <nav id="menu">
           <li>
-            <Link to="/">Filmes</Link>
+            <a href="/filmes?page=1">Filmes</a>
           </li>
           <li>
-            <Link to="/">Séries</Link>
+            <a href="/series?page=1">Séries</a>
           </li>
           <li>
-            <Link to="/">Atores</Link>
+            <a href="/">Buscar</a>
           </li>
         </nav>
       </aside>

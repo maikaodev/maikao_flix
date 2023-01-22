@@ -11,7 +11,7 @@ const api_key = import.meta.env.VITE_API_KEY;
 
 import { TopMoviesData } from "../Home";
 
-const Search = () => {
+const CategoryPage = () => {
   // React
 
   const [searchedCategory, setSearchedCategory] = useState([
@@ -21,17 +21,25 @@ const Search = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // React router
-  let { name } = useParams();
+  let { category } = useParams();
   const [currentPage, setCurrentPage] = useSearchParams();
 
   const getTheMostRated = async () => {
     setIsLoading(true);
 
-    const movies = `${movies_url_default}search/multi?${api_key}&language=pt-BR&query=${name}&page=${currentPage.get(
-      "page"
-    )}&include_adult=false&region=BR`;
+    let theme: string;
 
-    const data = await fetchData(movies);
+    if (category === "filmes") {
+      theme = "movie";
+    } else {
+      theme = "tv";
+    }
+
+    const topRatedUrl = `${movies_url_default}${theme}/top_rated?${api_key}&language=pt-BR&page=${currentPage.get(
+      "page"
+    )}&region=BR`;
+
+    const data = await fetchData(topRatedUrl);
     setSearchedCategory(data.results);
     setTotalPages(data.total_pages);
 
@@ -50,7 +58,7 @@ const Search = () => {
 
   useEffect(() => {
     getTheMostRated();
-  }, [name, currentPage.get("page")]);
+  }, [category, currentPage.get("page")]);
 
   return (
     <main>
@@ -95,5 +103,4 @@ const Search = () => {
     </main>
   );
 };
-
-export default Search;
+export default CategoryPage;

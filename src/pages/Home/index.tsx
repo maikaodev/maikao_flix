@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { fetchData } from "@/utils/fetchData";
 
 // Component
-import { Card, Carousel, InputText, Loading } from "@/components";
+import { Card, InputText, Loading } from "@/components";
 
 // CSS
 import "./style.css";
 
 // TypeScript
-import { CarouselProps } from "@/components/Carousel";
+import { Carousel, CarouselProps } from "@/components/Carousel";
 
 export type TopMoviesData = {
   media_type: string;
@@ -22,6 +22,7 @@ export type TopMoviesData = {
   vote_average: number;
   id: number;
   release_date: string;
+  video: boolean;
 };
 
 const movies_url = import.meta.env.VITE_API_URL_DEFAULT;
@@ -85,7 +86,6 @@ const Home = () => {
     const data = await fetchData(topRatedUrl);
 
     setTopRatedTvSeries(data.results);
-    console.log(data.results);
   };
   useEffect(() => {
     getTopRatedMovie();
@@ -108,22 +108,13 @@ const Home = () => {
             <h2>Milhares de filmes, séries para descobrir. Explore já!</h2>
             <InputText />
           </div>
-          <section>
+          <section id="section_card_list">
             <h2>As melhores séries de TV</h2>
-            <ul id="card_list">
-              {topRatedTvSeries &&
-                topRatedTvSeries.map((tvSerie) => {
-                  return (
-                    <Card
-                      title={tvSerie.title || tvSerie.name}
-                      url_image={tvSerie.backdrop_path || tvSerie.poster_path}
-                      vote_average={tvSerie.vote_average}
-                      id_movie={tvSerie.id}
-                      search_topic="tv"
-                    />
-                  );
-                })}
-            </ul>
+            <div id="list">
+              <ul id="card_list">
+                {topRatedTvSeries && <Card dataCard={topRatedTvSeries} />}
+              </ul>
+            </div>
           </section>
         </>
       )}

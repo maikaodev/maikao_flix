@@ -29,7 +29,7 @@ header {
 #topo {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 40px;
 
   height: 100%;
   width: 100%;
@@ -37,6 +37,7 @@ header {
   position: relative;
 }
 #topo button {
+  display: none;
   background: none;
 
   border: none;
@@ -64,7 +65,11 @@ header {
 header form {
   display: none;
 }
-
+@media (min-width: 768px) {
+  header form {
+    display: flex;
+  }
+}
 @media (min-width: 1024px) {
   #topo {
     justify-content: flex-start;
@@ -76,7 +81,13 @@ header form {
   #topo button {
     display: none;
   }
-  header form {
-    display: flex;
+}
+
+@media (max-width: 580px) {
+  #topo {
+    justify-content: space-between;
+  }
+  #topo button {
+    display: block;
   }
 }
