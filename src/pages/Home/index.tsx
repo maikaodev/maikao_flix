@@ -22,6 +22,7 @@ export type TopMoviesData = {
   vote_average: number;
   id: number;
   release_date: string;
+  video: boolean;
 };
 
 const movies_url = import.meta.env.VITE_API_URL_DEFAULT;
@@ -85,7 +86,6 @@ const Home = () => {
     const data = await fetchData(topRatedUrl);
 
     setTopRatedTvSeries(data.results);
-    console.log(data.results);
   };
   useEffect(() => {
     getTopRatedMovie();

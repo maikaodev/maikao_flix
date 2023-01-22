@@ -6,6 +6,7 @@ const api_image = import.meta.env.VITE_API_IMG;
 import { TopMoviesData } from "@/pages/Home";
 import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
+
 export const Card = ({ dataCard = [{} as TopMoviesData] }) => {
   //
 
@@ -32,7 +33,11 @@ export const Card = ({ dataCard = [{} as TopMoviesData] }) => {
                     </div>
                   )}
                   <div>
-                    <Link to={`/detalhes/movie/${data.id}`}>
+                    <Link
+                      to={`/detalhes/${
+                        (data.video && "movie") || (!data.video && "tv")
+                      }/${data.id}`}
+                    >
                       {data.title || data.name}
                     </Link>
                   </div>
