@@ -50,53 +50,40 @@ aside nav li a:hover {
   aside nav li:hover:nth-child(3) {
     border: 1px solid #02f2ff;
   }
+  aside nav li a,
+  aside nav #search button {
+    font-size: 20px;
+  }
 
+  aside nav #search button {
+    color: #fff;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+  }
   aside nav li a {
     color: #fff;
     width: 100%;
 
     padding: 10px;
   }
-}
-/* 
+  aside nav #form {
+    height: 100%;
 
-aside #menu {
-  width: 100%;
-  height: 106px;
-
-  text-align: center;
-
-  list-style: none;
-
-  background: rgba(216, 216, 216, 0.2);
-  backdrop-filter: blur(8px);
-}
-aside #menu li {
-  padding: 16px 8px;
-  border: 1px solid transparent;
-
-  cursor: pointer;
-}
-aside #menu li:hover {
-  border: 1px solid #02f2ff;
-}
-aside #menu li a {
-  display: block;
-  color: #ffffff;
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  aside {
-    width: 20%;
-    top: 0px;
-    right: 50%;
-  }
-  aside #menu {
-    background: transparent;
-    backdrop-filter: blur(0px);
     display: flex;
-    align-items: center;
-    height: 10vh;
+    justify-content: center;
   }
-} */
+  aside nav #form #arrow-back {
+    width: 100%;
+    height: 26px;
+
+    cursor: pointer;
+  }
+  aside nav li form {
+    display: flex;
+  }
+}
