@@ -143,23 +143,12 @@ const About = () => {
               </section>
             }
           </section>
-          {collections[0].title && (
+          {collections && (
             <section id="collections">
               <h2>Coleções</h2>
 
               <ul id="card_list">
-                {collections.map((movie) => {
-                  return (
-                    <Card
-                      key={movie.id}
-                      url_image={movie.backdrop_path || movie.poster_path}
-                      title={movie.title || movie.name}
-                      vote_average={movie.vote_average}
-                      id_movie={movie.id}
-                      search_topic={searchTopic || movie.media_type}
-                    />
-                  );
-                })}
+                <Card dataCard={collections} />
               </ul>
             </section>
           )}
@@ -168,18 +157,7 @@ const About = () => {
             <section id="recommendations">
               <h2>Recomendações</h2>
               <ul id="card_list">
-                {recommendations.map((movie) => {
-                  return (
-                    <Card
-                      key={movie.id}
-                      url_image={movie.backdrop_path || movie.poster_path}
-                      title={movie.title || movie.name}
-                      vote_average={movie.vote_average}
-                      id_movie={movie.id}
-                      search_topic={searchTopic || movie.media_type}
-                    />
-                  );
-                })}
+                <Card dataCard={recommendations} />
               </ul>
             </section>
           )}
