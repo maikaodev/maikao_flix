@@ -17,14 +17,13 @@
   font-size: 1.3rem;
 }
 #section_card_list {
-  width: 80vw;
-  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   margin-bottom: 16px;
 }
+
 #list {
   overflow-y: auto;
   height: 500px;
@@ -45,5 +44,13 @@ main section h2 {
   }
   #header form {
     display: none;
+  }
+  #list {
+    width: 80vw;
+  }
+  #section_card_list ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
   }
 }
