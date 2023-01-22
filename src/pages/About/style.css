@@ -48,6 +48,31 @@ div #float_button:hover {
 
   border: 2px solid #02f2ff;
 }
+
+#menu_show_it {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 16px;
+  margin: 16px 0;
+  list-style: none;
+}
+#menu_show_it li button {
+  background-color: #04ade9;
+
+  padding: 8px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  transition: all 0.75s;
+}
+#menu_show_it li button:hover {
+  background-color: #02f2ff;
+}
+
 #trailer {
   display: flex;
   flex-direction: column;

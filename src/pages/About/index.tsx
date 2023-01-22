@@ -41,6 +41,7 @@ const About = () => {
       key: string;
     },
   ]);
+  const [showIt, setShowIt] = useState<string>("trailer");
   const [navigations, setNavigations] = useState<number>(-1);
 
   let { id, searchTopic } = useParams();
@@ -85,6 +86,11 @@ const About = () => {
     const data = await fetchData(videosURL);
 
     setTrailer(data.results);
+  };
+
+  const setContent = (content: string) => {
+    if (content === showIt) return;
+    setShowIt(content);
   };
 
   useEffect(() => {
@@ -132,35 +138,89 @@ const About = () => {
             />
           </section>
           <section>
-            {
-              <section id="trailer">
-                <h2>Trailer</h2>
-                <iframe
-                  title={trailer[0].name}
-                  sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-presentation"
-                  src={`https://youtube.com/embed/${trailer[0].key}?autoplay=0`}
-                ></iframe>
-              </section>
-            }
+            <ul id="menu_show_it">
+              {trailer && (
+                <li>
+                  <button
+                    onClick={() => {
+                      setContent("trailer");
+                    }}
+                  >
+                    Trailer
+                  </button>
+                </li>
+              )}
+              {collections && (
+                <li>
+                  <button
+                    onClick={() => {
+                      setContent("collections");
+                    }}
+                  >
+                    Coleções
+                  </button>
+                </li>
+              )}
+              {recommendations && (
+                <li>
+                  <button
+                    onClick={() => {
+                      setContent("recommendations");
+                    }}
+                  >
+                    Recomendações
+                  </button>
+                </li>
+              )}
+            </ul>
           </section>
-          {collections && (
-            <section id="collections">
-              <h2>Coleções</h2>
-
-              <ul id="card_list">
-                <Card dataCard={collections} />
-              </ul>
+          {/* TRAILER */}
+          {showIt === "trailer" && (
+            <section>
+              {trailer && (
+                <section id="trailer">
+                  <h2>Trailer</h2>
+                  <iframe
+                    title={trailer[0].name}
+                    sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-presentation"
+                    src={`https://youtube.com/embed/${trailer[0].key}?autoplay=0`}
+                  ></iframe>
+                </section>
+              )}
             </section>
           )}
+          {/* TRAILER */}
 
-          {recommendations.length > 0 && (
-            <section id="recommendations">
-              <h2>Recomendações</h2>
-              <ul id="card_list">
-                <Card dataCard={recommendations} />
-              </ul>
-            </section>
+          {/* COLLECTIONS */}
+          {showIt === "collections" && (
+            <>
+              {collections && (
+                <section id="collections">
+                  <h2>Coleções</h2>
+
+                  <ul id="card_list">
+                    <Card dataCard={collections} />
+                  </ul>
+                </section>
+              )}
+            </>
           )}
+          {/* COLLECTIONS */}
+
+          {/* RECOMMENDATIONS */}
+          {showIt === "recommendations" && (
+            <>
+              {recommendations.length > 0 && (
+                <section id="recommendations">
+                  <h2>Recomendações</h2>
+                  <ul id="card_list">
+                    <Card dataCard={recommendations} />
+                  </ul>
+                </section>
+              )}
+            </>
+          )}
+          {/* RECOMMENDATIONS */}
         </main>
       )}
     </>
