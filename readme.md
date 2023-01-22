@@ -59,10 +59,11 @@ https://www.linkedin.com/in/maikaodev/
   - [x] -> Adicionar recomendações nos detalhes
   - [x] -> Adicionar coleções nos detalhes
   - [x] -> Adicionar Trailer
-  - [ ] -> Criar um menu de navegação para filmes, tv
+  - [x] -> Criar um menu de navegação para filmes, tv
   - [x] -> Adicionar minhas redes sociais
   - [x] -> Remover as redes sociais do header e por no footer como layout padrão
   - [ ] -> Corrigir a função de subir para o topo da página
+  - [ ] -> Adicionar um método de busca no menu em telas menores
 - [ ] -> Testes
 - [ ] -> Testes unitários
 - [ ] -> Teste de ponta a ponta
