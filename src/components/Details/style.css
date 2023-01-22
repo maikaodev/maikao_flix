@@ -24,10 +24,17 @@
 .content_details section #header_movie h2 {
   margin-top: 16px;
   margin-bottom: 8px;
+
+  text-align: left;
 }
 
 .content_details section #header_movie #genre_list {
   align-items: center;
+  list-style: none;
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
 }
 
 .content_details section #header_movie #genre_list #runtime {
@@ -41,8 +48,10 @@
 }
 
 .content_details section #details_list {
+  list-style: none;
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
 .content_details section #details_list .item_details div {
