@@ -40,10 +40,9 @@
 .content #pagination li button span svg {
   color: #ffff;
 }
-.content #card_list {
-  width: 80vw;
-
+.content #searchedCategory {
   margin-top: 16px;
+  overflow-y: scroll;
 }
 #nothingToSeeHere {
   height: 80vh;
@@ -80,4 +79,12 @@
   color: #222222;
 
   border: 2px solid #02f2ff;
+}
+
+@media (min-width: 1024px) {
+  .content #searchedCategory ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80vw;
+  }
 }

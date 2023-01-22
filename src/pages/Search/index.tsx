@@ -9,21 +9,13 @@ import "./style.css";
 const movies_url_default = import.meta.env.VITE_API_URL_DEFAULT;
 const api_key = import.meta.env.VITE_API_KEY;
 
-type FilmResearchedData = {
-  media_type: string;
-  name: string;
-  poster_path: string;
-  backdrop_path: string;
-  title: string;
-  vote_average: number;
-  id: number;
-};
+import { TopMoviesData } from "../Home";
 
 const Search = () => {
   // React
 
-  const [filmResearched, setFilmResearched] = useState([
-    {} as FilmResearchedData,
+  const [searchedCategory, setSearchedCategory] = useState([
+    {} as TopMoviesData,
   ]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -40,7 +32,7 @@ const Search = () => {
     )}&include_adult=false&region=BR`;
 
     const data = await fetchData(movies);
-    setFilmResearched(data.results);
+    setSearchedCategory(data.results);
     setTotalPages(data.total_pages);
 
     setIsLoading(false);
@@ -64,27 +56,13 @@ const Search = () => {
     <main>
       <section className="content">
         {isLoading && <Loading />}
-        {!isLoading && filmResearched && (
+        {!isLoading && searchedCategory && (
           <>
-            <ul id="card_list">
-              {filmResearched &&
-                filmResearched.map((movie, index) => {
-                  return (
-                    <Card
-                      key={index}
-                      url_image={
-                        movie.backdrop_path
-                          ? movie.backdrop_path
-                          : movie.poster_path
-                      }
-                      title={movie.title || movie.name}
-                      vote_average={movie.vote_average}
-                      id_movie={movie.id}
-                      search_topic={"movie"}
-                    />
-                  );
-                })}
-            </ul>
+            <section id="searchedCategory">
+              <ul id="card_list">
+                {searchedCategory && <Card dataCard={searchedCategory} />}
+              </ul>
+            </section>
             {totalPages > 1 && (
               <div id="pagination">
                 <Pagination
@@ -105,7 +83,7 @@ const Search = () => {
             )}
           </>
         )}
-        {filmResearched.length === 0 && (
+        {searchedCategory.length === 0 && (
           <>
             <div id="nothingToSeeHere">
               <h1>Filme não encontrado...</h1>
