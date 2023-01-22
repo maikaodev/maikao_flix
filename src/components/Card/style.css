@@ -1,77 +1,69 @@
 #card_list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
   list-style: none;
 
+  margin: 0 auto;
+}
+.card_list_item {
+  width: 300px;
+  height: 200px;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+
   display: flex;
-  gap: 16px;
-  overflow: auto hidden;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
-#card_list .item_movie .card img {
-  object-fit: cover;
+#description_card {
+  margin: 8px;
+  padding: 8px;
 
-  -webkit-box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px,
-    5px 5px 15px 5px rgba(0, 0, 0, 0);
-  box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px, 5px 5px 15px 5px rgba(0, 0, 0, 0);
-}
-
-#card_list .item_movie .card #background {
-  position: relative;
-}
-
-#card_list .item_movie .card #background .vote_average {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: end;
+
+  border-radius: 6px;
+
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(5px);
+}
+.vote_average {
+  display: flex;
   align-items: center;
-
-  height: 45px;
-  width: 45px;
-
-  background-color: #001a1b;
-
-  border-radius: 50%;
-
-  border: 1px solid #fff;
-
-  font-weight: 700;
-  font-size: 0.9rem;
-
-  position: absolute;
-
-  right: 6px;
-  bottom: 14px;
 }
-#card_list .item_movie .card #background .vote_average #star_icon {
-  margin-right: 4px;
-
-  color: #02f2ff;
+.vote_average #star_icon {
+  color: yellow;
 }
-#card_list .item_movie .card a {
-  display: block;
-
-  color: #ffffff;
-
-  font-size: 1.1rem;
-
-  margin-bottom: 16px;
-
-  cursor: pointer;
+#description_card a {
+  color: #fff;
 }
-#card_list .item_movie .card a:hover {
-  color: #ffffff;
+#description_card a:hover {
+  color: #fff;
 }
 
+/* width */
 ::-webkit-scrollbar {
   width: 10px;
-  height: 12px;
 }
 
+/* Track */
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
+/* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
 }
 
+/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }

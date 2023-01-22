@@ -1,50 +1,49 @@
-import { AiFillStar } from "react-icons/ai";
-import { Link } from "react-router-dom";
-
 import "./style.css";
 
 const api_image = import.meta.env.VITE_API_IMG;
 
-export const Card = ({
-  url_image,
-  title,
-  vote_average,
-  id_movie,
-  search_topic,
-}: {
-  url_image: string;
-  title: string;
-  vote_average: number;
-  id_movie: number;
-  search_topic: string;
-}) => {
+// TS
+import { TopMoviesData } from "@/pages/Home";
+import { AiFillStar } from "react-icons/ai";
+import { Link } from "react-router-dom";
+export const Card = ({ dataCard = [{} as TopMoviesData] }) => {
   //
 
   return (
     <>
-      {url_image && (
-        <li className="item_movie">
-          <div className="card">
-            <div id="background">
-              <img
-                src={`${api_image}${url_image}`}
-                alt={title}
-                width={150}
-                height={200}
-              />
-
-              {vote_average && (
-                <div className="vote_average">
-                  <AiFillStar id="star_icon" />
-                  <span>{vote_average.toFixed(1)}</span>
+      {dataCard && (
+        <>
+          {dataCard.map((data) => {
+            return (
+              <li
+                key={data.id}
+                className="card_list_item"
+                style={{
+                  backgroundImage: `url(${
+                    api_image + data.backdrop_path || data.poster_path
+                  })`,
+                }}
+              >
+                <div id="description_card">
+                  {data.vote_average && (
+                    <div className="vote_average">
+                      <AiFillStar id="star_icon" />
+                      <span>{data.vote_average.toFixed(1)}</span>
+                    </div>
+                  )}
+                  <div>
+                    <Link to={`/detalhes/movie/${data.id}`}>
+                      {data.title || data.name}
+                    </Link>
+                  </div>
                 </div>
-              )}
-            </div>
-
-            <Link to={`/detalhes/${search_topic}/${id_movie}`}>{title}</Link>
-          </div>
-        </li>
+              </li>
+            );
+          })}
+        </>
       )}
     </>
   );
 };
+{
+}
