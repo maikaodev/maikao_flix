@@ -57,6 +57,10 @@ header {
 
   color: #222222;
 }
+
+#topo #link svg {
+  margin-right: 8px;
+}
 #topo #link svg,
 #topo #link span {
   font-size: 2rem;

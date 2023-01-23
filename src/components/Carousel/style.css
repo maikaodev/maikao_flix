@@ -19,7 +19,8 @@
   transition: background 3s;
 }
 
-#carousel #carousel_content h4 {
+#carousel #carousel_content span {
+  display: block;
   padding: 8px;
   margin: 8px;
   text-align: left;
@@ -36,7 +37,10 @@
 
 @media (min-width: 768px) {
   #carousel {
-    width: 400px;
-    height: 200px;
+    width: 60vw;
+    height: 300px;
+  }
+  #carousel #carousel_content span {
+    font-size: 1.5rem;
   }
 }
