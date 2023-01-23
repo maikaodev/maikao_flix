@@ -14,16 +14,17 @@
   gap: 16px;
 }
 #header h2 {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 #section_card_list {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  margin-bottom: 16px;
+  gap: 32px;
 }
-
+#section_card_list h2 {
+  font-size: 1.3rem;
+}
 #list {
   overflow-y: auto;
   height: 500px;
@@ -31,26 +32,35 @@
 }
 main section h2 {
   text-align: center;
-  margin-bottom: 16px;
 }
 @media (min-width: 768px) {
   #header {
-    width: 500px;
-  }
-}
-@media (min-width: 1024px) {
-  #header {
+    width: 80vw;
+
     flex-direction: column-reverse;
+  }
+  #header h2 {
+    font-size: 2rem;
   }
   #header form {
     display: none;
   }
-  #list {
-    width: 80vw;
+
+  #section_card_list #list {
+    width: 85vw;
   }
+  #section_card_list h2 {
+    font-size: 1.5rem;
+  }
+
   #section_card_list ul {
+    width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%;
+  }
+}
+@media (min-width: 1024px) {
+  #section_card_list #list {
+    width: 90vw;
   }
 }

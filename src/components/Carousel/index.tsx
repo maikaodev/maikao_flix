@@ -20,12 +20,12 @@ export const Carousel = ({ data = {} as CarouselProps }) => {
           style={{ backgroundImage: `url(${api_image + data.background_url})` }}
         >
           <div id="carousel_content">
-            <h4>
+            <span>
               {data.title +
                 " (" +
                 releaseDate(new Date(data.release_date)) +
                 ")"}
-            </h4>
+            </span>
           </div>
         </div>
       </Link>
