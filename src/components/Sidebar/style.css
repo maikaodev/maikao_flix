@@ -76,9 +76,11 @@ aside nav li a:hover {
 
     display: flex;
     justify-content: center;
+
+    gap: 16px;
   }
   aside nav #form #arrow-back {
-    width: 100%;
+    width: 26px;
     height: 26px;
 
     cursor: pointer;
