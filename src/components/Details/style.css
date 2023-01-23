@@ -44,6 +44,9 @@
   align-items: center;
   width: 100px;
 }
+.content_details section #header_movie #genre_list #runtime span {
+  width: 87px;
+}
 
 .content_details section #header_movie #genre_list #runtime svg {
   font-size: 1.5rem;
@@ -75,12 +78,11 @@
   .content_details {
     flex-direction: row;
     align-items: flex-start;
+    justify-content: center;
 
     width: 1000px;
 
     gap: 16px;
-
-    margin: 0 auto;
   }
 
   .content_details section #details_list .item_details #synopsis {
