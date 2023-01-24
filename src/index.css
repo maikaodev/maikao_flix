@@ -29,16 +29,3 @@ a {
 a:hover {
   color: var(--link-color-hover);
 }
-
-header {
-  height: 10vh;
-}
-main {
-  height: 75vh;
-
-  overflow: auto;
-}
-
-footer {
-  height: 15vh;
-}
