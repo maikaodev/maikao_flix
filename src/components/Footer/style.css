@@ -4,7 +4,8 @@ footer {
   align-items: center;
   justify-content: center;
 
-  height: 70px;
+  padding-top: 16px;
+  border-top: 1px solid gray;
 }
 
 #social_network_list {
