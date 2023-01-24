@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 // Component
-import { Card, Details, Loading } from "../../components";
+import { BtnGoToTop, Card, Details, Loading } from "../../components";
 
 // CSS
 import "./style.css";
@@ -115,15 +115,11 @@ const About = () => {
             <button id="back" onClick={() => navigate(navigations)}>
               Voltar
             </button>
-            <a
-              id="float_button"
-              href="#topo"
+            <BtnGoToTop
               onClick={() => {
                 setNavigations((prevCount) => (prevCount += -1));
               }}
-            >
-              ⬆
-            </a>
+            />
           </div>
           <section>
             <Details

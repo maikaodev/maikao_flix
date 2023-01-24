@@ -19,30 +19,7 @@ section #nav_details {
   transition: 0.75s;
 }
 
-div #float_button {
-  background-color: #2e9abf;
-  color: #222222;
-
-  border: 2px solid #2e9abf;
-
-  width: 50px;
-  height: 50px;
-
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-
-  border-radius: 50%;
-
-  cursor: pointer;
-}
-
-#back:hover,
-div #float_button:hover {
+#back:hover {
   background-color: #02f2ff;
   color: #222222;
 
