@@ -19,30 +19,7 @@ section #nav_details {
   transition: 0.75s;
 }
 
-div #float_button {
-  background-color: #2e9abf;
-  color: #222222;
-
-  border: 2px solid #2e9abf;
-
-  width: 50px;
-  height: 50px;
-
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-
-  border-radius: 50%;
-
-  cursor: pointer;
-}
-
-#back:hover,
-div #float_button:hover {
+#back:hover {
   background-color: #02f2ff;
   color: #222222;
 
@@ -87,6 +64,46 @@ div #float_button:hover {
 #collections h2,
 #trailer h2 {
   margin: 16px 0;
+}
+
+#req_not_found {
+  width: 100vw;
+
+  text-align: center;
+
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+#req_not_found span {
+  font-size: 1.5rem;
+}
+
+#req_not_found a {
+  background-color: #2e9abf;
+  color: #222222;
+
+  border: 2px solid #2e9abf;
+
+  padding: 16px;
+
+  border-radius: 6px;
+
+  font-size: 1.2rem;
+  font-weight: 700;
+
+  transition: 0.75s;
+}
+
+#req_not_found a:hover {
+  background-color: #02f2ff;
+  color: #222222;
+
+  border: 2px solid #02f2ff;
 }
 
 @media (min-width: 768px) {

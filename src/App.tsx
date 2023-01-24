@@ -1,11 +1,12 @@
 import { Outlet } from "react-router-dom";
-import { Footer, NavBar } from "./components";
+import { BtnGoToTop, Footer, NavBar } from "./components";
 
 function App() {
   return (
     <>
       <NavBar />
       <Outlet />
+      <BtnGoToTop />
       <Footer />
     </>
   );

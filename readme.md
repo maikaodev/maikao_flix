@@ -31,14 +31,14 @@ https://www.linkedin.com/in/maikaodev/
 
   - [x] -> Criar o component NavBar
   - [x] -> Criar o component CARD
-  - [x] -> Criar o component Alert
+  - [ ] -> Criar o component Alert
   - [x] -> Criar o component Loading
 
 - [x] -> PÁGINAS
 
   - [x] -> Home
   - [x] -> Movie/:id
-  - [ ] -> Search/:id
+  - [x] -> Search/:id
     - [x] -> Paginação
     - [x] -> Layout
       - [x] -> Background sem imagem
@@ -62,8 +62,9 @@ https://www.linkedin.com/in/maikaodev/
   - [x] -> Criar um menu de navegação para filmes, tv
   - [x] -> Adicionar minhas redes sociais
   - [x] -> Remover as redes sociais do header e por no footer como layout padrão
-  - [ ] -> Corrigir a função de subir para o topo da página
+  - [x] -> Corrigir a função de subir para o topo da página
   - [x] -> Adicionar um método de busca no menu em telas menores
+  - [ ] -> Remover o alerta quando tem erro na requisição ou não tem dados
 - [ ] -> Testes
 - [ ] -> Testes unitários
 - [ ] -> Teste de ponta a ponta

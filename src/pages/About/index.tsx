@@ -1,9 +1,9 @@
 // Functions - Native
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 // Component
-import { Card, Details, Loading } from "../../components";
+import { BtnGoToTop, Card, Details, Loading } from "../../components";
 
 // CSS
 import "./style.css";
@@ -39,10 +39,12 @@ const About = () => {
     {} as {
       name: string;
       key: string;
+      empty?: boolean;
     },
   ]);
   const [showIt, setShowIt] = useState<string>("trailer");
   const [navigations, setNavigations] = useState<number>(-1);
+  const [reqNotFound, setReqNotFound] = useState<boolean>(false);
 
   let { id, searchTopic } = useParams();
 
@@ -56,11 +58,17 @@ const About = () => {
 
     setDetails(data);
 
-    getTheRecommendations();
-    if (data?.belongs_to_collection?.id) {
-      getTheCollections(data.belongs_to_collection.id);
+    if (data === undefined) {
+      setReqNotFound(true);
     }
+    if (data) {
+      getTheVideos();
+      getTheRecommendations();
 
+      if (data.belongs_to_collection) {
+        getTheCollections(data.belongs_to_collection.id);
+      }
+    }
     setIsLoading(false);
   };
 
@@ -77,7 +85,9 @@ const About = () => {
 
     const data = await fetchData(collectionsURL);
 
-    setCollections(data.parts);
+    if (data.results) {
+      setCollections(data.parts);
+    }
   };
 
   const getTheVideos = async () => {
@@ -85,7 +95,9 @@ const About = () => {
 
     const data = await fetchData(videosURL);
 
-    setTrailer(data.results);
+    if (data.results) {
+      setTrailer(data.results);
+    }
   };
 
   const setContent = (content: string) => {
@@ -94,36 +106,27 @@ const About = () => {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-
     getDetailsMovies();
-    getTheVideos();
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
-
     getDetailsMovies();
   }, [id]);
 
   return (
     <>
       {isLoading && <Loading />}
-      {!isLoading && (
+      {!isLoading && details && (
         <main>
           <div>
             <button id="back" onClick={() => navigate(navigations)}>
               Voltar
             </button>
-            <a
-              id="float_button"
-              href="#topo"
+            <BtnGoToTop
               onClick={() => {
                 setNavigations((prevCount) => (prevCount += -1));
               }}
-            >
-              ⬆
-            </a>
+            />
           </div>
           <section>
             <Details
@@ -151,7 +154,7 @@ const About = () => {
                     </button>
                   </li>
                 )}
-                {collections && (
+                {collections[0].id && (
                   <li>
                     <button
                       onClick={() => {
@@ -196,7 +199,7 @@ const About = () => {
           {/* COLLECTIONS */}
           {showIt === "collections" && (
             <>
-              {collections && (
+              {collections[0].id && (
                 <section id="collections">
                   <h2>Coleções</h2>
 
@@ -224,6 +227,12 @@ const About = () => {
           )}
           {/* RECOMMENDATIONS */}
         </main>
+      )}
+      {!isLoading && reqNotFound && (
+        <div id="req_not_found">
+          <span>Desculpe... não existe informações a respeito</span>
+          <Link to="/">Página Inicial</Link>
+        </div>
       )}
     </>
   );

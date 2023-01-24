@@ -14,10 +14,16 @@
 body {
   background-color: var(--bg-color);
   color: var(--font-color);
+
+  height: 100vh;
+}
+
+body #root {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 16px;
+  height: 100%;
 }
 
 a {
@@ -28,17 +34,4 @@ a {
 
 a:hover {
   color: var(--link-color-hover);
-}
-
-header {
-  height: 10vh;
-}
-main {
-  height: 75vh;
-
-  overflow: auto;
-}
-
-footer {
-  height: 15vh;
 }
