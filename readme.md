@@ -62,7 +62,7 @@ https://www.linkedin.com/in/maikaodev/
   - [x] -> Criar um menu de navegação para filmes, tv
   - [x] -> Adicionar minhas redes sociais
   - [x] -> Remover as redes sociais do header e por no footer como layout padrão
-  - [ ] -> Corrigir a função de subir para o topo da página
+  - [x] -> Corrigir a função de subir para o topo da página
   - [x] -> Adicionar um método de busca no menu em telas menores
 - [ ] -> Testes
 - [ ] -> Testes unitários
