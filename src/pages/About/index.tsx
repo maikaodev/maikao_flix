@@ -143,7 +143,7 @@ const About = () => {
           {searchTopic === "movie" && (
             <section>
               <ul id="menu_show_it">
-                {trailer && (
+                {trailer.length > 0 && (
                   <li>
                     <button
                       onClick={() => {
@@ -182,7 +182,7 @@ const About = () => {
           {/* TRAILER */}
           {showIt === "trailer" && (
             <section>
-              {searchTopic === "movie" && (
+              {searchTopic === "movie" && trailer.length > 0 && (
                 <section id="trailer">
                   <h2>Trailer</h2>
                   <iframe
