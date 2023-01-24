@@ -1,17 +1,17 @@
 // Functions - Native
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+// Components
+import { InputText } from "../InputText";
+import { Sidebar } from "../Sidebar";
 
 // CSS
 import "./style.css";
 
 // Icons
-import { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { BiCameraMovie } from "react-icons/bi";
-import { InputText } from "../InputText";
-import { Sidebar } from "../Sidebar";
-
-// TS
 
 export const NavBar = () => {
   //
@@ -20,6 +20,14 @@ export const NavBar = () => {
   const handleClick = () => {
     setIsActive(!isActive);
   };
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 5) {
+        setIsActive(false);
+      }
+    });
+  }, [window.scrollY]);
 
   return (
     <header>
