@@ -14,6 +14,8 @@
 body {
   background-color: var(--bg-color);
   color: var(--font-color);
+
+  height: 100vh;
 }
 
 body #root {
@@ -21,6 +23,7 @@ body #root {
   flex-direction: column;
   justify-content: space-between;
   gap: 16px;
+  height: 100%;
 }
 
 a {
