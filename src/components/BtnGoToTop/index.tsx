@@ -14,13 +14,13 @@ export const BtnGoToTop = ({ onClick }: { onClick?: () => void }) => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 10) {
+      if (window.scrollY > 40) {
         setShowTopBtn(true);
       } else {
         setShowTopBtn(false);
       }
     });
-  });
+  }, []);
 
   return (
     <>
