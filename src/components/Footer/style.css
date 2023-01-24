@@ -3,6 +3,8 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  height: 70px;
 }
 
 #social_network_list {
