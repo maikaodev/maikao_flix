@@ -85,7 +85,9 @@ const About = () => {
 
     const data = await fetchData(collectionsURL);
 
-    if (data.results) {
+    console.log("[COLLECTIONS", data.parts);
+
+    if (data.parts) {
       setCollections(data.parts);
     }
   };
@@ -143,7 +145,7 @@ const About = () => {
           {searchTopic === "movie" && (
             <section>
               <ul id="menu_show_it">
-                {trailer && (
+                {trailer.length > 0 && (
                   <li>
                     <button
                       onClick={() => {
@@ -182,7 +184,7 @@ const About = () => {
           {/* TRAILER */}
           {showIt === "trailer" && (
             <section>
-              {searchTopic === "movie" && (
+              {searchTopic === "movie" && trailer.length > 0 && (
                 <section id="trailer">
                   <h2>Trailer</h2>
                   <iframe
@@ -202,7 +204,6 @@ const About = () => {
               {collections[0].id && (
                 <section id="collections">
                   <h2>Coleções</h2>
-
                   <ul id="card_list">
                     <Card dataCard={collections} />
                   </ul>
