@@ -7,7 +7,13 @@ import "./style.css";
 // Icons
 import { AiFillWarning } from "react-icons/ai";
 
-export const AlertMessage = ({ alertMessage }: { alertMessage: string }) => {
+export const AlertMessage = ({
+  alertMessage,
+  backTo,
+}: {
+  alertMessage: string;
+  backTo?: string;
+}) => {
   return (
     <>
       <div id="alert">
@@ -15,7 +21,7 @@ export const AlertMessage = ({ alertMessage }: { alertMessage: string }) => {
           <AiFillWarning />
           <span>{alertMessage}</span>
         </div>
-        <Link to="/">Página Inicial</Link>
+        <Link to="/">{backTo || "Página Inicial"}</Link>
       </div>
     </>
   );
