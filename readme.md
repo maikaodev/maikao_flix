@@ -15,7 +15,7 @@
 
 ### Deploy
 
-https://maikaoflix.netlify.app/?page=1
+https://maikaoflix.netlify.app/
 
 ### Linkedin
 
