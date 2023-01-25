@@ -35,3 +35,9 @@ a {
 a:hover {
   color: var(--link-color-hover);
 }
+
+main {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
