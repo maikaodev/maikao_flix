@@ -85,6 +85,8 @@ const About = () => {
 
     const data = await fetchData(collectionsURL);
 
+    console.log("[COLLECTIONS", data.parts);
+
     if (data.parts) {
       setCollections(data.parts);
     }
@@ -154,7 +156,7 @@ const About = () => {
                     </button>
                   </li>
                 )}
-                {collections.length > 0 && (
+                {collections[0].id && (
                   <li>
                     <button
                       onClick={() => {
@@ -199,7 +201,7 @@ const About = () => {
           {/* COLLECTIONS */}
           {showIt === "collections" && (
             <>
-              {collections.length > 0 && (
+              {collections[0].id && (
                 <section id="collections">
                   <h2>Coleções</h2>
                   <ul id="card_list">
