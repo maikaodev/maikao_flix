@@ -3,14 +3,14 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { InputText } from "../InputText";
 import "./style.css";
 
-export const Sidebar = () => {
+export const Sidebar = ({ isActive }: { isActive: boolean }) => {
   const [hideIt, setHideIt] = useState<boolean>(false);
   const hiddenMenu = () => {
     setHideIt(!hideIt);
   };
   return (
     <>
-      <aside>
+      <aside className={isActive ? "sm_menu" : ""}>
         <nav id="menu">
           {!hideIt && (
             <>

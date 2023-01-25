@@ -31,7 +31,7 @@ https://www.linkedin.com/in/maikaodev/
 
   - [x] -> Criar o component NavBar
   - [x] -> Criar o component CARD
-  - [ ] -> Criar o component Alert
+  - [x] -> Criar o component Alert
   - [x] -> Criar o component Loading
 
 - [x] -> PÁGINAS
@@ -64,7 +64,8 @@ https://www.linkedin.com/in/maikaodev/
   - [x] -> Remover as redes sociais do header e por no footer como layout padrão
   - [x] -> Corrigir a função de subir para o topo da página
   - [x] -> Adicionar um método de busca no menu em telas menores
-  - [ ] -> Remover o alerta quando tem erro na requisição ou não tem dados
+  - [x] -> Remover o alerta quando tem erro na requisição
+  - [ ] -> Remover <Card/> sem background ou adicionar um padrão
 - [ ] -> Testes
 - [ ] -> Testes unitários
 - [ ] -> Teste de ponta a ponta
