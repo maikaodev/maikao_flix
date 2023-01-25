@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 import { fetchData } from "@/utils/fetchData";
 
 // Component
-import { Card, InputText, Loading } from "@/components";
+import { AlertMessage, Card, InputText, Loading } from "@/components";
 
 // CSS
 import "./style.css";
 
-// TypeScript
+// TS
 import { Carousel, CarouselProps } from "@/components/Carousel";
 
 export type TopMoviesData = {
@@ -37,12 +37,19 @@ const Home = () => {
   const [counter, setCounter] = useState<number>(0);
   const [index, setIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [alertMessage, setAlertMessage] = useState<string>();
 
   const getTopRatedMovie = async () => {
     //
     const topRatedUrl = `${movies_url}movie/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
 
     const data = await fetchData(topRatedUrl);
+
+    if (data?.error) {
+      setIsLoading(false);
+
+      return setAlertMessage(data.message);
+    }
 
     setTopRated(data.results);
 
@@ -97,9 +104,15 @@ const Home = () => {
   }, [counter]);
   return (
     <main id="container">
-      {/* HEADER */}
+      {/* ERROR */}
+      {!isLoading && alertMessage && (
+        <AlertMessage alertMessage={alertMessage} backTo="Recarregar" />
+      )}
+      {/* ERROR */}
       {isLoading && <Loading />}
-      {!isLoading && (
+
+      {/* HEADER */}
+      {!isLoading && !alertMessage && (
         <>
           <div id="header">
             <section id="carousel_section">
@@ -118,6 +131,7 @@ const Home = () => {
           </section>
         </>
       )}
+
       {/* HEADER */}
 
       {/* MAIN */}

@@ -2,7 +2,7 @@ import { fetchData } from "@/utils/fetchData";
 import { Pagination } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
-import { Card, Loading } from "../../components";
+import { AlertMessage, Card, Loading } from "../../components";
 
 import "./style.css";
 
@@ -19,6 +19,7 @@ const Search = () => {
   ]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [alertMessage, setAlertMessage] = useState<string>();
 
   // React router
   let { name } = useParams();
@@ -32,6 +33,13 @@ const Search = () => {
     )}&include_adult=false&region=BR`;
 
     const data = await fetchData(movies);
+
+    if (data?.error) {
+      setIsLoading(false);
+
+      return setAlertMessage(data.message);
+    }
+
     setSearchedCategory(data.results);
     setTotalPages(data.total_pages);
 
@@ -54,44 +62,52 @@ const Search = () => {
 
   return (
     <main>
-      <section className="content">
-        {isLoading && <Loading />}
-        {!isLoading && searchedCategory && (
-          <>
-            <section id="searchedCategory">
-              <ul id="card_list">
-                {searchedCategory && <Card dataCard={searchedCategory} />}
-              </ul>
-            </section>
-            {totalPages > 1 && (
-              <div id="pagination">
-                <Pagination
-                  simple
-                  defaultCurrent={Number(currentPage.get("page"))}
-                  current={Number(currentPage.get("page"))}
-                  total={totalPages * 10}
-                  onChange={(event) => {
-                    //
-                    const current_page = {
-                      page: event.toString(),
-                    };
+      {!isLoading && alertMessage && (
+        <AlertMessage alertMessage={alertMessage} />
+      )}
+      {!alertMessage && (
+        <section className="content">
+          {isLoading && <Loading />}
+          {!isLoading && searchedCategory && (
+            <>
+              <section id="searchedCategory">
+                <ul id="card_list">
+                  {searchedCategory && <Card dataCard={searchedCategory} />}
+                </ul>
+              </section>
+              {totalPages > 1 && (
+                <div id="pagination">
+                  <Pagination
+                    simple
+                    defaultCurrent={Number(currentPage.get("page"))}
+                    current={Number(currentPage.get("page"))}
+                    total={totalPages * 10}
+                    onChange={(event) => {
+                      //
+                      const current_page = {
+                        page: event.toString(),
+                      };
 
-                    setCurrentPage(current_page);
-                  }}
-                />
+                      setCurrentPage(current_page);
+                    }}
+                  />
+                </div>
+              )}
+            </>
+          )}
+          {searchedCategory.length === 0 && (
+            <>
+              <div id="nothingToSeeHere">
+                <h1>Filme não encontrado...</h1>
+                <Link to="/">Voltar para página principal</Link>
               </div>
-            )}
-          </>
-        )}
-        {searchedCategory.length === 0 && (
-          <>
-            <div id="nothingToSeeHere">
-              <h1>Filme não encontrado...</h1>
-              <Link to="/">Voltar para página principal</Link>
-            </div>
-          </>
-        )}
-      </section>
+            </>
+          )}
+          {!isLoading && alertMessage && (
+            <AlertMessage alertMessage={alertMessage} />
+          )}
+        </section>
+      )}
     </main>
   );
 };

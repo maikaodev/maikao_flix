@@ -3,7 +3,13 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 // Component
-import { BtnGoToTop, Card, Details, Loading } from "../../components";
+import {
+  AlertMessage,
+  BtnGoToTop,
+  Card,
+  Details,
+  Loading,
+} from "../../components";
 
 // CSS
 import "./style.css";
@@ -45,6 +51,7 @@ const About = () => {
   const [showIt, setShowIt] = useState<string>("trailer");
   const [navigations, setNavigations] = useState<number>(-1);
   const [reqNotFound, setReqNotFound] = useState<boolean>(false);
+  const [alertMessage, setAlertMessage] = useState<string>();
 
   let { id, searchTopic } = useParams();
 
@@ -56,11 +63,18 @@ const About = () => {
 
     const data = await fetchData(detailsURL);
 
+    if (data?.error) {
+      setIsLoading(false);
+
+      return setAlertMessage(data.message);
+    }
+
     setDetails(data);
 
     if (data === undefined) {
       setReqNotFound(true);
     }
+
     if (data) {
       getTheVideos();
       getTheRecommendations();
@@ -84,8 +98,6 @@ const About = () => {
     const collectionsURL = `${movies_url}collection/${collectionsId}?${api_key}&language=pt-BR`;
 
     const data = await fetchData(collectionsURL);
-
-    console.log("[COLLECTIONS", data.parts);
 
     if (data.parts) {
       setCollections(data.parts);
@@ -167,7 +179,7 @@ const About = () => {
                     </button>
                   </li>
                 )}
-                {recommendations && (
+                {recommendations.length > 0 && (
                   <li>
                     <button
                       onClick={() => {
@@ -234,6 +246,9 @@ const About = () => {
           <span>Desculpe... não existe informações a respeito</span>
           <Link to="/">Página Inicial</Link>
         </div>
+      )}
+      {!isLoading && alertMessage && (
+        <AlertMessage alertMessage={alertMessage} />
       )}
     </>
   );
