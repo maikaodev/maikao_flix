@@ -1,3 +1,4 @@
+export * from "./Alert";
 export * from "./BtnGoToTop";
 export * from "./Card";
 export * from "./Carousel";
