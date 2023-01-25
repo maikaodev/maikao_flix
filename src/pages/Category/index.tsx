@@ -44,7 +44,7 @@ const CategoryPage = () => {
       theme = "tv";
     }
 
-    const topRatedUrl = `${movies_url_default}${theme}/top_ated?${api_key}&language=pt-BR&page=${currentPage.get(
+    const topRatedUrl = `${movies_url_default}${theme}/top_rated?${api_key}&language=pt-BR&page=${currentPage.get(
       "page"
     )}&region=BR`;
 
