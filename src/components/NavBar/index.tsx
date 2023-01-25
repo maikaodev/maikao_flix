@@ -40,7 +40,7 @@ export const NavBar = () => {
           {!isActive && <AiOutlineMenu />}
           {isActive && <AiOutlineClose />}
         </button>
-        {isActive && <Sidebar />}
+        {<Sidebar isActive={isActive} />}
       </nav>
       <InputText />
     </header>
