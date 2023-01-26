@@ -15,35 +15,39 @@ export const Card = ({ dataCard = [{} as TopMoviesData] }) => {
       {dataCard && (
         <>
           {dataCard.map((data) => {
-            return (
-              <li
-                key={data.id}
-                className="card_list_item"
-                style={{
-                  backgroundImage: `url(${
-                    api_image + data.backdrop_path || data.poster_path
-                  })`,
-                }}
-              >
-                <div id="description_card">
-                  {data.vote_average && (
-                    <div className="vote_average">
-                      <AiFillStar id="star_icon" />
-                      <span>{data.vote_average.toFixed(1)}</span>
+            {
+              if (data.backdrop_path && data.poster_path !== null) {
+                return (
+                  <li
+                    key={data.id}
+                    className="card_list_item"
+                    style={{
+                      backgroundImage: `url(${
+                        api_image + data.backdrop_path || data.poster_path
+                      })`,
+                    }}
+                  >
+                    <div id="description_card">
+                      {data.vote_average && (
+                        <div className="vote_average">
+                          <AiFillStar id="star_icon" />
+                          <span>{data.vote_average.toFixed(1)}</span>
+                        </div>
+                      )}
+                      <div>
+                        <Link
+                          to={`/detalhes/${!data.video ? "movie" : "tv"}/${
+                            data.id
+                          }`}
+                        >
+                          {data.title || data.name}
+                        </Link>
+                      </div>
                     </div>
-                  )}
-                  <div>
-                    <Link
-                      to={`/detalhes/${!data.video ? "movie" : "tv"}/${
-                        data.id
-                      }`}
-                    >
-                      {data.title || data.name}
-                    </Link>
-                  </div>
-                </div>
-              </li>
-            );
+                  </li>
+                );
+              }
+            }
           })}
         </>
       )}
