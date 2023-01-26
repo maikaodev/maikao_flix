@@ -48,7 +48,7 @@ const About = () => {
       empty?: boolean;
     },
   ]);
-  const [showIt, setShowIt] = useState<string>("trailer");
+  const [showIt, setShowIt] = useState<string>("");
   const [navigations, setNavigations] = useState<number>(-1);
   const [reqNotFound, setReqNotFound] = useState<boolean>(false);
   const [alertMessage, setAlertMessage] = useState<string>();
@@ -69,29 +69,30 @@ const About = () => {
       return setAlertMessage(data.message);
     }
 
-    setDetails(data);
-
     if (data === undefined) {
       setReqNotFound(true);
     }
 
     if (data) {
+      setDetails(data);
       getTheVideos();
       getTheRecommendations();
 
-      if (data.belongs_to_collection) {
+      if (data?.belongs_to_collection) {
         getTheCollections(data.belongs_to_collection.id);
       }
+
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const getTheRecommendations = async () => {
     const recommendationsURL = `${movies_url}${searchTopic}/${id}/recommendations?${api_key}&language=pt-BR&page=1&region=BR`;
 
     const data = await fetchData(recommendationsURL);
-
-    setRecommendations(data.results);
+    if (data.results) {
+      setRecommendations(data.results);
+    }
   };
 
   const getTheCollections = async (collectionsId: number) => {
@@ -154,7 +155,7 @@ const About = () => {
               genres={details.genres}
             />
           </section>
-          {searchTopic === "movie" && (
+          {searchTopic && (
             <section>
               <ul id="menu_show_it">
                 {trailer.length > 0 && (
