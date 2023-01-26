@@ -25,8 +25,9 @@ export type TopMoviesData = {
   video: boolean;
 };
 
-const movies_url = import.meta.env.VITE_API_URL_DEFAULT;
-const api_key = import.meta.env.VITE_API_KEY;
+const movies_url =
+  import.meta.env.VITE_API_URL_DEFAULT || import.meta.env.API_URL_DEFAULT;
+const api_key = import.meta.env.VITE_API_KEY || import.meta.env.API_KEY;
 
 const Home = () => {
   const [topRated, setTopRated] = useState([{} as TopMoviesData]);
