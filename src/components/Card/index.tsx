@@ -1,11 +1,11 @@
 import "./style.css";
 
-const api_image = import.meta.env.VITE_API_IMG;
+const api_image = process.env.VITE_API_IMG;
 
 // TS
-import { TopMoviesData } from "@/pages/Home";
+import { TopMoviesData } from "@/pages";
+import Link from "next/link";
 import { AiFillStar } from "react-icons/ai";
-import { Link } from "react-router-dom";
 
 export const Card = ({ dataCard = [{} as TopMoviesData] }) => {
   //
@@ -36,7 +36,7 @@ export const Card = ({ dataCard = [{} as TopMoviesData] }) => {
                       )}
                       <div>
                         <Link
-                          to={`/detalhes/${!data.video ? "movie" : "tv"}/${
+                          href={`/detalhes/${!data.video ? "movie" : "tv"}/${
                             data.id
                           }`}
                         >

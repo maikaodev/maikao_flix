@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { InputText } from "../InputText";
@@ -15,10 +16,10 @@ export const Sidebar = ({ isActive }: { isActive: boolean }) => {
           {!hideIt && (
             <>
               <li>
-                <a href="/filmes?page=1">Filmes</a>
+                <Link href="/filmes?page=1">Filmes</Link>
               </li>
               <li>
-                <a href="/series?page=1">Séries</a>
+                <Link href="/series?page=1">Séries</Link>
               </li>
               <li id="search">
                 <button onClick={hiddenMenu}>Buscar</button>

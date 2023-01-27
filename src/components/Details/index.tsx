@@ -1,3 +1,6 @@
+// Function - Native
+import Image from "next/image";
+
 // Icons
 import { BsGraphUp } from "react-icons/bs";
 import { CgSandClock } from "react-icons/cg";
@@ -12,7 +15,7 @@ import { convertMinutesToHours } from "@/utils/convertMinutesToHours";
 import { formatCurrency } from "@/utils/formatCurrency";
 import { releaseDate } from "@/utils/releaseDate";
 
-const api_image = import.meta.env.VITE_API_IMG;
+const api_image = process.env.VITE_API_IMG;
 
 type DetailsProps = {
   background_img: string;
@@ -39,7 +42,7 @@ export const Details = ({
 
   return (
     <div className="content_details">
-      <img
+      <Image
         id="img"
         src={`${api_image}${background_img}`}
         alt={title}

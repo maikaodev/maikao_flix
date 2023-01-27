@@ -1,6 +1,6 @@
 // Functions - Native
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 // Components
 import { InputText } from "../InputText";
@@ -32,7 +32,7 @@ export const NavBar = () => {
   return (
     <header>
       <nav id="topo">
-        <Link id="link" to="/">
+        <Link id="link" href="/">
           <BiCameraMovie id="icon" />
           <span>MaikaoFlix</span>
         </Link>

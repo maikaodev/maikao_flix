@@ -1,6 +1,7 @@
 // Function - Native
 import { useEffect, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+// TODO: Corrigir e alterar para next-link
+// import { Link, useParams, useSearchParams } from "react-router-dom";
 
 // Function - Utils
 import { fetchData } from "@/utils/fetchData";
@@ -10,14 +11,14 @@ import { Pagination } from "antd";
 import { AlertMessage, Card, Loading } from "../../components";
 
 // CSs
-import "./style.css";
+import S from "../../styles/Category.module.css";
 
 // .env
-const movies_url_default = import.meta.env.VITE_API_URL_DEFAULT;
-const api_key = import.meta.env.VITE_API_KEY;
+const movies_url_default = process.env.VITE_API_URL_DEFAULT;
+const api_key = process.env.VITE_API_KEY;
 
 // TS
-import { TopMoviesData } from "../Home";
+import { TopMoviesData } from "../index";
 
 const CategoryPage = () => {
   // React
@@ -30,8 +31,9 @@ const CategoryPage = () => {
   const [alertMessage, setAlertMessage] = useState<string>();
 
   // React router
-  let { category } = useParams();
-  const [currentPage, setCurrentPage] = useSearchParams();
+  // TODO: Usar o router
+  // let { category } = useParams();
+  // const [currentPage, setCurrentPage] = useSearchParams();
 
   const getTheMostRated = async () => {
     setIsLoading(true);
@@ -82,17 +84,17 @@ const CategoryPage = () => {
         <AlertMessage alertMessage={alertMessage} />
       )}
       {!isLoading && !alertMessage && (
-        <section className="content">
+        <section className={S.content}>
           {isLoading && <Loading />}
           {!isLoading && searchedCategory && (
             <>
-              <section id="searchedCategory">
-                <ul id="card_list">
+              <section className={S.searchedCategory}>
+                <ul className={S.card_list}>
                   {searchedCategory && <Card dataCard={searchedCategory} />}
                 </ul>
               </section>
               {totalPages > 1 && (
-                <div id="pagination">
+                <div className={S.pagination}>
                   <Pagination
                     simple
                     defaultCurrent={Number(currentPage.get("page"))}
@@ -113,7 +115,7 @@ const CategoryPage = () => {
           )}
           {searchedCategory.length === 0 && (
             <>
-              <div id="nothingToSeeHere">
+              <div className={S.nothingToSeeHere}>
                 <h1>Filme não encontrado...</h1>
                 <Link to="/">Voltar para página principal</Link>
               </div>

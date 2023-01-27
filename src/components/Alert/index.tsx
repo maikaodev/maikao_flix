@@ -1,5 +1,5 @@
 // Functions - Native
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 // CSS
 import "./style.css";
@@ -21,7 +21,7 @@ export const AlertMessage = ({
           <AiFillWarning />
           <span>{alertMessage}</span>
         </div>
-        <Link to="/">{backTo || "Página Inicial"}</Link>
+        <Link href="/">{backTo || "Página Inicial"}</Link>
       </div>
     </>
   );

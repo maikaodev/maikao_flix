@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import "./style.css";
 
-export const BtnGoToTop = ({ onClick }: { onClick?: () => void }) => {
+export const BtnGoToTop = () => {
   const [showTopBtn, setShowTopBtn] = useState<boolean>(false);
 
   const goToTop = () => {

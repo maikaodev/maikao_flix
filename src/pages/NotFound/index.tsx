@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
-import "./style.css";
+import S from "../../styles/NotFound.module.css";
 
 const NotFound = () => {
   return (
-    <section id="notFound">
+    <section className={S.notFound}>
       <h2>Página não encontrada</h2>
-      <Link to="/">Voltar para página inicial</Link>
+      <Link href="/">Voltar para página inicial</Link>
     </section>
   );
 };

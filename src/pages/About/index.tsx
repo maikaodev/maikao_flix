@@ -1,6 +1,7 @@
 // Functions - Native
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+// TODO: Alterar para next-router
+// import { Link, useNavigate, useParams } from "react-router-dom";
 
 // Component
 import {
@@ -12,15 +13,16 @@ import {
 } from "../../components";
 
 // CSS
-import "./style.css";
+import S from "../../styles/About.module.css";
 
 // .env
-const movies_url = import.meta.env.VITE_API_URL_DEFAULT;
-const api_key = import.meta.env.VITE_API_KEY;
+const movies_url = process.env.API_URL_DEFAULT;
+const api_key = process.env.API_KEY;
 
 // TS
 import { fetchData } from "@/utils/fetchData";
-import { TopMoviesData } from "../Home";
+import Link from "next/link";
+import { TopMoviesData } from "../index";
 
 type DetailsData = {
   first_air_date: string;
@@ -134,7 +136,7 @@ const About = () => {
       {!isLoading && details && (
         <main>
           <div>
-            <button id="back" onClick={() => navigate(navigations)}>
+            <button className={S.back} onClick={() => navigate(navigations)}>
               Voltar
             </button>
             <BtnGoToTop
@@ -157,7 +159,7 @@ const About = () => {
           </section>
           {searchTopic && (
             <section>
-              <ul id="menu_show_it">
+              <ul className={S.menu_show_it}>
                 {trailer.length > 0 && (
                   <li>
                     <button
@@ -198,7 +200,7 @@ const About = () => {
           {showIt === "trailer" && (
             <section>
               {searchTopic === "movie" && trailer.length > 0 && (
-                <section id="trailer">
+                <section className={S.trailer}>
                   <h2>Trailer</h2>
                   <iframe
                     title={trailer[0].name}
@@ -215,9 +217,9 @@ const About = () => {
           {showIt === "collections" && (
             <>
               {collections[0].id && (
-                <section id="collections">
+                <section className={S.collections}>
                   <h2>Coleções</h2>
-                  <ul id="card_list">
+                  <ul className={S.card_list}>
                     <Card dataCard={collections} />
                   </ul>
                 </section>
@@ -230,9 +232,9 @@ const About = () => {
           {showIt === "recommendations" && (
             <>
               {recommendations.length > 0 && (
-                <section id="recommendations">
+                <section className={S.recommendations}>
                   <h2>Recomendações</h2>
-                  <ul id="card_list">
+                  <ul className={S.card_list}>
                     <Card dataCard={recommendations} />
                   </ul>
                 </section>
@@ -243,9 +245,9 @@ const About = () => {
         </main>
       )}
       {!isLoading && reqNotFound && (
-        <div id="req_not_found">
+        <div className={S.req_not_found}>
           <span>Desculpe... não existe informações a respeito</span>
-          <Link to="/">Página Inicial</Link>
+          <Link href="/">Página Inicial</Link>
         </div>
       )}
       {!isLoading && alertMessage && (
