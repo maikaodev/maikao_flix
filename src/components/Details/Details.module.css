@@ -17,18 +17,18 @@
   box-shadow: rgb(0, 0, 0) 0px 10px 13px -7px, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 
-.content_details section #header_movie {
+.content_details section .header_movie {
   margin-bottom: 16px;
 }
 
-.content_details section #header_movie h2 {
+.content_details section .header_movie h2 {
   margin-top: 16px;
   margin-bottom: 8px;
 
   text-align: left;
 }
 
-.content_details section #header_movie #genre_list {
+.content_details section .header_movie .genre_list {
   align-items: center;
   list-style: none;
   display: flex;
@@ -39,34 +39,34 @@
   gap: 16px;
 }
 
-.content_details section #header_movie #genre_list #runtime {
+.content_details section .header_movie .genre_list .runtime {
   display: flex;
   align-items: center;
   width: 100px;
 }
-.content_details section #header_movie #genre_list #runtime span {
+.content_details section .header_movie .genre_list .runtime span {
   width: 87px;
 }
 
-.content_details section #header_movie #genre_list #runtime svg {
+.content_details section .header_movie .genre_list .runtime svg {
   font-size: 1.5rem;
 }
 
-.content_details section #details_list {
+.content_details section .details_list {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.content_details section #details_list .item_details div {
+.content_details section .details_list .item_details div {
   display: flex;
   align-items: center;
 
   margin-bottom: 4px;
 }
 
-.content_details section #details_list .item_details div svg {
+.content_details section .details_list .item_details div svg {
   font-size: 1.5rem;
 
   margin-right: 4px;
@@ -85,7 +85,7 @@
     gap: 16px;
   }
 
-  .content_details section #details_list .item_details #synopsis {
+  .content_details section .details_list .item_details .synopsis {
     width: 600px;
   }
 }

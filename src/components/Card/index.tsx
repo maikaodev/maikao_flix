@@ -1,4 +1,4 @@
-import "./style.css";
+import S from "./Card.module.css";
 
 const api_image = process.env.VITE_API_IMG;
 
@@ -20,17 +20,17 @@ export const Card = ({ dataCard = [{} as TopMoviesData] }) => {
                 return (
                   <li
                     key={data.id}
-                    className="card_list_item"
+                    className={S.card_list_item}
                     style={{
                       backgroundImage: `url(${
                         api_image + data.backdrop_path || data.poster_path
                       })`,
                     }}
                   >
-                    <div id="description_card">
+                    <div className={S.description_card}>
                       {data.vote_average && (
-                        <div className="vote_average">
-                          <AiFillStar id="star_icon" />
+                        <div className={S.vote_average}>
+                          <AiFillStar className={S.star_icon} />
                           <span>{data.vote_average.toFixed(1)}</span>
                         </div>
                       )}

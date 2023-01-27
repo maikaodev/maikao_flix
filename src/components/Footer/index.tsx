@@ -8,11 +8,11 @@ import { SiGmail } from "react-icons/si";
 import { SlSocialLinkedin } from "react-icons/sl";
 
 //CSS
-import "./style.css";
+import S from "./Footer.module.css";
 
 export const Footer = () => {
   return (
-    <footer>
+    <footer className={S.footer}>
       <p>
         Desenvolvido por{" "}
         <Link href="https://github.com/maikaodev" target="_blank">
@@ -20,8 +20,8 @@ export const Footer = () => {
         </Link>{" "}
         &copy; 2023
       </p>
-      <nav id="social_network_list">
-        <li className="social_network">
+      <nav className={S.social_network_list}>
+        <li className={S.social_network}>
           <Link
             href="https://www.linkedin.com/in/maikaodev/"
             target="_blank"
@@ -30,7 +30,7 @@ export const Footer = () => {
             <SlSocialLinkedin />
           </Link>
         </li>
-        <li className="social_network">
+        <li className={S.social_network}>
           <Link
             href="https://github.com/maikaodev"
             target="_blank"
@@ -39,7 +39,7 @@ export const Footer = () => {
             <FiGithub />
           </Link>
         </li>
-        <li className="social_network">
+        <li className={S.social_network}>
           <Link
             href="mailto:maikao.dev@gmail.com"
             target="_blank"
@@ -48,7 +48,7 @@ export const Footer = () => {
             <SiGmail />
           </Link>
         </li>
-        <li className="social_network">
+        <li className={S.social_network}>
           <Link
             href="https://portfolio-maikaodev.netlify.app/"
             target="_blank"

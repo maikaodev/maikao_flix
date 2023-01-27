@@ -7,7 +7,7 @@ import { InputText } from "../InputText";
 import { Sidebar } from "../Sidebar";
 
 // CSS
-import "./style.css";
+import S from "./NavBar.module.css";
 
 // Icons
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
@@ -30,10 +30,10 @@ export const NavBar = () => {
   }, [window.scrollY]);
 
   return (
-    <header>
-      <nav id="topo">
-        <Link id="link" href="/">
-          <BiCameraMovie id="icon" />
+    <header className={S.header}>
+      <nav className={S.topo}>
+        <Link className={S.link} href="/">
+          <BiCameraMovie className={S.icon} />
           <span>MaikaoFlix</span>
         </Link>
         <button onClick={handleClick}>

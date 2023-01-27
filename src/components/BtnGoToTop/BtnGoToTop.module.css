@@ -1,4 +1,4 @@
-#float_button {
+.float_button {
   background-color: #2e9abf;
   color: #222222;
 
@@ -20,7 +20,7 @@
   cursor: pointer;
 }
 
-#float_button:hover {
+.float_button:hover {
   background-color: #02f2ff;
   color: #222222;
 

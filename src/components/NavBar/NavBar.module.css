@@ -15,7 +15,7 @@
     background: #04ade9;
   }
 }
-header {
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,7 +26,7 @@ header {
   animation: changeBg 5s infinite alternate linear;
 }
 
-#topo {
+.topo {
   display: flex;
   align-items: center;
   gap: 40px;
@@ -36,7 +36,7 @@ header {
 
   position: relative;
 }
-#topo button {
+.topo button {
   display: none;
   background: none;
 
@@ -49,7 +49,7 @@ header {
   cursor: pointer;
 }
 
-#topo #link {
+.topo .link {
   display: flex;
   align-items: center;
 
@@ -58,40 +58,40 @@ header {
   color: #222222;
 }
 
-#topo #link svg {
+.topo .link svg {
   margin-right: 8px;
 }
-#topo #link svg,
-#topo #link span {
+.topo .link svg,
+.topo .link span {
   font-size: 2rem;
 }
 
-header form {
+.header form {
   display: none;
 }
 @media (min-width: 768px) {
-  header form {
+  .header form {
     display: flex;
   }
 }
 @media (min-width: 1024px) {
-  #topo {
+  .topo {
     justify-content: flex-start;
   }
-  #topo #link {
+  .topo .link {
     width: 200px;
     margin-right: 16px;
   }
-  #topo button {
+  .topo button {
     display: none;
   }
 }
 
 @media (max-width: 580px) {
-  #topo {
+  .topo {
     justify-content: space-between;
   }
-  #topo button {
+  .topo button {
     display: block;
   }
 }

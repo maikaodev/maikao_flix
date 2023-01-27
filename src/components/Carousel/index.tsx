@@ -1,6 +1,8 @@
 import { releaseDate } from "@/utils/releaseDate";
 import Link from "next/link";
-// import "./style.css";
+
+// CSS
+import S from "./Carousel.module.css";
 
 const api_image = process.env.VITE_API_IMG;
 
@@ -14,12 +16,12 @@ export type CarouselProps = {
 export const Carousel = ({ data = {} as CarouselProps }) => {
   return (
     <>
-      <Link id="link" href={`detalhes/movie/${data.id_movie}`}>
+      <Link href={`detalhes/movie/${data.id_movie}`}>
         <div
-          id="carousel"
+          className={S.carousel}
           style={{ backgroundImage: `url(${api_image + data.background_url})` }}
         >
-          <div id="carousel_content">
+          <div className={S.carousel_content}>
             <span>
               {data.title +
                 " (" +

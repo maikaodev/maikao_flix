@@ -6,7 +6,7 @@ import { FormEvent, useRef } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
 
 // CSS
-import "./style.css";
+import S from "./InputText.module.css";
 
 export const InputText = () => {
   const router = useRouter();
@@ -29,7 +29,7 @@ export const InputText = () => {
     input.current!.value = "";
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={S.Form} onSubmit={handleSubmit}>
       <input
         ref={input}
         type="text"
