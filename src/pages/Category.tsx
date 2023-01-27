@@ -1,14 +1,13 @@
 // Function - Native
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-// TODO: Corrigir e alterar para next-link
-// import { Link, useParams, useSearchParams } from "react-router-dom";
 
 // Function - Utils
 import { fetchData } from "@/utils/fetchData";
 
 // Components
 import { Pagination } from "antd";
-import { AlertMessage, Card, Loading } from "../../components";
+import { AlertMessage, Card, Loading } from "../components";
 
 // CSs
 import S from "../../styles/Category.module.css";
@@ -18,7 +17,8 @@ const movies_url_default = process.env.VITE_API_URL_DEFAULT;
 const api_key = process.env.VITE_API_KEY;
 
 // TS
-import { TopMoviesData } from "../index";
+import Link from "next/link";
+import { TopMoviesData } from "./index";
 
 const CategoryPage = () => {
   // React
@@ -30,9 +30,8 @@ const CategoryPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alertMessage, setAlertMessage] = useState<string>();
 
-  // React router
-  // TODO: Usar o router
-  // let { category } = useParams();
+  // Router
+  const router = useRouter();
   // const [currentPage, setCurrentPage] = useSearchParams();
 
   const getTheMostRated = async () => {
@@ -40,15 +39,13 @@ const CategoryPage = () => {
 
     let theme: string;
 
-    if (category === "filmes") {
+    if (router.query.category === "filmes") {
       theme = "movie";
     } else {
       theme = "tv";
     }
 
-    const topRatedUrl = `${movies_url_default}${theme}/top_rated?${api_key}&language=pt-BR&page=${currentPage.get(
-      "page"
-    )}&region=BR`;
+    const topRatedUrl = `${movies_url_default}${theme}/top_rated?${api_key}&language=pt-BR&page=${router.query.page}&region=BR`;
 
     const data = await fetchData(topRatedUrl);
 
@@ -65,18 +62,15 @@ const CategoryPage = () => {
   };
 
   useEffect(() => {
-    if (!currentPage.get("page")) {
-      const current_page = {
-        page: "1",
-      };
-      setCurrentPage(current_page);
+    if (!router.query.page) {
+      if (!router.query.page) {
+        router.push({
+          query: { page: 1 },
+        });
+      }
     }
     getTheMostRated();
-  }, []);
-
-  useEffect(() => {
-    getTheMostRated();
-  }, [category, currentPage.get("page")]);
+  });
 
   return (
     <main>
@@ -97,16 +91,14 @@ const CategoryPage = () => {
                 <div className={S.pagination}>
                   <Pagination
                     simple
-                    defaultCurrent={Number(currentPage.get("page"))}
-                    current={Number(currentPage.get("page"))}
+                    defaultCurrent={Number(router.query.page)}
+                    current={Number(router.query.page)}
                     total={totalPages * 10}
                     onChange={(event) => {
                       //
-                      const current_page = {
-                        page: event.toString(),
-                      };
-
-                      setCurrentPage(current_page);
+                      router.push({
+                        query: { page: event.toString() },
+                      });
                     }}
                   />
                 </div>
@@ -117,7 +109,7 @@ const CategoryPage = () => {
             <>
               <div className={S.nothingToSeeHere}>
                 <h1>Filme não encontrado...</h1>
-                <Link to="/">Voltar para página principal</Link>
+                <Link href="/">Voltar para página principal</Link>
               </div>
             </>
           )}

@@ -1,6 +1,6 @@
 // Functions - Native
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // Components
 import { InputText } from "../InputText";
@@ -21,13 +21,13 @@ export const NavBar = () => {
     setIsActive(!isActive);
   };
 
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 5) {
-        setIsActive(false);
-      }
-    });
-  }, [window.scrollY]);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", () => {
+  //     if (window.scrollY > 5) {
+  //       setIsActive(false);
+  //     }
+  //   });
+  // }, [window.scrollY]);
 
   return (
     <header className={S.header}>

@@ -1,16 +1,17 @@
 import { fetchData } from "@/utils/fetchData";
 import { Pagination } from "antd";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 // import { Link, useParams, useSearchParams } from "react-router-dom";
-import { AlertMessage, Card, Loading } from "../../components";
+import { AlertMessage, Card, Loading } from "../components";
 
 import styles from "../../styles/Search.module.css";
 
 const movies_url_default = process.env.API_URL_DEFAULT;
 const api_key = process.env.API_KEY;
 
-import { TopMoviesData } from "../index";
+import { TopMoviesData } from "./index";
 
 const Search = () => {
   // React
@@ -30,9 +31,7 @@ const Search = () => {
   const getTheMostRated = async () => {
     setIsLoading(true);
 
-    const movies = `${movies_url_default}search/multi?${api_key}&language=pt-BR&query=${
-      router.query.name
-    }&page=${currentPage.get("page")}&include_adult=false&region=BR`;
+    const movies = `${movies_url_default}search/multi?${api_key}&language=pt-BR&query=${router.query.name}&page=${router.query.page}&include_adult=false&region=BR`;
 
     const data = await fetchData(movies);
 
@@ -49,19 +48,13 @@ const Search = () => {
   };
 
   useEffect(() => {
-    router.query.páge;
-    if (!currentPage.get("page")) {
-      const current_page = {
-        page: "1",
-      };
-      setCurrentPage(current_page);
+    if (!router.query.page) {
+      router.push({
+        query: { page: 1 },
+      });
     }
     getTheMostRated();
-  }, []);
-
-  useEffect(() => {
-    getTheMostRated();
-  }, [name, currentPage.get("page")]);
+  });
 
   return (
     <main>
@@ -82,17 +75,15 @@ const Search = () => {
                 <div className={styles.pagination}>
                   <Pagination
                     simple
-                    defaultCurrent={Number(currentPage.get("page"))}
-                    current={Number(currentPage.get("page"))}
+                    defaultCurrent={Number(router.query.page)}
+                    current={Number(router.query.page)}
                     total={totalPages * 10}
                     // TODO: TS
-                    onChange={(event: any) => {
+                    onChange={(event) => {
                       //
-                      const current_page = {
-                        page: event.toString(),
-                      };
-
-                      setCurrentPage(current_page);
+                      router.push({
+                        query: { page: event.toString() },
+                      });
                     }}
                   />
                 </div>
@@ -103,7 +94,7 @@ const Search = () => {
             <>
               <div className={styles.nothingToSeeHere}>
                 <h1>Filme não encontrado...</h1>
-                <Link to="/">Voltar para página principal</Link>
+                <Link href="/">Voltar para página principal</Link>
               </div>
             </>
           )}
