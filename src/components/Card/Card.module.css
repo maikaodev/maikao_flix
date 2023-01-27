@@ -1,4 +1,4 @@
-#card_list {
+.card_list {
   display: flex;
   flex-direction: column;
 
@@ -21,13 +21,13 @@
   justify-content: flex-end;
   align-items: flex-end;
 }
-#description_card {
+.description_card {
   margin: 8px;
   padding: 8px;
 
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: flex-end;
 
   border-radius: 6px;
 
@@ -39,38 +39,38 @@
   display: flex;
   align-items: center;
 }
-.vote_average #star_icon {
+.vote_average .star_icon {
   color: yellow;
   margin-right: 4px;
 }
-#description_card a {
+.description_card a {
   color: #fff;
 }
-#description_card a:hover {
+.description_card a:hover {
   color: #fff;
 }
 
 /* width */
-::-webkit-scrollbar {
+.card_list::-webkit-scrollbar {
   width: 0px;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+.card_list::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+.card_list::-webkit-scrollbar-thumb {
   background: #888;
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+.card_list::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 @media (min-width: 375px) {
-  ::-webkit-scrollbar {
+  .card_list::-webkit-scrollbar {
     width: 5px;
   }
 }

@@ -1,6 +1,6 @@
 // Functions - Native
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
 
 // Component
 import {
@@ -9,18 +9,19 @@ import {
   Card,
   Details,
   Loading,
-} from "../../components";
+} from "../components";
 
 // CSS
-import "./style.css";
+import S from "../../styles/About.module.css";
 
 // .env
-const movies_url = import.meta.env.VITE_API_URL_DEFAULT;
-const api_key = import.meta.env.VITE_API_KEY;
+const movies_url = process.env.API_URL_DEFAULT;
+const api_key = process.env.API_KEY;
 
 // TS
 import { fetchData } from "@/utils/fetchData";
-import { TopMoviesData } from "../Home";
+import Link from "next/link";
+import { TopMoviesData } from "./index";
 
 type DetailsData = {
   first_air_date: string;
@@ -49,17 +50,15 @@ const About = () => {
     },
   ]);
   const [showIt, setShowIt] = useState<string>("");
-  const [navigations, setNavigations] = useState<number>(-1);
   const [reqNotFound, setReqNotFound] = useState<boolean>(false);
   const [alertMessage, setAlertMessage] = useState<string>();
 
-  let { id, searchTopic } = useParams();
-
-  const navigate = useNavigate();
+  // Router
+  const router = useRouter();
 
   const getDetailsMovies = async () => {
     //
-    const detailsURL = `${movies_url}${searchTopic}/${id}?${api_key}&language=pt-BR&page=1&region=BR`;
+    const detailsURL = `${movies_url}${router.query.searchTopic}/${router.query.id}?${api_key}&language=pt-BR&page=1&region=BR`;
 
     const data = await fetchData(detailsURL);
 
@@ -87,7 +86,7 @@ const About = () => {
   };
 
   const getTheRecommendations = async () => {
-    const recommendationsURL = `${movies_url}${searchTopic}/${id}/recommendations?${api_key}&language=pt-BR&page=1&region=BR`;
+    const recommendationsURL = `${movies_url}${router.query.searchTopic}/${router.query.id}/recommendations?${api_key}&language=pt-BR&page=1&region=BR`;
 
     const data = await fetchData(recommendationsURL);
     if (data.results) {
@@ -106,7 +105,7 @@ const About = () => {
   };
 
   const getTheVideos = async () => {
-    const videosURL = `${movies_url}${searchTopic}/${id}/videos?${api_key}&language=pt-BR`;
+    const videosURL = `${movies_url}${router.query.searchTopic}/${router.query.id}/videos?${api_key}&language=pt-BR`;
 
     const data = await fetchData(videosURL);
 
@@ -122,11 +121,7 @@ const About = () => {
 
   useEffect(() => {
     getDetailsMovies();
-  }, []);
-
-  useEffect(() => {
-    getDetailsMovies();
-  }, [id]);
+  });
 
   return (
     <>
@@ -134,14 +129,10 @@ const About = () => {
       {!isLoading && details && (
         <main>
           <div>
-            <button id="back" onClick={() => navigate(navigations)}>
+            <button className={S.back} onClick={() => router.back()}>
               Voltar
             </button>
-            <BtnGoToTop
-              onClick={() => {
-                setNavigations((prevCount) => (prevCount += -1));
-              }}
-            />
+            <BtnGoToTop />
           </div>
           <section>
             <Details
@@ -155,9 +146,9 @@ const About = () => {
               genres={details.genres}
             />
           </section>
-          {searchTopic && (
+          {router.query.searchTopic && (
             <section>
-              <ul id="menu_show_it">
+              <ul className={S.menu_show_it}>
                 {trailer.length > 0 && (
                   <li>
                     <button
@@ -197,8 +188,8 @@ const About = () => {
           {/* TRAILER */}
           {showIt === "trailer" && (
             <section>
-              {searchTopic === "movie" && trailer.length > 0 && (
-                <section id="trailer">
+              {router.query.searchTopic === "movie" && trailer.length > 0 && (
+                <section className={S.trailer}>
                   <h2>Trailer</h2>
                   <iframe
                     title={trailer[0].name}
@@ -215,9 +206,9 @@ const About = () => {
           {showIt === "collections" && (
             <>
               {collections[0].id && (
-                <section id="collections">
+                <section className={S.collections}>
                   <h2>Coleções</h2>
-                  <ul id="card_list">
+                  <ul className={S.card_list}>
                     <Card dataCard={collections} />
                   </ul>
                 </section>
@@ -230,9 +221,9 @@ const About = () => {
           {showIt === "recommendations" && (
             <>
               {recommendations.length > 0 && (
-                <section id="recommendations">
+                <section className={S.recommendations}>
                   <h2>Recomendações</h2>
-                  <ul id="card_list">
+                  <ul className={S.card_list}>
                     <Card dataCard={recommendations} />
                   </ul>
                 </section>
@@ -243,9 +234,9 @@ const About = () => {
         </main>
       )}
       {!isLoading && reqNotFound && (
-        <div id="req_not_found">
+        <div className={S.req_not_found}>
           <span>Desculpe... não existe informações a respeito</span>
-          <Link to="/">Página Inicial</Link>
+          <Link href="/">Página Inicial</Link>
         </div>
       )}
       {!isLoading && alertMessage && (

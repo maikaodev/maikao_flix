@@ -1,3 +1,6 @@
+// Function - Native
+import Link from "next/link";
+
 // Icons
 import { FiGithub } from "react-icons/fi";
 import { MdContactPage } from "react-icons/md";
@@ -5,38 +8,54 @@ import { SiGmail } from "react-icons/si";
 import { SlSocialLinkedin } from "react-icons/sl";
 
 //CSS
-import "./style.css";
+import S from "./Footer.module.css";
 
 export const Footer = () => {
   return (
-    <footer>
+    <footer className={S.footer}>
       <p>
         Desenvolvido por{" "}
-        <a href="https://github.com/maikaodev" target="_blank">
+        <Link href="https://github.com/maikaodev" target="_blank">
           maikaodev
-        </a>{" "}
+        </Link>{" "}
         &copy; 2023
       </p>
-      <nav id="social_network_list">
-        <li className="social_network">
-          <a href="https://www.linkedin.com/in/maikaodev/" target="_blank">
+      <nav className={S.social_network_list}>
+        <li className={S.social_network}>
+          <Link
+            href="https://www.linkedin.com/in/maikaodev/"
+            target="_blank"
+            rel="noreferrer"
+          >
             <SlSocialLinkedin />
-          </a>
+          </Link>
         </li>
-        <li className="social_network">
-          <a href="https://github.com/maikaodev" target="_blank">
+        <li className={S.social_network}>
+          <Link
+            href="https://github.com/maikaodev"
+            target="_blank"
+            rel="noreferrer"
+          >
             <FiGithub />
-          </a>
+          </Link>
         </li>
-        <li className="social_network">
-          <a href="mailto:maikao.dev@gmail.com" target="_blank">
+        <li className={S.social_network}>
+          <Link
+            href="mailto:maikao.dev@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+          >
             <SiGmail />
-          </a>
+          </Link>
         </li>
-        <li className="social_network">
-          <a href="https://portfolio-maikaodev.netlify.app/" target="_blank">
+        <li className={S.social_network}>
+          <Link
+            href="https://portfolio-maikaodev.netlify.app/"
+            target="_blank"
+            rel="noreferrer"
+          >
             <MdContactPage />
-          </a>
+          </Link>
         </li>
       </nav>
     </footer>

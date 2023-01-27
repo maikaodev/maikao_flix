@@ -1,13 +1,13 @@
-aside nav {
+.xl_menu nav {
   list-style: none;
   display: flex;
   gap: 16px;
 }
-aside nav li a {
+.xl_menu nav li a {
   color: #222;
 }
 
-aside nav li a:hover {
+.xl_menu nav li a:hover {
   color: #fff;
 }
 @media (max-width: 580px) {
@@ -52,11 +52,11 @@ aside nav li a:hover {
     border: 1px solid #02f2ff;
   }
   .sm_menu nav li a,
-  .sm_menu nav #search button {
+  .sm_menu nav .search button {
     font-size: 20px;
   }
 
-  .sm_menu nav #search button {
+  .sm_menu nav .search button {
     color: #fff;
     width: 100%;
 
@@ -72,7 +72,7 @@ aside nav li a:hover {
 
     padding: 10px;
   }
-  .sm_menu nav #form {
+  .sm_menu nav .form {
     height: 100%;
 
     display: flex;
@@ -80,7 +80,7 @@ aside nav li a:hover {
 
     gap: 16px;
   }
-  .sm_menu nav #form #arrow-back {
+  .sm_menu nav .form .arrow_back {
     width: 26px;
     height: 26px;
 
@@ -91,7 +91,7 @@ aside nav li a:hover {
   }
 }
 @media (max-width: 768px) {
-  aside {
+  .xl_menu {
     display: none;
   }
 }

@@ -1,15 +1,17 @@
 import { fetchData } from "@/utils/fetchData";
 import { Pagination } from "antd";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
-import { AlertMessage, Card, Loading } from "../../components";
+// import { Link, useParams, useSearchParams } from "react-router-dom";
+import { AlertMessage, Card, Loading } from "../components";
 
-import "./style.css";
+import styles from "../../styles/Search.module.css";
 
-const movies_url_default = import.meta.env.VITE_API_URL_DEFAULT;
-const api_key = import.meta.env.VITE_API_KEY;
+const movies_url_default = process.env.API_URL_DEFAULT;
+const api_key = process.env.API_KEY;
 
-import { TopMoviesData } from "../Home";
+import { TopMoviesData } from "./index";
 
 const Search = () => {
   // React
@@ -22,15 +24,14 @@ const Search = () => {
   const [alertMessage, setAlertMessage] = useState<string>();
 
   // React router
-  let { name } = useParams();
-  const [currentPage, setCurrentPage] = useSearchParams();
+  let router = useRouter();
+  // TODO: Alterar os parametros das rotas usando next link
+  // const [currentPage, setCurrentPage] = useSearchParams();
 
   const getTheMostRated = async () => {
     setIsLoading(true);
 
-    const movies = `${movies_url_default}search/multi?${api_key}&language=pt-BR&query=${name}&page=${currentPage.get(
-      "page"
-    )}&include_adult=false&region=BR`;
+    const movies = `${movies_url_default}search/multi?${api_key}&language=pt-BR&query=${router.query.name}&page=${router.query.page}&include_adult=false&region=BR`;
 
     const data = await fetchData(movies);
 
@@ -47,18 +48,13 @@ const Search = () => {
   };
 
   useEffect(() => {
-    if (!currentPage.get("page")) {
-      const current_page = {
-        page: "1",
-      };
-      setCurrentPage(current_page);
+    if (!router.query.page) {
+      router.push({
+        query: { page: 1 },
+      });
     }
     getTheMostRated();
-  }, []);
-
-  useEffect(() => {
-    getTheMostRated();
-  }, [name, currentPage.get("page")]);
+  });
 
   return (
     <main>
@@ -66,29 +62,28 @@ const Search = () => {
         <AlertMessage alertMessage={alertMessage} />
       )}
       {!alertMessage && (
-        <section className="content">
+        <section className={styles.content}>
           {isLoading && <Loading />}
           {!isLoading && searchedCategory && (
             <>
-              <section id="searchedCategory">
-                <ul id="card_list">
+              <section className={styles.searchedCategory}>
+                <ul className={styles.card_list}>
                   {searchedCategory && <Card dataCard={searchedCategory} />}
                 </ul>
               </section>
               {totalPages > 1 && (
-                <div id="pagination">
+                <div className={styles.pagination}>
                   <Pagination
                     simple
-                    defaultCurrent={Number(currentPage.get("page"))}
-                    current={Number(currentPage.get("page"))}
+                    defaultCurrent={Number(router.query.page)}
+                    current={Number(router.query.page)}
                     total={totalPages * 10}
+                    // TODO: TS
                     onChange={(event) => {
                       //
-                      const current_page = {
-                        page: event.toString(),
-                      };
-
-                      setCurrentPage(current_page);
+                      router.push({
+                        query: { page: event.toString() },
+                      });
                     }}
                   />
                 </div>
@@ -97,9 +92,9 @@ const Search = () => {
           )}
           {searchedCategory.length === 0 && (
             <>
-              <div id="nothingToSeeHere">
+              <div className={styles.nothingToSeeHere}>
                 <h1>Filme não encontrado...</h1>
-                <Link to="/">Voltar para página principal</Link>
+                <Link href="/">Voltar para página principal</Link>
               </div>
             </>
           )}

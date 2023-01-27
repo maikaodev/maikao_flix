@@ -1,3 +1,6 @@
+// Function - Native
+import Image from "next/image";
+
 // Icons
 import { BsGraphUp } from "react-icons/bs";
 import { CgSandClock } from "react-icons/cg";
@@ -5,14 +8,14 @@ import { MdDescription } from "react-icons/md";
 import { SlWallet } from "react-icons/sl";
 
 // CSS
-import "./style.css";
+import S from "./Details.module.css";
 
 // Functions - utils
 import { convertMinutesToHours } from "@/utils/convertMinutesToHours";
 import { formatCurrency } from "@/utils/formatCurrency";
 import { releaseDate } from "@/utils/releaseDate";
 
-const api_image = import.meta.env.VITE_API_IMG;
+const api_image = process.env.VITE_API_IMG;
 
 type DetailsProps = {
   background_img: string;
@@ -38,9 +41,8 @@ export const Details = ({
   //
 
   return (
-    <div className="content_details">
-      <img
-        id="img"
+    <div className={S.content_details}>
+      <Image
         src={`${api_image}${background_img}`}
         alt={title}
         height={400}
@@ -48,11 +50,11 @@ export const Details = ({
       />
       <section>
         {/* HEADER */}
-        <div id="header_movie">
+        <div className={S.header_movie}>
           <h2>
             {title} ({releaseDate(new Date(release_date))})
           </h2>
-          <ul id="genre_list">
+          <ul className={S.genre_list}>
             <>
               {genres &&
                 genres.map((genre) => {
@@ -65,7 +67,7 @@ export const Details = ({
                 })}
             </>
             {runTime > 0 && (
-              <li id="runtime">
+              <li className={S.runtime}>
                 <CgSandClock />
                 <span> {convertMinutesToHours(runTime)}</span>
               </li>
@@ -75,9 +77,9 @@ export const Details = ({
         {/* HEADER */}
 
         {/* DESCRIPTION */}
-        <ul id="details_list">
+        <ul className={S.details_list}>
           {budget > 0 && (
-            <li className="item_details">
+            <li className={S.item_details}>
               <div>
                 <SlWallet />
                 <strong>Orçamento :</strong>
@@ -86,7 +88,7 @@ export const Details = ({
             </li>
           )}
           {revenue > 0 && (
-            <li className="item_details">
+            <li className={S.item_details}>
               <div>
                 <BsGraphUp />
                 <strong>Receita :</strong>
@@ -95,12 +97,12 @@ export const Details = ({
             </li>
           )}
 
-          <li className="item_details">
+          <li className={S.item_details}>
             <div>
               <MdDescription />
               <strong>Sinopse :</strong>
             </div>
-            <p id="synopsis">{overView || "Não tem sinopse... "}</p>
+            <p className={S.synopsis}>{overView || "Não tem sinopse... "}</p>
           </li>
         </ul>
         {/* DESCRIPTION */}

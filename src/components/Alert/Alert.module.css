@@ -1,4 +1,4 @@
-#alert {
+.alert {
   width: 80vw;
 
   margin: 0 auto;
@@ -10,21 +10,21 @@
 
   gap: 16px;
 }
-#alert div {
+.alert div {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#alert div svg {
+.alert div svg {
   color: yellow;
   font-size: 32px;
 
   margin-right: 8px;
 }
-#alert div span {
+.alert div span {
   font-size: 1rem;
 }
-#alert a {
+.alert a {
   width: 250px;
 
   background-color: #2e9abf;
@@ -42,7 +42,7 @@
 
   transition: 0.75s;
 }
-#alert a:hover {
+.alert a:hover {
   background-color: #02f2ff;
   color: #222222;
 
@@ -50,7 +50,7 @@
 }
 
 @media (min-width: 768px) {
-  #alert {
+  .alert {
     width: 500px;
   }
 }

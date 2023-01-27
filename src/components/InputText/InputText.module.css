@@ -1,9 +1,9 @@
-form {
+.form {
   display: flex;
   align-items: center;
 }
 
-form input {
+.form input {
   width: 200px;
 
   font-weight: 400;
@@ -17,11 +17,11 @@ form input {
   box-shadow: 0px 0px 10px -3px rgba(0, 0, 0, 0.71);
 }
 
-form input:focus-visible {
+.form input:focus-visible {
   outline: none;
 }
 
-form button {
+.form button {
   background: transparent;
   border: none;
   padding: 8px;
@@ -30,18 +30,18 @@ form button {
 
   cursor: pointer;
 }
-form button:hover {
+.form button:hover {
   background: transparent;
   border: none;
 }
 
-form #icon {
+.form #icon {
   width: 26px;
   height: 26px;
 }
 
 @media (min-width: 768px) {
-  form input {
+  .form input {
     width: 300px;
   }
 }

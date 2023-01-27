@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import "./style.css";
+import S from "./BtnGoToTop.module.css";
 
-export const BtnGoToTop = ({ onClick }: { onClick?: () => void }) => {
+export const BtnGoToTop = () => {
   const [showTopBtn, setShowTopBtn] = useState<boolean>(false);
 
   const goToTop = () => {
@@ -26,7 +26,7 @@ export const BtnGoToTop = ({ onClick }: { onClick?: () => void }) => {
     <>
       {showTopBtn && (
         <button
-          id="float_button"
+          className={S.float_button}
           onClick={() => {
             goToTop();
           }}

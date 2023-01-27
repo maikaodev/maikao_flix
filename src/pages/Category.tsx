@@ -1,23 +1,24 @@
 // Function - Native
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
 
 // Function - Utils
 import { fetchData } from "@/utils/fetchData";
 
 // Components
 import { Pagination } from "antd";
-import { AlertMessage, Card, Loading } from "../../components";
+import { AlertMessage, Card, Loading } from "../components";
 
 // CSs
-import "./style.css";
+import S from "../../styles/Category.module.css";
 
 // .env
-const movies_url_default = import.meta.env.VITE_API_URL_DEFAULT;
-const api_key = import.meta.env.VITE_API_KEY;
+const movies_url_default = process.env.VITE_API_URL_DEFAULT;
+const api_key = process.env.VITE_API_KEY;
 
 // TS
-import { TopMoviesData } from "../Home";
+import Link from "next/link";
+import { TopMoviesData } from "./index";
 
 const CategoryPage = () => {
   // React
@@ -29,24 +30,22 @@ const CategoryPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alertMessage, setAlertMessage] = useState<string>();
 
-  // React router
-  let { category } = useParams();
-  const [currentPage, setCurrentPage] = useSearchParams();
+  // Router
+  const router = useRouter();
+  // const [currentPage, setCurrentPage] = useSearchParams();
 
   const getTheMostRated = async () => {
     setIsLoading(true);
 
     let theme: string;
 
-    if (category === "filmes") {
+    if (router.query.category === "filmes") {
       theme = "movie";
     } else {
       theme = "tv";
     }
 
-    const topRatedUrl = `${movies_url_default}${theme}/top_rated?${api_key}&language=pt-BR&page=${currentPage.get(
-      "page"
-    )}&region=BR`;
+    const topRatedUrl = `${movies_url_default}${theme}/top_rated?${api_key}&language=pt-BR&page=${router.query.page}&region=BR`;
 
     const data = await fetchData(topRatedUrl);
 
@@ -63,18 +62,15 @@ const CategoryPage = () => {
   };
 
   useEffect(() => {
-    if (!currentPage.get("page")) {
-      const current_page = {
-        page: "1",
-      };
-      setCurrentPage(current_page);
+    if (!router.query.page) {
+      if (!router.query.page) {
+        router.push({
+          query: { page: 1 },
+        });
+      }
     }
     getTheMostRated();
-  }, []);
-
-  useEffect(() => {
-    getTheMostRated();
-  }, [category, currentPage.get("page")]);
+  });
 
   return (
     <main>
@@ -82,29 +78,27 @@ const CategoryPage = () => {
         <AlertMessage alertMessage={alertMessage} />
       )}
       {!isLoading && !alertMessage && (
-        <section className="content">
+        <section className={S.content}>
           {isLoading && <Loading />}
           {!isLoading && searchedCategory && (
             <>
-              <section id="searchedCategory">
-                <ul id="card_list">
+              <section className={S.searchedCategory}>
+                <ul className={S.card_list}>
                   {searchedCategory && <Card dataCard={searchedCategory} />}
                 </ul>
               </section>
               {totalPages > 1 && (
-                <div id="pagination">
+                <div className={S.pagination}>
                   <Pagination
                     simple
-                    defaultCurrent={Number(currentPage.get("page"))}
-                    current={Number(currentPage.get("page"))}
+                    defaultCurrent={Number(router.query.page)}
+                    current={Number(router.query.page)}
                     total={totalPages * 10}
                     onChange={(event) => {
                       //
-                      const current_page = {
-                        page: event.toString(),
-                      };
-
-                      setCurrentPage(current_page);
+                      router.push({
+                        query: { page: event.toString() },
+                      });
                     }}
                   />
                 </div>
@@ -113,9 +107,9 @@ const CategoryPage = () => {
           )}
           {searchedCategory.length === 0 && (
             <>
-              <div id="nothingToSeeHere">
+              <div className={S.nothingToSeeHere}>
                 <h1>Filme não encontrado...</h1>
-                <Link to="/">Voltar para página principal</Link>
+                <Link href="/">Voltar para página principal</Link>
               </div>
             </>
           )}

@@ -1,15 +1,15 @@
 // Functions
+import { useRouter } from "next/router";
 import { FormEvent, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 
 // Icons
 import { BiSearchAlt2 } from "react-icons/bi";
 
 // CSS
-import "./style.css";
+import S from "./InputText.module.css";
 
 export const InputText = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const input = useRef<HTMLInputElement>(null);
 
@@ -24,12 +24,12 @@ export const InputText = () => {
       alert("Insira um nome válido");
     }
     if (searching) {
-      navigate(`/procurando/${searching}`);
+      router.push(`/procurando/${searching}`);
     }
     input.current!.value = "";
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={S.Form} onSubmit={handleSubmit}>
       <input
         ref={input}
         type="text"

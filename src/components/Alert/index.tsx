@@ -1,8 +1,8 @@
 // Functions - Native
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
-// CSS
-import "./style.css";
+// CSS 
+import S from "./Alert.module.css";
 
 // Icons
 import { AiFillWarning } from "react-icons/ai";
@@ -16,12 +16,12 @@ export const AlertMessage = ({
 }) => {
   return (
     <>
-      <div id="alert">
+      <div className={S.alert}>
         <div>
           <AiFillWarning />
           <span>{alertMessage}</span>
         </div>
-        <Link to="/">{backTo || "Página Inicial"}</Link>
+        <Link href="/">{backTo || "Página Inicial"}</Link>
       </div>
     </>
   );

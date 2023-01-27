@@ -10,16 +10,16 @@
   margin: auto;
 }
 
-.content #pagination .ant-pagination {
+.content .pagination .ant-pagination {
   justify-content: center;
 
   margin-top: 16px;
 }
-.content #pagination li {
+.content .pagination li {
   color: #ffffff;
 }
-.content #pagination li input,
-.content #pagination li button {
+.content .pagination li input,
+.content .pagination li button {
   background-color: #2e9abf;
   color: #222222;
 
@@ -27,24 +27,24 @@
 
   transition: 0.75s;
 }
-.content #pagination li button:hover {
+.content .pagination li button:hover {
   background-color: #02f2ff;
 
   border: 2px solid #02f2ff;
 }
 
-.content #pagination li input {
+.content .pagination li input {
   pointer-events: none;
 }
 
-.content #pagination li button span svg {
+.content .pagination li button span svg {
   color: #ffff;
 }
-.content #searchedCategory {
+.content .searchedCategory {
   margin-top: 16px;
   overflow-y: scroll;
 }
-#nothingToSeeHere {
+.nothingToSeeHere {
   height: 80vh;
   width: 100vw;
 
@@ -56,7 +56,7 @@
   gap: 16px;
 }
 
-#nothingToSeeHere a {
+.nothingToSeeHere a {
   width: 250px;
 
   background-color: #2e9abf;
@@ -74,7 +74,7 @@
   transition: 0.75s;
 }
 
-#nothingToSeeHere a:hover {
+.nothingToSeeHere a:hover {
   background-color: #02f2ff;
   color: #222222;
 
@@ -82,7 +82,7 @@
 }
 
 @media (min-width: 1024px) {
-  .content #searchedCategory ul {
+  .content .searchedCategory ul {
     flex-direction: row;
     flex-wrap: wrap;
     width: 80vw;
