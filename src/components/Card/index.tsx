@@ -11,7 +11,7 @@ export const Card = ({ dataCard = [{} as TopMoviesData] }) => {
   //
 
   return (
-    <>
+    <ul className={S.card_list}>
       {dataCard && (
         <>
           {dataCard.map((data) => {
@@ -51,7 +51,7 @@ export const Card = ({ dataCard = [{} as TopMoviesData] }) => {
           })}
         </>
       )}
-    </>
+    </ul>
   );
 };
 {

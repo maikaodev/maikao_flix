@@ -29,7 +29,7 @@ export const InputText = () => {
     input.current!.value = "";
   };
   return (
-    <form className={S.Form} onSubmit={handleSubmit}>
+    <form className={S.form} onSubmit={handleSubmit}>
       <input
         ref={input}
         type="text"
@@ -37,7 +37,7 @@ export const InputText = () => {
         placeholder="Buscar por um Filme ou Série..."
       />
       <button type="submit">
-        <BiSearchAlt2 id="icon" />
+        <BiSearchAlt2 className={S.icon} />
       </button>
     </form>
   );

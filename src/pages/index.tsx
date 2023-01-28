@@ -134,9 +134,7 @@ export default function Home({
             <section className={styles.section_card_list}>
               <h2>As melhores séries de TV</h2>
               <div className={styles.list}>
-                <ul className={styles.card_list}>
-                  {topRatedSeries && <Card dataCard={topRatedSeries} />}
-                </ul>
+                <>{topRatedSeries && <Card dataCard={topRatedSeries} />}</>
               </div>
             </section>
           </>

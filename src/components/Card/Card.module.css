@@ -1,6 +1,7 @@
 .card_list {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   gap: 24px;
 
@@ -48,29 +49,4 @@
 }
 .description_card a:hover {
   color: #fff;
-}
-
-/* width */
-.card_list::-webkit-scrollbar {
-  width: 0px;
-}
-
-/* Track */
-.card_list::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-.card_list::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-.card_list::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-@media (min-width: 375px) {
-  .card_list::-webkit-scrollbar {
-    width: 5px;
-  }
 }

@@ -21,14 +21,6 @@ export const NavBar = () => {
     setIsActive(!isActive);
   };
 
-  // useEffect(() => {
-  //   window.addEventListener("scroll", () => {
-  //     if (window.scrollY > 5) {
-  //       setIsActive(false);
-  //     }
-  //   });
-  // }, [window.scrollY]);
-
   return (
     <header className={S.header}>
       <nav className={S.topo}>
