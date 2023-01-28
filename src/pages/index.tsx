@@ -60,8 +60,6 @@ export default function Home({
     setTopRatedMovies(dataTopRatedMovie.results);
     setTopRatedSeries(dataTopRatedSerie.results);
 
-    console.log("topRatedMovies", topRatedMovies);
-
     setPropsCarousel({
       title: topRatedMovies[index]?.title || topRatedMovies[index]?.name,
       release_date: topRatedMovies[index]?.release_date,
