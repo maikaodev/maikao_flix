@@ -1,6 +1,6 @@
 import S from "./Card.module.css";
 
-const api_image = process.env.VITE_API_IMG;
+const api_image = process.env.NEXT_PUBLIC_API_IMG;
 
 // TS
 import { TopMoviesData } from "@/pages";

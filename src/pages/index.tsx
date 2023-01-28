@@ -1,6 +1,6 @@
 // Functions - Native
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 
 // Functions - utils
 import { fetchData } from "@/utils/fetchData";
@@ -25,52 +25,53 @@ export type TopMoviesData = {
   release_date: string;
   video: boolean;
 };
+type DataProps = {
+  results: SetStateAction<TopMoviesData[]>;
+  error?: boolean;
+  message?: string;
+};
 
 const movies_url = process.env.API_URL_DEFAULT;
 const api_key = process.env.API_KEY;
 
-export default function Home() {
-  const [topRated, setTopRated] = useState([{} as TopMoviesData]);
-  const [topRatedTvSeries, setTopRatedTvSeries] = useState([
-    {} as TopMoviesData,
-  ]);
+export default function Home({
+  dataTopRatedMovie,
+  dataTopRatedSerie,
+}: {
+  dataTopRatedMovie: DataProps;
+  dataTopRatedSerie: DataProps;
+}) {
+  const [topRatedMovies, setTopRatedMovies] = useState([{} as TopMoviesData]);
+  const [topRatedSeries, setTopRatedSeries] = useState([{} as TopMoviesData]);
   const [propsCarousel, setPropsCarousel] = useState({} as CarouselProps);
   const [counter, setCounter] = useState<number>(0);
   const [index, setIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [alertMessage, setAlertMessage] = useState<string>();
 
-  const getTopRatedMovie = async () => {
+  const checkDatas = (dataMovie: DataProps, dataSeries: DataProps) => {
     //
-    const topRatedUrl = `${movies_url}movie/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
-
-    const data = await fetchData(topRatedUrl);
-
-    if (data?.error) {
+    if (dataMovie.error || dataSeries.error) {
       setIsLoading(false);
 
-      return setAlertMessage(data.message);
+      return setAlertMessage(dataMovie.message || dataSeries.message);
     }
 
-    setTopRated(data.results);
+    setTopRatedMovies(dataTopRatedMovie.results);
+    setTopRatedSeries(dataTopRatedSerie.results);
+
+    console.log("topRatedMovies", topRatedMovies);
 
     setPropsCarousel({
-      title: data.results[index]?.title || data.results[index]?.name,
-      release_date: data.results[index]?.release_date,
+      title: topRatedMovies[index]?.title || topRatedMovies[index]?.name,
+      release_date: topRatedMovies[index]?.release_date,
       background_url:
-        data.results[index]?.backdrop_path || data.results[index]?.poster_path,
-      id_movie: data.results[index].id,
+        topRatedMovies[index]?.backdrop_path ||
+        topRatedMovies[index]?.poster_path,
+      id_movie: topRatedMovies[index].id,
     });
-
+    countDown();
     setIsLoading(false);
-  };
-  const getTopRatedTVSeries = async () => {
-    //
-    const topRatedUrl = `${movies_url}tv/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
-
-    const data = await fetchData(topRatedUrl);
-
-    setTopRatedTvSeries(data.results);
   };
 
   //
@@ -82,14 +83,15 @@ export default function Home() {
 
     if (counter === 0) {
       setPropsCarousel({
-        title: topRated[index]?.title || topRated[index]?.name,
-        release_date: topRated[index]?.release_date,
+        title: topRatedMovies[index]?.title || topRatedMovies[index]?.name,
+        release_date: topRatedMovies[index]?.release_date,
         background_url:
-          topRated[index]?.backdrop_path || topRated[index]?.poster_path,
-        id_movie: topRated[index].id,
+          topRatedMovies[index]?.backdrop_path ||
+          topRatedMovies[index]?.poster_path,
+        id_movie: topRatedMovies[index].id,
       });
 
-      if (index === topRated.length - 1) {
+      if (index === topRatedMovies.length - 1) {
         setIndex(0);
       } else {
         setIndex((prevState) => prevState + 1);
@@ -99,14 +101,12 @@ export default function Home() {
   };
 
   useEffect(() => {
-    getTopRatedMovie();
-    getTopRatedTVSeries();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    checkDatas(dataTopRatedMovie, dataTopRatedSerie);
   }, []);
 
   useEffect(() => {
     countDown();
-  });
+  }, [counter]);
   return (
     <>
       <Head>
@@ -128,7 +128,7 @@ export default function Home() {
           <>
             <div className={styles.header}>
               <section className={styles.carousel_section}>
-                {topRated && <Carousel data={propsCarousel} />}
+                {topRatedMovies && <Carousel data={propsCarousel} />}
               </section>
               <h2>Milhares de filmes, séries para descobrir. Explore já!</h2>
               <InputText />
@@ -137,7 +137,7 @@ export default function Home() {
               <h2>As melhores séries de TV</h2>
               <div className={styles.list}>
                 <ul className={styles.card_list}>
-                  {topRatedTvSeries && <Card dataCard={topRatedTvSeries} />}
+                  {topRatedSeries && <Card dataCard={topRatedSeries} />}
                 </ul>
               </div>
             </section>
@@ -150,4 +150,15 @@ export default function Home() {
       </main>
     </>
   );
+}
+export async function getServerSideProps() {
+  const topRatedMovieUrl = `${movies_url}movie/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
+  const topRatedSerieUrl = `${movies_url}tv/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
+
+  const dataTopRatedMovie = await fetchData(topRatedMovieUrl);
+  const dataTopRatedSerie = await fetchData(topRatedSerieUrl);
+
+  return {
+    props: { dataTopRatedMovie, dataTopRatedSerie },
+  };
 }
