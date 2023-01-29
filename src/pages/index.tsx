@@ -25,14 +25,14 @@ export type TopMoviesData = {
   release_date: string;
   video: boolean;
 };
-type DataProps = {
+export type DataProps = {
   results: SetStateAction<TopMoviesData[]>;
   error?: boolean;
   message?: string;
 };
 
-const movies_url = process.env.API_URL_DEFAULT;
-const api_key = process.env.API_KEY;
+export const api_url_default = process.env.API_URL_DEFAULT;
+export const api_key = process.env.API_KEY;
 
 export default function Home({
   dataTopRatedMovie,
@@ -148,8 +148,8 @@ export default function Home({
   );
 }
 export async function getServerSideProps() {
-  const topRatedMovieUrl = `${movies_url}movie/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
-  const topRatedSerieUrl = `${movies_url}tv/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
+  const topRatedMovieUrl = `${api_url_default}movie/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
+  const topRatedSerieUrl = `${api_url_default}tv/top_rated?${api_key}&language=pt-BR&page=1&region=BR`;
 
   const dataTopRatedMovie = await fetchData(topRatedMovieUrl);
   const dataTopRatedSerie = await fetchData(topRatedSerieUrl);
