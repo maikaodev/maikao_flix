@@ -24,7 +24,7 @@ export const InputText = () => {
       alert("Insira um nome válido");
     }
     if (searching) {
-      router.push(`/procurando/${searching}`);
+      router.push(`/procurando/${searching}?page=1`);
     }
     input.current!.value = "";
   };
