@@ -8,6 +8,7 @@
   width: 280px;
 
   margin: auto;
+  margin-top: 16px;
 
   text-align: center;
 
@@ -32,6 +33,31 @@
 }
 .section_card_list h2 {
   text-align: center;
+}
+
+/* width */
+.list::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+.list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.list::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+@media (min-width: 375px) {
+  .list::-webkit-scrollbar {
+    width: 5px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -61,7 +87,7 @@
   }
 }
 @media (min-width: 1024px) {
-  .section_card_list #list {
+  .section_card_list .list {
     width: 90vw;
   }
 }

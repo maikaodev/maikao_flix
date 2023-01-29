@@ -4,7 +4,7 @@
 }
 
 .form input {
-  width: 200px;
+  width: 240px;
 
   font-weight: 400;
   font-size: 0.75rem;
@@ -35,7 +35,7 @@
   border: none;
 }
 
-.form #icon {
+.form .icon {
   width: 26px;
   height: 26px;
 }

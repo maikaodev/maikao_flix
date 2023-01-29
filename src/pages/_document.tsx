@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="pt-BR">
       <Head>
         <meta
-          http-equiv="Content-Security-Policy"
+          httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

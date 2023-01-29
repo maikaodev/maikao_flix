@@ -4,7 +4,7 @@ import Link from "next/link";
 // CSS
 import S from "./Carousel.module.css";
 
-const api_image = process.env.VITE_API_IMG;
+const api_image = process.env.NEXT_PUBLIC_API_IMG;
 
 export type CarouselProps = {
   title: string;

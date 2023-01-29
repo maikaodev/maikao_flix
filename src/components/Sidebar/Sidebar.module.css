@@ -11,6 +11,9 @@
   color: #fff;
 }
 @media (max-width: 580px) {
+  .xl_menu {
+    display: none;
+  }
   .sm_menu {
     display: block;
     position: fixed;
@@ -88,10 +91,5 @@
   }
   .sm_menu nav li form {
     display: flex;
-  }
-}
-@media (max-width: 768px) {
-  .xl_menu {
-    display: none;
   }
 }
