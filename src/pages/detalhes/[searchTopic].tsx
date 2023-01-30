@@ -44,19 +44,29 @@ type AboutProps = DataProps &
     belongs_to_collection?: { id: number };
   };
 
-const About = ({ dataDetails }: { dataDetails: AboutProps }) => {
+type ResultsProps = {
+  name: string;
+  key: string;
+  empty?: boolean;
+};
+
+type DataTrailer = {
+  results: ResultsProps[];
+};
+
+const About = ({
+  dataDetails,
+  dataTrailer,
+}: {
+  dataDetails: AboutProps;
+  dataTrailer: DataTrailer;
+}) => {
   //
   const [details, setDetails] = useState<DetailsData>();
   const [recommendations, setRecommendations] = useState([{} as TopMoviesData]);
   const [collections, setCollections] = useState([{} as TopMoviesData]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [trailer, setTrailer] = useState([
-    {} as {
-      name: string;
-      key: string;
-      empty?: boolean;
-    },
-  ]);
+  const [trailerData, setTrailerData] = useState<ResultsProps>();
   const [showIt, setShowIt] = useState<string>("");
   const [reqNotFound, setReqNotFound] = useState<boolean>(false);
   const [alertMessage, setAlertMessage] = useState<string>();
@@ -64,7 +74,10 @@ const About = ({ dataDetails }: { dataDetails: AboutProps }) => {
   // Router
   const router = useRouter();
 
-  const getDetailsMovies = async (data: AboutProps) => {
+  const getDetailsMovies = async (
+    data: AboutProps,
+    dataTrailer: DataTrailer
+  ) => {
     //
 
     if (data?.error) {
@@ -79,7 +92,9 @@ const About = ({ dataDetails }: { dataDetails: AboutProps }) => {
 
     if (data) {
       setDetails(data);
-      // getTheVideos();
+      setTrailerData(dataTrailer.results[0]);
+      // setTrailerData(dataTrailer.results[0])
+      // setVideo(dataTrailer[0])
       // getTheRecommendations();
 
       // if (data?.belongs_to_collection) {
@@ -110,11 +125,10 @@ const About = ({ dataDetails }: { dataDetails: AboutProps }) => {
   };
 
   const getTheVideos = async () => {
-    const videosURL = `${api_url_default}${router.query.searchTopic}/${router.query.id}/videos?${api_key}&language=pt-BR`;
-    const data = await fetchData(videosURL);
-    if (data.results) {
-      setTrailer(data.results);
-    }
+    // const data = await fetchData(videosURL);
+    // if (data.results) {
+    //   setTrailer(data.results);
+    // }
   };
 
   const setContent = (content: string) => {
@@ -123,7 +137,7 @@ const About = ({ dataDetails }: { dataDetails: AboutProps }) => {
   };
 
   useEffect(() => {
-    getDetailsMovies(dataDetails);
+    getDetailsMovies(dataDetails, dataTrailer);
   }, []);
 
   return (
@@ -152,7 +166,7 @@ const About = ({ dataDetails }: { dataDetails: AboutProps }) => {
           {router.query.searchTopic && (
             <section>
               <ul className={S.menu_show_it}>
-                {trailer.length > 0 && (
+                {trailerData?.key && (
                   <li>
                     <button
                       onClick={() => {
@@ -191,13 +205,13 @@ const About = ({ dataDetails }: { dataDetails: AboutProps }) => {
           {/* TRAILER */}
           {showIt === "trailer" && (
             <section>
-              {router.query.searchTopic === "movie" && trailer.length > 0 && (
+              {router.query.searchTopic === "movie" && trailerData?.key && (
                 <section className={S.trailer}>
                   <h2>Trailer</h2>
                   <iframe
-                    title={trailer[0].name}
+                    title={trailerData.name}
                     sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-presentation"
-                    src={`https://youtube.com/embed/${trailer[0].key}?autoplay=0`}
+                    src={`https://youtube.com/embed/${trailerData.key}?autoplay=0`}
                   ></iframe>
                 </section>
               )}
@@ -254,11 +268,15 @@ export async function getServerSideProps({
   query: { searchTopic: string; id: string };
 }) {
   const detailsURL = `${api_url_default}${query.searchTopic}/${query.id}?${api_key}&language=pt-BR`;
+  const trailerURL = `${api_url_default}${query.searchTopic}/${query.id}/videos?${api_key}&language=pt-BR`;
 
   const dataDetails = await fetchData(detailsURL);
+  const dataTrailer = await fetchData(trailerURL);
+
+  console.log("dataTraier ", dataTrailer);
 
   return {
-    props: { dataDetails },
+    props: { dataDetails, dataTrailer },
   };
 }
 export default About;
