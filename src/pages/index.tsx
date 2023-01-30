@@ -31,8 +31,9 @@ export type DataProps = {
   message?: string;
 };
 
-export const api_url_default = process.env.API_URL_DEFAULT;
-export const api_key = process.env.API_KEY;
+export const api_url_default =
+  process.env.API_URL_DEFAULT || process.env.PRODUCTION_API_URL_DEFAULT;
+export const api_key = process.env.API_KEY || process.env.PRODUCTION_API_KEY;
 
 export default function Home({
   dataTopRatedMovie,
