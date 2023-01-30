@@ -15,8 +15,7 @@ import S from "../../styles/Home.module.css";
 import styles from "../../styles/Search.module.css";
 
 // .env
-export const api_url_default = process.env.API_URL_DEFAULT;
-export const api_key = process.env.API_KEY;
+import { api_key, api_url_default } from "../index";
 
 // TS
 import { DataProps, TopMoviesData } from "../index";
