@@ -1,6 +1,10 @@
 // Functions - Native
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+
+// Functions - utils
+import { fetchData } from "@/utils/fetchData";
 
 // Component
 import {
@@ -9,36 +13,40 @@ import {
   Card,
   Details,
   Loading,
-} from "../components";
+} from "../../components";
 
 // CSS
 import S from "../../styles/About.module.css";
 
 // .env
-const movies_url = process.env.API_URL_DEFAULT;
-const api_key = process.env.API_KEY;
+import { api_key, api_url_default } from "../index";
 
 // TS
-import { fetchData } from "@/utils/fetchData";
-import Link from "next/link";
-import { TopMoviesData } from "./index";
+import { DetailsProps } from "@/components/Details";
+import { DataProps, TopMoviesData } from "../index";
 
-type DetailsData = {
+export type DetailsData = DetailsProps & {
   first_air_date: string;
   name: string;
   genres: [{ name: string }];
   release_date: string;
   title: string;
   poster_path: string;
+  background_path: string;
   budget: number;
   revenue: number;
   runtime: number;
   overview: string;
 };
 
-const About = () => {
+type AboutProps = DataProps &
+  DetailsData & {
+    belongs_to_collection?: { id: number };
+  };
+
+const About = ({ dataDetails }: { dataDetails: AboutProps }) => {
   //
-  const [details, setDetails] = useState({} as DetailsData);
+  const [details, setDetails] = useState<DetailsData>();
   const [recommendations, setRecommendations] = useState([{} as TopMoviesData]);
   const [collections, setCollections] = useState([{} as TopMoviesData]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -56,11 +64,9 @@ const About = () => {
   // Router
   const router = useRouter();
 
-  const getDetailsMovies = async () => {
+  const getDetailsMovies = async (data: AboutProps) => {
     //
-    const detailsURL = `${movies_url}${router.query.searchTopic}/${router.query.id}?${api_key}&language=pt-BR&page=1&region=BR`;
-
-    const data = await fetchData(detailsURL);
+    console.log("[data]", data);
 
     if (data?.error) {
       setIsLoading(false);
@@ -74,19 +80,19 @@ const About = () => {
 
     if (data) {
       setDetails(data);
-      getTheVideos();
-      getTheRecommendations();
+      // getTheVideos();
+      // getTheRecommendations();
 
-      if (data?.belongs_to_collection) {
-        getTheCollections(data.belongs_to_collection.id);
-      }
+      // if (data?.belongs_to_collection) {
+      //   getTheCollections(data.belongs_to_collection.id);
+      // }
 
       setIsLoading(false);
     }
   };
 
   const getTheRecommendations = async () => {
-    const recommendationsURL = `${movies_url}${router.query.searchTopic}/${router.query.id}/recommendations?${api_key}&language=pt-BR&page=1&region=BR`;
+    const recommendationsURL = `${api_url_default}${router.query.searchTopic}/${router.query.id}/recommendations?${api_key}&language=pt-BR&page=1&region=BR`;
 
     const data = await fetchData(recommendationsURL);
     if (data.results) {
@@ -95,7 +101,7 @@ const About = () => {
   };
 
   const getTheCollections = async (collectionsId: number) => {
-    const collectionsURL = `${movies_url}collection/${collectionsId}?${api_key}&language=pt-BR`;
+    const collectionsURL = `${api_url_default}collection/${collectionsId}?${api_key}&language=pt-BR`;
 
     const data = await fetchData(collectionsURL);
 
@@ -105,10 +111,8 @@ const About = () => {
   };
 
   const getTheVideos = async () => {
-    const videosURL = `${movies_url}${router.query.searchTopic}/${router.query.id}/videos?${api_key}&language=pt-BR`;
-
+    const videosURL = `${api_url_default}${router.query.searchTopic}/${router.query.id}/videos?${api_key}&language=pt-BR`;
     const data = await fetchData(videosURL);
-
     if (data.results) {
       setTrailer(data.results);
     }
@@ -120,8 +124,8 @@ const About = () => {
   };
 
   useEffect(() => {
-    getDetailsMovies();
-  });
+    getDetailsMovies(dataDetails);
+  }, []);
 
   return (
     <>
@@ -137,11 +141,11 @@ const About = () => {
           <section>
             <Details
               title={details.title || details.name}
-              background_img={details.poster_path}
+              background_img={details.poster_path || details.background_path}
               budget={details.budget}
               revenue={details.revenue}
-              runTime={details.runtime}
-              overView={details.overview}
+              runtime={details.runtime}
+              overview={details.overview}
               release_date={details.release_date || details.first_air_date}
               genres={details.genres}
             />
@@ -245,5 +249,17 @@ const About = () => {
     </>
   );
 };
+export async function getServerSideProps({
+  query,
+}: {
+  query: { searchTopic: string; id: string };
+}) {
+  const detailsURL = `${api_url_default}${query.searchTopic}/${query.id}?${api_key}&language=pt-BR`;
 
+  const dataDetails = await fetchData(detailsURL);
+
+  return {
+    props: { dataDetails },
+  };
+}
 export default About;
