@@ -257,8 +257,6 @@ export async function getServerSideProps({
   const collectionsURL = `${api_url_default}collection/${dataDetails.belongs_to_collection.id}?${api_key}&language=pt-BR`;
   const dataCollections = await fetchData(collectionsURL);
 
-  console.log("dataCollections ", dataCollections);
-
   return {
     props: { dataDetails, dataTrailer, dataRecommendations, dataCollections },
   };
