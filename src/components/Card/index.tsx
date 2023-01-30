@@ -1,6 +1,7 @@
 import S from "./Card.module.css";
 
-export const api_image = process.env.NEXT_PUBLIC_API_IMG;
+export const api_image =
+  process.env.NEXT_PUBLIC_API_IMG || process.env.NEXT_PUBLIC_PRODUCTION_API_IMG;
 
 // TS
 import { TopMoviesData } from "@/pages";
