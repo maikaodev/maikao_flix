@@ -68,9 +68,7 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
             <>
               <section className={S.section_card_list}>
                 <div className={S.list}>
-                  <>
                     {searchedCategory && <Card dataCard={searchedCategory} />}
-                  </>
                 </div>
               </section>
               {totalPages > 1 && (
