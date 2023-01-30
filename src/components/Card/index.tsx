@@ -1,6 +1,6 @@
 import S from "./Card.module.css";
 
-const api_image = process.env.NEXT_PUBLIC_API_IMG;
+export const api_image = process.env.NEXT_PUBLIC_API_IMG;
 
 // TS
 import { TopMoviesData } from "@/pages";
@@ -36,7 +36,7 @@ export const Card = ({ dataCard = [{} as TopMoviesData] }) => {
                       )}
                       <div>
                         <Link
-                          href={`/detalhes/${!data.video ? "movie" : "tv"}/${
+                          href={`/detalhes/${!data.video ? "movie" : "tv"}?id=${
                             data.id
                           }`}
                         >

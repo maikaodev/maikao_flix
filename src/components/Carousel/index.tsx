@@ -16,7 +16,7 @@ export type CarouselProps = {
 export const Carousel = ({ data = {} as CarouselProps }) => {
   return (
     <>
-      <Link href={`detalhes/movie/${data.id_movie}`}>
+      <Link href={`detalhes/movie?id=${data.id_movie}`}>
         <div
           className={S.carousel}
           style={{ backgroundImage: `url(${api_image + data.background_url})` }}
