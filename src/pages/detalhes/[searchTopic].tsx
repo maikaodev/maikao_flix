@@ -56,14 +56,20 @@ type DataTrailer = {
 type RecommendationsProps = {
   results: TopMoviesData[];
 };
+
+type CollectionsProps = {
+  parts: TopMoviesData[];
+};
 const About = ({
   dataDetails,
   dataTrailer,
   dataRecommendations,
+  dataCollections,
 }: {
   dataDetails: AboutProps;
   dataTrailer: DataTrailer;
   dataRecommendations: RecommendationsProps;
+  dataCollections: CollectionsProps;
 }) => {
   //
   const [details, setDetails] = useState<DetailsData>();
@@ -99,32 +105,9 @@ const About = ({
       setDetails(data);
       setTrailerData(dataTrailer.results[0]);
       setRecommendations(dataRecommendations.results);
-      // setTrailerData(dataTrailer.results[0])
-      // setVideo(dataTrailer[0])
-      // getTheRecommendations();
-
-      // if (data?.belongs_to_collection) {
-      //   getTheCollections(data.belongs_to_collection.id);
-      // }
+      setCollections(dataCollections.parts);
 
       setIsLoading(false);
-    }
-  };
-
-  const getTheRecommendations = async () => {
-    // const data = await fetchData(recommendationsURL);
-    // if (data.results) {
-    //   setRecommendations(data.results);
-    // }
-  };
-
-  const getTheCollections = async (collectionsId: number) => {
-    const collectionsURL = `${api_url_default}collection/${collectionsId}?${api_key}&language=pt-BR`;
-
-    const data = await fetchData(collectionsURL);
-
-    if (data.parts) {
-      setCollections(data.parts);
     }
   };
 
@@ -270,10 +253,14 @@ export async function getServerSideProps({
   const dataTrailer = await fetchData(trailerURL);
   const dataRecommendations = await fetchData(recommendationsURL);
 
-  console.log("dataRecommendation ", dataRecommendations);
+  // cc
+  const collectionsURL = `${api_url_default}collection/${dataDetails.belongs_to_collection.id}?${api_key}&language=pt-BR`;
+  const dataCollections = await fetchData(collectionsURL);
+
+  console.log("dataCollections ", dataCollections);
 
   return {
-    props: { dataDetails, dataTrailer, dataRecommendations },
+    props: { dataDetails, dataTrailer, dataRecommendations, dataCollections },
   };
 }
 export default About;
