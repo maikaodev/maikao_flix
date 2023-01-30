@@ -12,6 +12,7 @@ import { AlertMessage, Card, Loading } from "../../components";
 
 // CSS
 import S from "../../styles/Category.module.css";
+import styles from "../../styles/Home.module.css";
 
 // .env
 import { api_key, api_url_default } from "../index";
@@ -27,7 +28,7 @@ const CategoryPage = ({ dataTopRated }: { dataTopRated: WantedDataProps }) => {
     {} as TopMoviesData,
   ]);
   const [totalPages, setTotalPages] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [alertMessage, setAlertMessage] = useState<string>();
 
   // Router
@@ -47,8 +48,6 @@ const CategoryPage = ({ dataTopRated }: { dataTopRated: WantedDataProps }) => {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-
     checkData(dataTopRated);
   }, []);
 
@@ -60,18 +59,18 @@ const CategoryPage = ({ dataTopRated }: { dataTopRated: WantedDataProps }) => {
 
   return (
     <main>
+      {isLoading && <Loading />}
       {!isLoading && alertMessage && (
         <AlertMessage alertMessage={alertMessage} />
       )}
       {!isLoading && !alertMessage && (
         <section className={S.content}>
-          {isLoading && <Loading />}
           {!isLoading && searchedCategory && (
             <>
-              <section className={S.searchedCategory}>
-                <ul className={S.card_list}>
+              <section className={styles.section_card_list}>
+                <div className={styles.list}>
                   {searchedCategory && <Card dataCard={searchedCategory} />}
-                </ul>
+                </div>
               </section>
               {totalPages > 1 && (
                 <div className={S.pagination}>
