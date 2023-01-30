@@ -20,7 +20,7 @@ import { api_key, api_url_default } from "../index";
 // TS
 import { DataProps, TopMoviesData } from "../index";
 
-type WantedDataProps = DataProps & {
+export type WantedDataProps = DataProps & {
   total_pages: number;
 };
 
