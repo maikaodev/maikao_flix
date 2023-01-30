@@ -11,6 +11,7 @@ import { AlertMessage, Card, Loading } from "@/components";
 import { Pagination } from "antd";
 
 // CSS
+import S from "../../styles/Home.module.css";
 import styles from "../../styles/Search.module.css";
 
 // .env
@@ -52,8 +53,12 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
     checkData(wantedData);
   }, []);
 
+  useEffect(() => {
+    checkData(wantedData);
+  }, [router.query.page]);
+
   return (
-    <main>
+    <>
       {!isLoading && alertMessage && (
         <AlertMessage alertMessage={alertMessage} />
       )}
@@ -62,8 +67,12 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
           {isLoading && <Loading />}
           {!isLoading && searchedCategory && (
             <>
-              <section className={styles.searchedCategory}>
-                <>{searchedCategory && <Card dataCard={searchedCategory} />}</>
+              <section className={S.section_card_list}>
+                <div className={S.list}>
+                  <>
+                    {searchedCategory && <Card dataCard={searchedCategory} />}
+                  </>
+                </div>
               </section>
               {totalPages > 1 && (
                 <div className={styles.pagination}>
@@ -75,9 +84,8 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
                     // TODO: TS
                     onChange={(event) => {
                       //
-                      router.push({
-                        query: { page: event.toString() },
-                      });
+                      setIsLoading(true);
+                      router.push(`${router.query.name}?page=${event}`);
                     }}
                   />
                 </div>
@@ -97,7 +105,7 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
           )}
         </section>
       )}
-    </main>
+    </>
   );
 };
 
