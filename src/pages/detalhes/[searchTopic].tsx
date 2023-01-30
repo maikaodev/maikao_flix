@@ -66,7 +66,6 @@ const About = ({ dataDetails }: { dataDetails: AboutProps }) => {
 
   const getDetailsMovies = async (data: AboutProps) => {
     //
-    console.log("[data]", data);
 
     if (data?.error) {
       setIsLoading(false);
