@@ -53,13 +53,17 @@ type ResultsProps = {
 type DataTrailer = {
   results: ResultsProps[];
 };
-
+type RecommendationsProps = {
+  results: TopMoviesData[];
+};
 const About = ({
   dataDetails,
   dataTrailer,
+  dataRecommendations,
 }: {
   dataDetails: AboutProps;
   dataTrailer: DataTrailer;
+  dataRecommendations: RecommendationsProps;
 }) => {
   //
   const [details, setDetails] = useState<DetailsData>();
@@ -76,7 +80,8 @@ const About = ({
 
   const getDetailsMovies = async (
     data: AboutProps,
-    dataTrailer: DataTrailer
+    dataTrailer: DataTrailer,
+    dataRecommendations: RecommendationsProps
   ) => {
     //
 
@@ -93,6 +98,7 @@ const About = ({
     if (data) {
       setDetails(data);
       setTrailerData(dataTrailer.results[0]);
+      setRecommendations(dataRecommendations.results);
       // setTrailerData(dataTrailer.results[0])
       // setVideo(dataTrailer[0])
       // getTheRecommendations();
@@ -106,12 +112,10 @@ const About = ({
   };
 
   const getTheRecommendations = async () => {
-    const recommendationsURL = `${api_url_default}${router.query.searchTopic}/${router.query.id}/recommendations?${api_key}&language=pt-BR&page=1&region=BR`;
-
-    const data = await fetchData(recommendationsURL);
-    if (data.results) {
-      setRecommendations(data.results);
-    }
+    // const data = await fetchData(recommendationsURL);
+    // if (data.results) {
+    //   setRecommendations(data.results);
+    // }
   };
 
   const getTheCollections = async (collectionsId: number) => {
@@ -124,20 +128,13 @@ const About = ({
     }
   };
 
-  const getTheVideos = async () => {
-    // const data = await fetchData(videosURL);
-    // if (data.results) {
-    //   setTrailer(data.results);
-    // }
-  };
-
   const setContent = (content: string) => {
     if (content === showIt) return;
     setShowIt(content);
   };
 
   useEffect(() => {
-    getDetailsMovies(dataDetails, dataTrailer);
+    getDetailsMovies(dataDetails, dataTrailer, dataRecommendations);
   }, []);
 
   return (
@@ -240,9 +237,7 @@ const About = ({
               {recommendations.length > 0 && (
                 <section className={S.recommendations}>
                   <h2>Recomendações</h2>
-                  <ul className={S.card_list}>
-                    <Card dataCard={recommendations} />
-                  </ul>
+                  <Card dataCard={recommendations} />
                 </section>
               )}
             </>
@@ -269,14 +264,16 @@ export async function getServerSideProps({
 }) {
   const detailsURL = `${api_url_default}${query.searchTopic}/${query.id}?${api_key}&language=pt-BR`;
   const trailerURL = `${api_url_default}${query.searchTopic}/${query.id}/videos?${api_key}&language=pt-BR`;
+  const recommendationsURL = `${api_url_default}${query.searchTopic}/${query.id}/recommendations?${api_key}&language=pt-BR&page=1&region=BR`;
 
   const dataDetails = await fetchData(detailsURL);
   const dataTrailer = await fetchData(trailerURL);
+  const dataRecommendations = await fetchData(recommendationsURL);
 
-  console.log("dataTraier ", dataTrailer);
+  console.log("dataRecommendation ", dataRecommendations);
 
   return {
-    props: { dataDetails, dataTrailer },
+    props: { dataDetails, dataTrailer, dataRecommendations },
   };
 }
 export default About;
