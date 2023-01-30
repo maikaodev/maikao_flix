@@ -36,7 +36,7 @@ export const Card = ({ dataCard = [{} as TopMoviesData] }) => {
                       )}
                       <div>
                         <Link
-                          href={`/detalhes/${!data.video ? "movie" : "tv"}?id=${
+                          href={`/detalhes/${data?.video ? "movie" : "tv"}?id=${
                             data.id
                           }`}
                         >
