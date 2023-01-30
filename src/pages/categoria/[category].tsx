@@ -1,4 +1,5 @@
 // Function - Native
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -7,85 +8,69 @@ import { fetchData } from "@/utils/fetchData";
 
 // Components
 import { Pagination } from "antd";
-import { AlertMessage, Card, Loading } from "../components";
+import { AlertMessage, Card, Loading } from "../../components";
 
-// CSs
+// CSS
 import S from "../../styles/Category.module.css";
+import styles from "../../styles/Home.module.css";
 
 // .env
-const movies_url_default = process.env.VITE_API_URL_DEFAULT;
-const api_key = process.env.VITE_API_KEY;
+import { api_key, api_url_default } from "../index";
 
 // TS
-import Link from "next/link";
-import { TopMoviesData } from "./index";
+import { TopMoviesData } from "../index";
+import { WantedDataProps } from "../procurando/[name]";
 
-const CategoryPage = () => {
+const CategoryPage = ({ dataTopRated }: { dataTopRated: WantedDataProps }) => {
   // React
 
   const [searchedCategory, setSearchedCategory] = useState([
     {} as TopMoviesData,
   ]);
   const [totalPages, setTotalPages] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [alertMessage, setAlertMessage] = useState<string>();
 
   // Router
   const router = useRouter();
-  // const [currentPage, setCurrentPage] = useSearchParams();
 
-  const getTheMostRated = async () => {
-    setIsLoading(true);
-
-    let theme: string;
-
-    if (router.query.category === "filmes") {
-      theme = "movie";
-    } else {
-      theme = "tv";
-    }
-
-    const topRatedUrl = `${movies_url_default}${theme}/top_rated?${api_key}&language=pt-BR&page=${router.query.page}&region=BR`;
-
-    const data = await fetchData(topRatedUrl);
-
-    if (data?.error) {
+  const checkData = async (dataTopRated: WantedDataProps) => {
+    if (dataTopRated?.error) {
       setIsLoading(false);
 
-      return setAlertMessage(data.message);
+      return setAlertMessage(dataTopRated.message);
     }
 
-    setSearchedCategory(data.results);
-    setTotalPages(data.total_pages);
+    setSearchedCategory(dataTopRated.results);
+    setTotalPages(dataTopRated.total_pages);
 
     setIsLoading(false);
   };
 
   useEffect(() => {
-    if (!router.query.page) {
-      if (!router.query.page) {
-        router.push({
-          query: { page: 1 },
-        });
-      }
-    }
-    getTheMostRated();
-  });
+    checkData(dataTopRated);
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    checkData(dataTopRated);
+  }, [router.query.category]);
 
   return (
     <main>
+      {isLoading && <Loading />}
       {!isLoading && alertMessage && (
         <AlertMessage alertMessage={alertMessage} />
       )}
       {!isLoading && !alertMessage && (
         <section className={S.content}>
-          {isLoading && <Loading />}
           {!isLoading && searchedCategory && (
             <>
-              <section className={S.searchedCategory}>
-                <ul className={S.card_list}>
+              <section className={styles.section_card_list}>
+                <div className={styles.list}>
                   {searchedCategory && <Card dataCard={searchedCategory} />}
-                </ul>
+                </div>
               </section>
               {totalPages > 1 && (
                 <div className={S.pagination}>
@@ -118,4 +103,25 @@ const CategoryPage = () => {
     </main>
   );
 };
+export async function getServerSideProps({
+  query,
+}: {
+  query: { category: string; page: string };
+}) {
+  let category: string;
+
+  if (query.category === "filmes") {
+    category = "movie";
+  } else {
+    category = "tv";
+  }
+
+  const topRatedUrl = `${api_url_default}${category}/top_rated?${api_key}&language=pt-BR&page=${query.page}&region=BR`;
+  const dataTopRated = await fetchData(topRatedUrl);
+
+  return {
+    props: { dataTopRated },
+  };
+}
+
 export default CategoryPage;

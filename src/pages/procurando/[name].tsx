@@ -1,21 +1,31 @@
-import { fetchData } from "@/utils/fetchData";
-import { Pagination } from "antd";
+// Functions - Native
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-// import { Link, useParams, useSearchParams } from "react-router-dom";
-import { AlertMessage, Card, Loading } from "../components";
 
+// Functions - Utils
+import { fetchData } from "@/utils/fetchData";
+
+// Components
+import { AlertMessage, Card, Loading } from "@/components";
+import { Pagination } from "antd";
+
+// CSS
+import S from "../../styles/Home.module.css";
 import styles from "../../styles/Search.module.css";
 
-const movies_url_default = process.env.API_URL_DEFAULT;
-const api_key = process.env.API_KEY;
+// .env
+import { api_key, api_url_default } from "../index";
 
-import { TopMoviesData } from "./index";
+// TS
+import { DataProps, TopMoviesData } from "../index";
 
-const Search = () => {
+export type WantedDataProps = DataProps & {
+  total_pages: number;
+};
+
+const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
   // React
-
   const [searchedCategory, setSearchedCategory] = useState([
     {} as TopMoviesData,
   ]);
@@ -23,21 +33,12 @@ const Search = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alertMessage, setAlertMessage] = useState<string>();
 
-  // React router
-  let router = useRouter();
-  // TODO: Alterar os parametros das rotas usando next link
-  // const [currentPage, setCurrentPage] = useSearchParams();
+  // Router
+  const router = useRouter();
 
-  const getTheMostRated = async () => {
-    setIsLoading(true);
-
-    const movies = `${movies_url_default}search/multi?${api_key}&language=pt-BR&query=${router.query.name}&page=${router.query.page}&include_adult=false&region=BR`;
-
-    const data = await fetchData(movies);
-
-    if (data?.error) {
+  const checkData = (data: WantedDataProps) => {
+    if (data.error) {
       setIsLoading(false);
-
       return setAlertMessage(data.message);
     }
 
@@ -48,16 +49,15 @@ const Search = () => {
   };
 
   useEffect(() => {
-    if (!router.query.page) {
-      router.push({
-        query: { page: 1 },
-      });
-    }
-    getTheMostRated();
-  });
+    checkData(wantedData);
+  }, []);
+
+  useEffect(() => {
+    checkData(wantedData);
+  }, [router.query.page]);
 
   return (
-    <main>
+    <>
       {!isLoading && alertMessage && (
         <AlertMessage alertMessage={alertMessage} />
       )}
@@ -66,10 +66,10 @@ const Search = () => {
           {isLoading && <Loading />}
           {!isLoading && searchedCategory && (
             <>
-              <section className={styles.searchedCategory}>
-                <ul className={styles.card_list}>
-                  {searchedCategory && <Card dataCard={searchedCategory} />}
-                </ul>
+              <section className={S.section_card_list}>
+                <div className={S.list}>
+                    {searchedCategory && <Card dataCard={searchedCategory} />}
+                </div>
               </section>
               {totalPages > 1 && (
                 <div className={styles.pagination}>
@@ -81,9 +81,8 @@ const Search = () => {
                     // TODO: TS
                     onChange={(event) => {
                       //
-                      router.push({
-                        query: { page: event.toString() },
-                      });
+                      setIsLoading(true);
+                      router.push(`${router.query.name}?page=${event}`);
                     }}
                   />
                 </div>
@@ -103,8 +102,23 @@ const Search = () => {
           )}
         </section>
       )}
-    </main>
+    </>
   );
 };
+
+export async function getServerSideProps({
+  query,
+}: {
+  query: { name: string; page: string };
+}) {
+  const url = `${api_url_default}search/multi?${api_key}&language=pt-BR&query=${query.name.toLocaleLowerCase()}&page=${
+    query.page
+  }&include_adult=false&region=BR`;
+  const wantedData = await fetchData(url);
+
+  return {
+    props: { wantedData },
+  };
+}
 
 export default Search;

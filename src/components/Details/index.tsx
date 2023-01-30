@@ -15,14 +15,14 @@ import { convertMinutesToHours } from "@/utils/convertMinutesToHours";
 import { formatCurrency } from "@/utils/formatCurrency";
 import { releaseDate } from "@/utils/releaseDate";
 
-const api_image = process.env.VITE_API_IMG;
+import { api_image } from "../Card";
 
-type DetailsProps = {
+export type DetailsProps = {
   background_img: string;
   budget: number;
   revenue: number;
-  runTime: number;
-  overView: string;
+  runtime: number;
+  overview: string;
   title: string;
   release_date: string;
   genres: [{ name: string }];
@@ -31,9 +31,9 @@ type DetailsProps = {
 export const Details = ({
   background_img,
   budget,
-  overView,
+  overview,
   revenue,
-  runTime,
+  runtime,
   title,
   release_date,
   genres,
@@ -66,10 +66,10 @@ export const Details = ({
                   );
                 })}
             </>
-            {runTime > 0 && (
+            {runtime > 0 && (
               <li className={S.runtime}>
                 <CgSandClock />
-                <span> {convertMinutesToHours(runTime)}</span>
+                <span> {convertMinutesToHours(runtime)}</span>
               </li>
             )}
           </ul>
@@ -102,7 +102,7 @@ export const Details = ({
               <MdDescription />
               <strong>Sinopse :</strong>
             </div>
-            <p className={S.synopsis}>{overView || "Não tem sinopse... "}</p>
+            <p className={S.synopsis}>{overview || "Não tem sinopse... "}</p>
           </li>
         </ul>
         {/* DESCRIPTION */}

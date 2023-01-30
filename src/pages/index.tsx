@@ -1,6 +1,6 @@
 // Functions - Native
 import Head from "next/head";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // Functions - utils
 import { fetchData } from "@/utils/fetchData";
@@ -26,7 +26,7 @@ export type TopMoviesData = {
   video: boolean;
 };
 export type DataProps = {
-  results: SetStateAction<TopMoviesData[]>;
+  results: TopMoviesData[];
   error?: boolean;
   message?: string;
 };
@@ -57,16 +57,16 @@ export default function Home({
       return setAlertMessage(dataMovie.message || dataSeries.message);
     }
 
-    setTopRatedMovies(dataTopRatedMovie.results);
-    setTopRatedSeries(dataTopRatedSerie.results);
+    setTopRatedMovies(dataMovie.results);
+    setTopRatedSeries(dataSeries.results);
 
     setPropsCarousel({
-      title: topRatedMovies[index]?.title || topRatedMovies[index]?.name,
-      release_date: topRatedMovies[index]?.release_date,
+      title: dataMovie.results[index]?.title || dataMovie.results[index]?.name,
+      release_date: dataMovie.results[index]?.release_date,
       background_url:
-        topRatedMovies[index]?.backdrop_path ||
-        topRatedMovies[index]?.poster_path,
-      id_movie: topRatedMovies[index].id,
+        dataMovie.results[index]?.backdrop_path ||
+        dataMovie.results[index]?.poster_path,
+      id_movie: dataMovie.results[index].id,
     });
     countDown();
     setIsLoading(false);

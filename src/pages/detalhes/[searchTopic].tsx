@@ -1,6 +1,10 @@
 // Functions - Native
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+
+// Functions - utils
+import { fetchData } from "@/utils/fetchData";
 
 // Component
 import {
@@ -9,46 +13,70 @@ import {
   Card,
   Details,
   Loading,
-} from "../components";
+} from "../../components";
 
 // CSS
 import S from "../../styles/About.module.css";
 
 // .env
-const movies_url = process.env.API_URL_DEFAULT;
-const api_key = process.env.API_KEY;
+import { api_key, api_url_default } from "../index";
 
 // TS
-import { fetchData } from "@/utils/fetchData";
-import Link from "next/link";
-import { TopMoviesData } from "./index";
+import { DetailsProps } from "@/components/Details";
+import { DataProps, TopMoviesData } from "../index";
 
-type DetailsData = {
+export type DetailsData = DetailsProps & {
   first_air_date: string;
   name: string;
   genres: [{ name: string }];
   release_date: string;
   title: string;
   poster_path: string;
+  background_path: string;
   budget: number;
   revenue: number;
   runtime: number;
   overview: string;
 };
 
-const About = () => {
+type AboutProps = DataProps &
+  DetailsData & {
+    belongs_to_collection?: { id: number };
+  };
+
+type ResultsProps = {
+  name: string;
+  key: string;
+  empty?: boolean;
+};
+
+type DataTrailer = {
+  results: ResultsProps[];
+};
+type RecommendationsProps = {
+  results: TopMoviesData[];
+};
+
+type CollectionsProps = {
+  parts: TopMoviesData[];
+};
+const About = ({
+  dataDetails,
+  dataTrailer,
+  dataRecommendations,
+  dataCollections,
+}: {
+  dataDetails: AboutProps;
+  dataTrailer: DataTrailer;
+  dataRecommendations: RecommendationsProps;
+  dataCollections: CollectionsProps;
+}) => {
   //
-  const [details, setDetails] = useState({} as DetailsData);
+  const [details, setDetails] = useState<DetailsData>();
   const [recommendations, setRecommendations] = useState([{} as TopMoviesData]);
   const [collections, setCollections] = useState([{} as TopMoviesData]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [trailer, setTrailer] = useState([
-    {} as {
-      name: string;
-      key: string;
-      empty?: boolean;
-    },
-  ]);
+  const [trailerData, setTrailerData] = useState<ResultsProps>();
   const [showIt, setShowIt] = useState<string>("");
   const [reqNotFound, setReqNotFound] = useState<boolean>(false);
   const [alertMessage, setAlertMessage] = useState<string>();
@@ -56,11 +84,12 @@ const About = () => {
   // Router
   const router = useRouter();
 
-  const getDetailsMovies = async () => {
+  const getDetailsMovies = async (
+    data: AboutProps,
+    dataTrailer: DataTrailer,
+    dataRecommendations: RecommendationsProps
+  ) => {
     //
-    const detailsURL = `${movies_url}${router.query.searchTopic}/${router.query.id}?${api_key}&language=pt-BR&page=1&region=BR`;
-
-    const data = await fetchData(detailsURL);
 
     if (data?.error) {
       setIsLoading(false);
@@ -74,43 +103,11 @@ const About = () => {
 
     if (data) {
       setDetails(data);
-      getTheVideos();
-      getTheRecommendations();
-
-      if (data?.belongs_to_collection) {
-        getTheCollections(data.belongs_to_collection.id);
-      }
+      setTrailerData(dataTrailer.results[0]);
+      setRecommendations(dataRecommendations.results);
+      setCollections(dataCollections.parts);
 
       setIsLoading(false);
-    }
-  };
-
-  const getTheRecommendations = async () => {
-    const recommendationsURL = `${movies_url}${router.query.searchTopic}/${router.query.id}/recommendations?${api_key}&language=pt-BR&page=1&region=BR`;
-
-    const data = await fetchData(recommendationsURL);
-    if (data.results) {
-      setRecommendations(data.results);
-    }
-  };
-
-  const getTheCollections = async (collectionsId: number) => {
-    const collectionsURL = `${movies_url}collection/${collectionsId}?${api_key}&language=pt-BR`;
-
-    const data = await fetchData(collectionsURL);
-
-    if (data.parts) {
-      setCollections(data.parts);
-    }
-  };
-
-  const getTheVideos = async () => {
-    const videosURL = `${movies_url}${router.query.searchTopic}/${router.query.id}/videos?${api_key}&language=pt-BR`;
-
-    const data = await fetchData(videosURL);
-
-    if (data.results) {
-      setTrailer(data.results);
     }
   };
 
@@ -120,8 +117,8 @@ const About = () => {
   };
 
   useEffect(() => {
-    getDetailsMovies();
-  });
+    getDetailsMovies(dataDetails, dataTrailer, dataRecommendations);
+  }, []);
 
   return (
     <>
@@ -137,11 +134,11 @@ const About = () => {
           <section>
             <Details
               title={details.title || details.name}
-              background_img={details.poster_path}
+              background_img={details.poster_path || details.background_path}
               budget={details.budget}
               revenue={details.revenue}
-              runTime={details.runtime}
-              overView={details.overview}
+              runtime={details.runtime}
+              overview={details.overview}
               release_date={details.release_date || details.first_air_date}
               genres={details.genres}
             />
@@ -149,7 +146,7 @@ const About = () => {
           {router.query.searchTopic && (
             <section>
               <ul className={S.menu_show_it}>
-                {trailer.length > 0 && (
+                {trailerData?.key && (
                   <li>
                     <button
                       onClick={() => {
@@ -188,13 +185,13 @@ const About = () => {
           {/* TRAILER */}
           {showIt === "trailer" && (
             <section>
-              {router.query.searchTopic === "movie" && trailer.length > 0 && (
+              {router.query.searchTopic === "movie" && trailerData?.key && (
                 <section className={S.trailer}>
                   <h2>Trailer</h2>
                   <iframe
-                    title={trailer[0].name}
+                    title={trailerData.name}
                     sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-presentation"
-                    src={`https://youtube.com/embed/${trailer[0].key}?autoplay=0`}
+                    src={`https://youtube.com/embed/${trailerData.key}?autoplay=0`}
                   ></iframe>
                 </section>
               )}
@@ -223,9 +220,7 @@ const About = () => {
               {recommendations.length > 0 && (
                 <section className={S.recommendations}>
                   <h2>Recomendações</h2>
-                  <ul className={S.card_list}>
-                    <Card dataCard={recommendations} />
-                  </ul>
+                  <Card dataCard={recommendations} />
                 </section>
               )}
             </>
@@ -245,5 +240,25 @@ const About = () => {
     </>
   );
 };
+export async function getServerSideProps({
+  query,
+}: {
+  query: { searchTopic: string; id: string };
+}) {
+  const detailsURL = `${api_url_default}${query.searchTopic}/${query.id}?${api_key}&language=pt-BR`;
+  const trailerURL = `${api_url_default}${query.searchTopic}/${query.id}/videos?${api_key}&language=pt-BR`;
+  const recommendationsURL = `${api_url_default}${query.searchTopic}/${query.id}/recommendations?${api_key}&language=pt-BR&page=1&region=BR`;
 
+  const dataDetails = await fetchData(detailsURL);
+  const dataTrailer = await fetchData(trailerURL);
+  const dataRecommendations = await fetchData(recommendationsURL);
+
+  // cc
+  const collectionsURL = `${api_url_default}collection/${dataDetails.belongs_to_collection.id}?${api_key}&language=pt-BR`;
+  const dataCollections = await fetchData(collectionsURL);
+
+  return {
+    props: { dataDetails, dataTrailer, dataRecommendations, dataCollections },
+  };
+}
 export default About;

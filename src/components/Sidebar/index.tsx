@@ -16,10 +16,10 @@ export const Sidebar = ({ isActive }: { isActive: boolean }) => {
           {!hideIt && (
             <>
               <li>
-                <Link href="/filmes?page=1">Filmes</Link>
+                <Link href="/categoria/filmes?page=1">Filmes</Link>
               </li>
               <li>
-                <Link href="/series?page=1">Séries</Link>
+                <Link href="/categoria/series?page=1">Séries</Link>
               </li>
               <li className={S.search}>
                 <button onClick={hiddenMenu}>Buscar</button>
