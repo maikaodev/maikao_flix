@@ -45,7 +45,7 @@ export default function Home({
   const [topRatedMovies, setTopRatedMovies] = useState([{} as TopMoviesData]);
   const [topRatedSeries, setTopRatedSeries] = useState([{} as TopMoviesData]);
   const [propsCarousel, setPropsCarousel] = useState({} as CarouselProps);
-  const [counter, setCounter] = useState<number>(0);
+  const [counter, setCounter] = useState<number>(5);
   const [index, setIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [alertMessage, setAlertMessage] = useState<string>();
@@ -77,8 +77,8 @@ export default function Home({
 
   const countDown = () => {
     if (counter > 0) {
+      setTimeout(() => setCounter(counter - 1), 1000);
     }
-    setTimeout(() => setCounter(counter - 1), 1000);
 
     if (counter === 0) {
       setPropsCarousel({
@@ -106,6 +106,7 @@ export default function Home({
   useEffect(() => {
     countDown();
   }, [counter]);
+
   return (
     <>
       <Head>
