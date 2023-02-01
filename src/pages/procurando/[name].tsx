@@ -85,7 +85,6 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
                     defaultCurrent={Number(router.query.page)}
                     current={Number(router.query.page)}
                     total={totalPages * 10}
-                    // TODO: TS
                     onChange={(event) => {
                       //
                       setIsLoading(true);
