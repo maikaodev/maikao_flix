@@ -1,4 +1,5 @@
 // Functions - Native
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -58,6 +59,12 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
 
   return (
     <>
+      <Head>
+        <title>MaikãoFlix | Procurando </title>
+        <meta name="description" content="Maikaoflix | Procurando" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       {!isLoading && alertMessage && (
         <AlertMessage alertMessage={alertMessage} />
       )}
@@ -68,7 +75,7 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
             <>
               <section className={S.section_card_list}>
                 <div className={S.list}>
-                    {searchedCategory && <Card dataCard={searchedCategory} />}
+                  {searchedCategory && <Card dataCard={searchedCategory} />}
                 </div>
               </section>
               {totalPages > 1 && (
@@ -78,7 +85,6 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
                     defaultCurrent={Number(router.query.page)}
                     current={Number(router.query.page)}
                     total={totalPages * 10}
-                    // TODO: TS
                     onChange={(event) => {
                       //
                       setIsLoading(true);

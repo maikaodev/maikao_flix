@@ -1,5 +1,7 @@
+// CSS
 import S from "./Card.module.css";
 
+// .env
 export const api_image =
   process.env.NEXT_PUBLIC_API_IMG || process.env.NEXT_PUBLIC_PRODUCTION_API_IMG;
 
@@ -37,9 +39,9 @@ export const Card = ({ dataCard = [{} as TopMoviesData] }) => {
                       )}
                       <div>
                         <Link
-                          href={`/detalhes/${data?.video ? "movie" : "tv"}?id=${
-                            data.id
-                          }`}
+                          href={`/detalhes/${
+                            data?.video === false ? "movie" : "tv"
+                          }?id=${data.id}`}
                         >
                           {data.title || data.name}
                         </Link>

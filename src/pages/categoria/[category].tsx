@@ -1,4 +1,5 @@
 // Function - Native
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -59,6 +60,12 @@ const CategoryPage = ({ dataTopRated }: { dataTopRated: WantedDataProps }) => {
 
   return (
     <main>
+      <Head>
+        <title>MaikãoFlix | Categoria </title>
+        <meta name="description" content="Maikaoflix | Categoria" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       {isLoading && <Loading />}
       {!isLoading && alertMessage && (
         <AlertMessage alertMessage={alertMessage} />

@@ -1,4 +1,5 @@
 // Functions - Native
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -87,7 +88,8 @@ const About = ({
   const getDetailsMovies = async (
     data: AboutProps,
     dataTrailer: DataTrailer,
-    dataRecommendations: RecommendationsProps
+    dataRecommendations: RecommendationsProps,
+    dataCollections: CollectionsProps
   ) => {
     //
 
@@ -103,9 +105,10 @@ const About = ({
 
     if (data) {
       setDetails(data);
-      setTrailerData(dataTrailer.results[0]);
-      setRecommendations(dataRecommendations.results);
-      setCollections(dataCollections.parts);
+      if (dataTrailer?.results[0]) setTrailerData(dataTrailer.results[0]);
+      if (dataRecommendations?.results)
+        setRecommendations(dataRecommendations.results);
+      if (dataCollections?.parts) setCollections(dataCollections.parts);
 
       setIsLoading(false);
     }
@@ -117,11 +120,22 @@ const About = ({
   };
 
   useEffect(() => {
-    getDetailsMovies(dataDetails, dataTrailer, dataRecommendations);
+    getDetailsMovies(
+      dataDetails,
+      dataTrailer,
+      dataRecommendations,
+      dataCollections
+    );
   }, []);
 
   return (
     <>
+      <Head>
+        <title>MaikãoFlix | Detalhes </title>
+        <meta name="description" content="Maikaoflix | Detalhes" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       {isLoading && <Loading />}
       {!isLoading && details && (
         <main>
@@ -253,9 +267,11 @@ export async function getServerSideProps({
   const dataTrailer = await fetchData(trailerURL);
   const dataRecommendations = await fetchData(recommendationsURL);
 
-  // cc
-  const collectionsURL = `${api_url_default}collection/${dataDetails.belongs_to_collection.id}?${api_key}&language=pt-BR`;
-  const dataCollections = await fetchData(collectionsURL);
+  // Collections
+  if (query.searchTopic === "movie") {
+    const collectionsURL = `${api_url_default}collection/${dataDetails.belongs_to_collection.id}?${api_key}&language=pt-BR`;
+    var dataCollections = await fetchData(collectionsURL);
+  }
 
   return {
     props: { dataDetails, dataTrailer, dataRecommendations, dataCollections },
