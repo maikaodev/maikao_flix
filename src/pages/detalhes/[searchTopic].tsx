@@ -74,10 +74,12 @@ const About = ({
 }) => {
   //
   const [details, setDetails] = useState<DetailsData>();
-  const [recommendations, setRecommendations] = useState([{} as TopMoviesData]);
-  const [collections, setCollections] = useState([{} as TopMoviesData]);
+  const [recommendations, setRecommendations] = useState<
+    TopMoviesData[] | null
+  >();
+  const [collections, setCollections] = useState<TopMoviesData[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [trailerData, setTrailerData] = useState<ResultsProps>();
+  const [trailerData, setTrailerData] = useState<ResultsProps | null>();
   const [showIt, setShowIt] = useState<string>("");
   const [reqNotFound, setReqNotFound] = useState<boolean>(false);
   const [alertMessage, setAlertMessage] = useState<string>();
@@ -105,10 +107,31 @@ const About = ({
 
     if (data) {
       setDetails(data);
-      if (dataTrailer?.results[0]) setTrailerData(dataTrailer.results[0]);
-      if (dataRecommendations?.results)
+
+      if (showIt) {
+        setShowIt("");
+      }
+
+      // Trailer
+      if (dataTrailer?.results[0]) {
+        setTrailerData(dataTrailer.results[0]);
+      } else {
+        setTrailerData(null);
+      }
+
+      // Recommendations
+      if (dataRecommendations?.results) {
         setRecommendations(dataRecommendations.results);
-      if (dataCollections?.parts) setCollections(dataCollections.parts);
+      } else {
+        setRecommendations(null);
+      }
+
+      // Collections
+      if (dataCollections?.parts) {
+        setCollections(dataCollections.parts);
+      } else {
+        setCollections(null);
+      }
 
       setIsLoading(false);
     }
@@ -127,6 +150,15 @@ const About = ({
       dataCollections
     );
   }, []);
+
+  useEffect(() => {
+    getDetailsMovies(
+      dataDetails,
+      dataTrailer,
+      dataRecommendations,
+      dataCollections
+    );
+  }, [router.query.id]);
 
   return (
     <>
@@ -160,7 +192,7 @@ const About = ({
           {router.query.searchTopic && (
             <section>
               <ul className={S.menu_show_it}>
-                {trailerData?.key && (
+                {trailerData && (
                   <li>
                     <button
                       onClick={() => {
@@ -171,7 +203,7 @@ const About = ({
                     </button>
                   </li>
                 )}
-                {collections[0].id && (
+                {collections && (
                   <li>
                     <button
                       onClick={() => {
@@ -182,7 +214,7 @@ const About = ({
                     </button>
                   </li>
                 )}
-                {recommendations.length > 0 && (
+                {recommendations && (
                   <li>
                     <button
                       onClick={() => {
@@ -199,7 +231,7 @@ const About = ({
           {/* TRAILER */}
           {showIt === "trailer" && (
             <section>
-              {router.query.searchTopic === "movie" && trailerData?.key && (
+              {router.query.searchTopic === "movie" && trailerData && (
                 <section className={S.trailer}>
                   <h2>Trailer</h2>
                   <iframe
@@ -216,7 +248,7 @@ const About = ({
           {/* COLLECTIONS */}
           {showIt === "collections" && (
             <>
-              {collections[0].id && (
+              {collections && (
                 <section className={S.collections}>
                   <h2>Coleções</h2>
                   <ul className={S.card_list}>
@@ -231,7 +263,7 @@ const About = ({
           {/* RECOMMENDATIONS */}
           {showIt === "recommendations" && (
             <>
-              {recommendations.length > 0 && (
+              {recommendations && (
                 <section className={S.recommendations}>
                   <h2>Recomendações</h2>
                   <Card dataCard={recommendations} />
@@ -268,9 +300,11 @@ export async function getServerSideProps({
   const dataRecommendations = await fetchData(recommendationsURL);
 
   // Collections
-  if (query.searchTopic === "movie") {
+  let dataCollections = null;
+
+  if (query.searchTopic === "movie" && dataDetails.belongs_to_collection?.id) {
     const collectionsURL = `${api_url_default}collection/${dataDetails.belongs_to_collection.id}?${api_key}&language=pt-BR`;
-    var dataCollections = await fetchData(collectionsURL);
+    dataCollections = await fetchData(collectionsURL);
   }
 
   return {
