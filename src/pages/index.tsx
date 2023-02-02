@@ -115,7 +115,7 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main id="container">
+      <main>
         {/* ERROR */}
         {!isLoading && alertMessage && (
           <AlertMessage alertMessage={alertMessage} backTo="Recarregar" />
@@ -155,6 +155,7 @@ export async function getServerSideProps() {
 
   const dataTopRatedMovie = await fetchData(topRatedMovieUrl);
   const dataTopRatedSerie = await fetchData(topRatedSerieUrl);
+  console.log(dataTopRatedMovie.results[0]);
 
   return {
     props: { dataTopRatedMovie, dataTopRatedSerie },
