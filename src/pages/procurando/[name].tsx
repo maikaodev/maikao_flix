@@ -65,46 +65,40 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {isLoading && <Loading />}
+
       {!isLoading && alertMessage && (
         <AlertMessage alertMessage={alertMessage} />
       )}
-      {!alertMessage && (
+      {!isLoading && searchedCategory.length === 0 && (
+        <>
+          <div className={styles.nothingToSeeHere}>
+            <h1>Filme não encontrado...</h1>
+            <Link href="/">Voltar para página principal</Link>
+          </div>
+        </>
+      )}
+      {!isLoading && searchedCategory.length > 0 && (
         <section className={styles.content}>
-          {isLoading && <Loading />}
-          {!isLoading && searchedCategory && (
-            <>
-              <section className={S.section_card_list}>
-                <div className={S.list}>
-                  {searchedCategory && <Card dataCard={searchedCategory} />}
-                </div>
-              </section>
-              {totalPages > 1 && (
-                <div className={styles.pagination}>
-                  <Pagination
-                    simple
-                    defaultCurrent={Number(router.query.page)}
-                    current={Number(router.query.page)}
-                    total={totalPages * 10}
-                    onChange={(event) => {
-                      //
-                      setIsLoading(true);
-                      router.push(`${router.query.name}?page=${event}`);
-                    }}
-                  />
-                </div>
-              )}
-            </>
-          )}
-          {searchedCategory.length === 0 && (
-            <>
-              <div className={styles.nothingToSeeHere}>
-                <h1>Filme não encontrado...</h1>
-                <Link href="/">Voltar para página principal</Link>
-              </div>
-            </>
-          )}
-          {!isLoading && alertMessage && (
-            <AlertMessage alertMessage={alertMessage} />
+          <section className={S.section_card_list}>
+            <div className={S.list}>
+              {searchedCategory && <Card dataCard={searchedCategory} />}
+            </div>
+          </section>
+          {totalPages > 1 && (
+            <div className={styles.pagination}>
+              <Pagination
+                simple
+                defaultCurrent={Number(router.query.page)}
+                current={Number(router.query.page)}
+                total={totalPages * 10}
+                onChange={(event) => {
+                  //
+                  setIsLoading(true);
+                  router.push(`${router.query.name}?page=${event}`);
+                }}
+              />
+            </div>
           )}
         </section>
       )}
@@ -121,6 +115,7 @@ export async function getServerSideProps({
     query.page
   }&include_adult=false&region=BR`;
   const wantedData = await fetchData(url);
+  console.log(wantedData);
 
   return {
     props: { wantedData },
