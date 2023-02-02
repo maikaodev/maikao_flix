@@ -155,7 +155,6 @@ export async function getServerSideProps() {
 
   const dataTopRatedMovie = await fetchData(topRatedMovieUrl);
   const dataTopRatedSerie = await fetchData(topRatedSerieUrl);
-  console.log(dataTopRatedMovie.results[0]);
 
   return {
     props: { dataTopRatedMovie, dataTopRatedSerie },
