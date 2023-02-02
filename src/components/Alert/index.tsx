@@ -1,10 +1,10 @@
 // Functions - Native
-import Link from "next/link";
 
-// CSS 
+// CSS
 import S from "./Alert.module.css";
 
 // Icons
+import { useRouter } from "next/router";
 import { AiFillWarning } from "react-icons/ai";
 
 export const AlertMessage = ({
@@ -14,6 +14,15 @@ export const AlertMessage = ({
   alertMessage: string;
   backTo?: string;
 }) => {
+  const router = useRouter();
+
+  const checkTheRoute = () => {
+    if (router.asPath === "/") {
+      router.reload();
+    } else {
+      router.replace("/");
+    }
+  };
   return (
     <>
       <div className={S.alert}>
@@ -21,7 +30,7 @@ export const AlertMessage = ({
           <AiFillWarning />
           <span>{alertMessage}</span>
         </div>
-        <Link href="/">{backTo || "Página Inicial"}</Link>
+        <button onClick={checkTheRoute}>{backTo || "Página Inicial"}</button>
       </div>
     </>
   );

@@ -66,7 +66,7 @@ https://www.linkedin.com/in/maikaodev/
   - [x] -> Adicionar um método de busca no menu em telas menores
   - [x] -> Remover o alerta quando tem erro na requisição
   - [x] -> Remover <Card/> sem background ou adicionar um padrão
-  - [ ] -> Criar uma pasta para os types(TS)
+  - [x] -> Tratar as erros das requisições
 - [ ] -> Testes
 - [ ] -> Testes unitários
 - [ ] -> Teste de ponta a ponta
