@@ -7,29 +7,14 @@ import { fetchData } from "@/utils/fetchData";
 
 // Component
 import { AlertMessage, Card, InputText, Loading } from "@/components";
+import { Carousel } from "@/components/Carousel";
 
 // CSS
 import styles from "../styles/Home.module.css";
 
 // TS
-import { Carousel, CarouselProps } from "@/components/Carousel";
-
-export type TopMoviesData = {
-  media_type: string;
-  name: string;
-  backdrop_path: string;
-  poster_path: string;
-  title: string;
-  vote_average: number;
-  id: number;
-  release_date: string;
-  video: boolean;
-};
-export type DataProps = {
-  results: TopMoviesData[];
-  error?: boolean;
-  message?: string;
-};
+import { CarouselProps } from "@/types/components";
+import { DataProps as TopRatedProps, ResultsProps } from "@/types/pages";
 
 export const api_url_default =
   process.env.API_URL_DEFAULT || process.env.PRODUCTION_API_URL_DEFAULT;
@@ -39,18 +24,18 @@ export default function Home({
   dataTopRatedMovie,
   dataTopRatedSerie,
 }: {
-  dataTopRatedMovie: DataProps;
-  dataTopRatedSerie: DataProps;
+  dataTopRatedMovie: TopRatedProps;
+  dataTopRatedSerie: TopRatedProps;
 }) {
-  const [topRatedMovies, setTopRatedMovies] = useState([{} as TopMoviesData]);
-  const [topRatedSeries, setTopRatedSeries] = useState([{} as TopMoviesData]);
+  const [topRatedMovies, setTopRatedMovies] = useState([{} as ResultsProps]);
+  const [topRatedSeries, setTopRatedSeries] = useState([{} as ResultsProps]);
   const [propsCarousel, setPropsCarousel] = useState({} as CarouselProps);
   const [counter, setCounter] = useState<number>(5);
   const [index, setIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [alertMessage, setAlertMessage] = useState<string>();
 
-  const checkDatas = (dataMovie: DataProps, dataSeries: DataProps) => {
+  const checkDatas = (dataMovie: TopRatedProps, dataSeries: TopRatedProps) => {
     //
     if (dataMovie.error || dataSeries.error) {
       setIsLoading(false);

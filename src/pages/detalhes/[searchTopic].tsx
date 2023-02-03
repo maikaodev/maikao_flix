@@ -23,44 +23,20 @@ import S from "../../styles/About.module.css";
 import { api_key, api_url_default } from "../index";
 
 // TS
-import { DetailsProps } from "@/components/Details";
-import { DataProps, TopMoviesData } from "../index";
-
-export type DetailsData = DetailsProps & {
-  first_air_date: string;
-  name: string;
-  genres: [{ name: string }];
-  release_date: string;
-  title: string;
-  poster_path: string;
-  background_path: string;
-  budget: number;
-  revenue: number;
-  runtime: number;
-  overview: string;
-};
+import {
+  CollectionsProps,
+  DataProps,
+  DetailsData,
+  ResultsProps,
+  ResultTrailerProps,
+  TrailerProps,
+} from "@/types/pages";
 
 type AboutProps = DataProps &
   DetailsData & {
     belongs_to_collection?: { id: number };
   };
 
-type ResultsProps = {
-  name: string;
-  key: string;
-  empty?: boolean;
-};
-
-type DataTrailer = {
-  results: ResultsProps[];
-};
-type RecommendationsProps = {
-  results: TopMoviesData[];
-};
-
-type CollectionsProps = {
-  parts: TopMoviesData[];
-};
 const About = ({
   dataDetails,
   dataTrailer,
@@ -68,18 +44,18 @@ const About = ({
   dataCollections,
 }: {
   dataDetails: AboutProps;
-  dataTrailer: DataTrailer;
-  dataRecommendations: RecommendationsProps;
+  dataTrailer: TrailerProps;
+  dataRecommendations: DataProps;
   dataCollections: CollectionsProps;
 }) => {
   //
   const [details, setDetails] = useState<DetailsData>();
   const [recommendations, setRecommendations] = useState<
-    TopMoviesData[] | null
+    ResultsProps[] | null
   >();
-  const [collections, setCollections] = useState<TopMoviesData[] | null>(null);
+  const [collections, setCollections] = useState<ResultsProps[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [trailerData, setTrailerData] = useState<ResultsProps | null>();
+  const [trailerData, setTrailerData] = useState<ResultTrailerProps | null>();
   const [showIt, setShowIt] = useState<string>("");
   const [reqNotFound, setReqNotFound] = useState<boolean>(false);
   const [alertMessage, setAlertMessage] = useState<string>();
@@ -89,8 +65,8 @@ const About = ({
 
   const getDetailsMovies = async (
     data: AboutProps,
-    dataTrailer: DataTrailer,
-    dataRecommendations: RecommendationsProps,
+    dataTrailer: TrailerProps,
+    dataRecommendations: DataProps,
     dataCollections: CollectionsProps
   ) => {
     //
@@ -113,7 +89,7 @@ const About = ({
       }
 
       // Trailer
-      if (dataTrailer?.results[0]) {
+      if (dataTrailer?.results) {
         setTrailerData(dataTrailer.results[0]);
       } else {
         setTrailerData(null);

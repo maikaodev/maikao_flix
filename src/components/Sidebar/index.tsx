@@ -1,8 +1,15 @@
+// Functions - Native
 import Link from "next/link";
 import { useState } from "react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import { InputText } from "../InputText";
+
+// CSS
 import S from "./Sidebar.module.css";
+
+// Icons
+import { AiOutlineArrowLeft } from "react-icons/ai";
+
+// Components
+import { InputText } from "../InputText";
 
 export const Sidebar = ({ isActive }: { isActive: boolean }) => {
   const [hideIt, setHideIt] = useState<boolean>(false);

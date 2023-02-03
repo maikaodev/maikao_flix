@@ -19,16 +19,12 @@ import styles from "../../styles/Search.module.css";
 import { api_key, api_url_default } from "../index";
 
 // TS
-import { DataProps, TopMoviesData } from "../index";
-
-export type WantedDataProps = DataProps & {
-  total_pages: number;
-};
+import { DataProps as WantedDataProps, ResultsProps } from "@/types/pages";
 
 const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
   // React
   const [searchedCategory, setSearchedCategory] = useState([
-    {} as TopMoviesData,
+    {} as ResultsProps,
   ]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -44,7 +40,7 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
     }
 
     setSearchedCategory(data.results);
-    setTotalPages(data.total_pages);
+    setTotalPages(data.total_pages!);
 
     setIsLoading(false);
   };

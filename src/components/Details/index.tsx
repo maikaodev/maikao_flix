@@ -15,18 +15,11 @@ import { convertMinutesToHours } from "@/utils/convertMinutesToHours";
 import { formatCurrency } from "@/utils/formatCurrency";
 import { releaseDate } from "@/utils/releaseDate";
 
+// Components
 import { api_image } from "../Card";
 
-export type DetailsProps = {
-  background_img: string;
-  budget: number;
-  revenue: number;
-  runtime: number;
-  overview: string;
-  title: string;
-  release_date: string;
-  genres: [{ name: string }];
-};
+// TS
+import { DetailsProps } from "@/types/components";
 
 export const Details = ({
   background_img,

@@ -1,16 +1,20 @@
+// Functions - Native
+import Link from "next/link";
+
 // CSS
 import S from "./Card.module.css";
+
+// Icons
+import { AiFillStar } from "react-icons/ai";
 
 // .env
 export const api_image =
   process.env.NEXT_PUBLIC_API_IMG || process.env.NEXT_PUBLIC_PRODUCTION_API_IMG;
 
 // TS
-import { TopMoviesData } from "@/pages";
-import Link from "next/link";
-import { AiFillStar } from "react-icons/ai";
+import { ResultsProps as CardProps } from "@/types/pages";
 
-export const Card = ({ dataCard = [{} as TopMoviesData] }) => {
+export const Card = ({ dataCard = [{} as CardProps] }) => {
   //
 
   return (
