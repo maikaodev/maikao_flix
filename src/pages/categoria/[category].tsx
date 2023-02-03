@@ -20,8 +20,6 @@ import { api_key, api_url_default } from "../index";
 
 // TS
 import { DataProps as TopRated, ResultsProps } from "@/types/pages";
-// import { TopMoviesData } from "../index";
-// import { WantedDataProps } from "../procurando/[name]";
 
 const CategoryPage = ({ dataTopRated }: { dataTopRated: TopRated }) => {
   // React
