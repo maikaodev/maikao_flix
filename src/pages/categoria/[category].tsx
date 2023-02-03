@@ -19,14 +19,13 @@ import styles from "../../styles/Home.module.css";
 import { api_key, api_url_default } from "../index";
 
 // TS
-import { TopMoviesData } from "../index";
-import { WantedDataProps } from "../procurando/[name]";
+import { DataProps as TopRated, ResultsProps } from "@/types/pages";
 
-const CategoryPage = ({ dataTopRated }: { dataTopRated: WantedDataProps }) => {
+const CategoryPage = ({ dataTopRated }: { dataTopRated: TopRated }) => {
   // React
 
   const [searchedCategory, setSearchedCategory] = useState([
-    {} as TopMoviesData,
+    {} as ResultsProps,
   ]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -35,7 +34,7 @@ const CategoryPage = ({ dataTopRated }: { dataTopRated: WantedDataProps }) => {
   // Router
   const router = useRouter();
 
-  const checkData = async (dataTopRated: WantedDataProps) => {
+  const checkData = async (dataTopRated: TopRated) => {
     if (dataTopRated?.error) {
       setIsLoading(false);
 
@@ -43,7 +42,7 @@ const CategoryPage = ({ dataTopRated }: { dataTopRated: WantedDataProps }) => {
     }
 
     setSearchedCategory(dataTopRated.results);
-    setTotalPages(dataTopRated.total_pages);
+    setTotalPages(dataTopRated.total_pages!);
 
     setIsLoading(false);
   };

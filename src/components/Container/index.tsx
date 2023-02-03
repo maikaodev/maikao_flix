@@ -2,6 +2,7 @@
 import { Footer } from "../Footer";
 import { NavBar } from "../NavBar";
 
+// TS
 type ContainerProps = {
   children: React.ReactNode;
 };

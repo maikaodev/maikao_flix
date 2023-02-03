@@ -1,17 +1,17 @@
-import { releaseDate } from "@/utils/releaseDate";
+// Functions - Native
 import Link from "next/link";
+
+// Functions - Utils
+import { releaseDate } from "@/utils/releaseDate";
 
 // CSS
 import S from "./Carousel.module.css";
 
+// .env
 import { api_image } from "../Card";
 
-export type CarouselProps = {
-  title: string;
-  release_date: string;
-  background_url: string;
-  id_movie: number;
-};
+// TS
+import { CarouselProps } from "@/types/components";
 
 export const Carousel = ({ data = {} as CarouselProps }) => {
   return (

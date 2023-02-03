@@ -67,6 +67,8 @@ https://www.linkedin.com/in/maikaodev/
   - [x] -> Remover o alerta quando tem erro na requisição
   - [x] -> Remover <Card/> sem background ou adicionar um padrão
   - [x] -> Tratar as erros das requisições
+  - [ ] -> Remover o menu de links/pesquisa quando der scroll na tela
+  - [x] -> Seperar as tipagens em uma pasta
 - [ ] -> Testes
 - [ ] -> Testes unitários
 - [ ] -> Teste de ponta a ponta
