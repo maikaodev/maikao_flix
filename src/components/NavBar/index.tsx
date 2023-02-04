@@ -1,6 +1,6 @@
 // Functions - Native
 import Link from "next/link";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 // Components
 import { InputText } from "../InputText";
@@ -20,6 +20,17 @@ export const NavBar = () => {
   const handleClick = () => {
     setIsActive(!isActive);
   };
+
+  const onScroll = useCallback(() => {
+    if (isActive === true) setIsActive(false);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   return (
     <header className={S.header}>
