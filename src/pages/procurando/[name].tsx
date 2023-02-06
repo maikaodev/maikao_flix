@@ -51,7 +51,7 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
 
   useEffect(() => {
     checkData(wantedData);
-  }, [router.query.page]);
+  }, [router.query.page, router.query.name]);
 
   return (
     <>
@@ -110,8 +110,8 @@ export async function getServerSideProps({
   const url = `${api_url_default}search/multi?${api_key}&language=pt-BR&query=${query.name.toLocaleLowerCase()}&page=${
     query.page
   }&include_adult=false&region=BR`;
+
   const wantedData = await fetchData(url);
-  console.log(wantedData);
 
   return {
     props: { wantedData },
