@@ -74,13 +74,14 @@ const CategoryPage = ({ dataTopRated }: { dataTopRated: TopRated }) => {
           {!isLoading && searchedCategory && (
             <>
               <section className={styles.section_card_list}>
-                <div className={styles.list}>
+                <div className={styles.list} data-testid="card">
                   {searchedCategory && <Card dataCard={searchedCategory} />}
                 </div>
               </section>
               {totalPages > 1 && (
                 <div className={S.pagination}>
                   <Pagination
+                    data-testid="pagination"
                     simple
                     defaultCurrent={Number(router.query.page)}
                     current={Number(router.query.page)}

@@ -100,37 +100,35 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        {/* ERROR */}
-        {!isLoading && alertMessage && (
-          <AlertMessage alertMessage={alertMessage} backTo="Recarregar" />
-        )}
-        {/* ERROR */}
-        {isLoading && <Loading />}
+      {/* ERROR */}
+      {!isLoading && alertMessage && (
+        <AlertMessage alertMessage={alertMessage} backTo="Recarregar" />
+      )}
+      {/* ERROR */}
+      {isLoading && <Loading />}
 
-        {/* HEADER */}
-        {!isLoading && !alertMessage && (
-          <>
-            <div className={styles.header}>
-              <section className={styles.carousel_section}>
-                {topRatedMovies && <Carousel data={propsCarousel} />}
-              </section>
-              <h2>Milhares de filmes, séries para descobrir. Explore já!</h2>
-              <InputText />
-            </div>
-            <section className={styles.section_card_list}>
-              <h2>As melhores séries de TV</h2>
-              <div className={styles.list}>
-                <>{topRatedSeries && <Card dataCard={topRatedSeries} />}</>
-              </div>
+      {/* HEADER */}
+      {!isLoading && !alertMessage && (
+        <>
+          <div className={styles.header}>
+            <section className={styles.carousel_section} data-testid="carousel">
+              {topRatedMovies && <Carousel data={propsCarousel} />}
             </section>
-          </>
-        )}
+            <h2>Milhares de filmes, séries para descobrir. Explore já!</h2>
+            <InputText />
+          </div>
+          <section className={styles.section_card_list}>
+            <h2>As melhores séries de TV</h2>
+            <div className={styles.list} data-testid="card">
+              <>{topRatedSeries && <Card dataCard={topRatedSeries} />}</>
+            </div>
+          </section>
+        </>
+      )}
 
-        {/* HEADER */}
+      {/* HEADER */}
 
-        {/* MAIN */}
-      </main>
+      {/* MAIN */}
     </>
   );
 }

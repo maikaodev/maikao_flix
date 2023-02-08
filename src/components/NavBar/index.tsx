@@ -33,7 +33,7 @@ export const NavBar = () => {
   }, []);
 
   return (
-    <header className={S.header}>
+    <header className={S.header} data-test-id="header">
       <nav className={S.topo}>
         <Link className={S.link} href="/">
           <BiCameraMovie className={S.icon} />
