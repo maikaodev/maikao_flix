@@ -77,13 +77,14 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
       {!isLoading && searchedCategory.length > 0 && (
         <section className={styles.content}>
           <section className={S.section_card_list}>
-            <div className={S.list}>
+            <div className={S.list} data-testid="card">
               {searchedCategory && <Card dataCard={searchedCategory} />}
             </div>
           </section>
           {totalPages > 1 && (
-            <div className={styles.pagination}>
+            <div className={styles.pagination} data-testid="content_pagination">
               <Pagination
+                data-testid="pagination"
                 simple
                 defaultCurrent={Number(router.query.page)}
                 current={Number(router.query.page)}
