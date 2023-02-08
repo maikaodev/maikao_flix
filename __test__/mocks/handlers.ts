@@ -205,6 +205,7 @@ export const handlers = [
               vote_count: 7423,
             },
           ],
+          total_pages: 200,
         })
       );
     }
