@@ -67,6 +67,7 @@ export const handlers = [
               vote_count: 17422,
             },
           ],
+          total_pages: 200,
         })
       );
     }
@@ -124,6 +125,7 @@ export const handlers = [
               vote_count: 3171,
             },
           ],
+          total_pages: 200,
         })
       );
     }
