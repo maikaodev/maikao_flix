@@ -14,7 +14,7 @@ import { fetchData } from "../../../src/utils/fetchData";
 // Mock Router
 jest.mock("next/router", () => require("next-router-mock"));
 
-describe("Home page", () => {
+describe("Search page", () => {
   //
   let wantedData: WantedDataProps;
 
@@ -26,6 +26,8 @@ describe("Home page", () => {
     // Passing the page parameter to the pagination component
     mockRouter.push("/procurando/batman?page=1");
   });
+
+  // Configuring to test antd component
   beforeAll(() => {
     Object.defineProperty(window, "matchMedia", {
       writable: true,
