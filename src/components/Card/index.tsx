@@ -18,7 +18,7 @@ export const Card = ({ dataCard = [{} as CardProps] }) => {
   //
 
   return (
-    <ul className={S.card_list}>
+    <ul data-testid="card_list" className={S.card_list}>
       {dataCard && (
         <>
           {dataCard.map((data) => {
@@ -26,6 +26,7 @@ export const Card = ({ dataCard = [{} as CardProps] }) => {
               if (data.backdrop_path && data.poster_path !== null) {
                 return (
                   <li
+                    data-testid="item_card_list"
                     key={data.id}
                     className={S.card_list_item}
                     style={{
