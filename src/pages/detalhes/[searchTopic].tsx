@@ -32,7 +32,7 @@ import {
   TrailerProps,
 } from "@/types/pages";
 
-type AboutProps = DataProps &
+export type AboutProps = DataProps &
   DetailsData & {
     belongs_to_collection?: { id: number };
   };
@@ -165,55 +165,57 @@ const About = ({
               genres={details.genres}
             />
           </section>
-          {router.query.searchTopic && (
-            <section>
-              <ul className={S.menu_show_it}>
-                {trailerData && (
-                  <li>
-                    <button
-                      onClick={() => {
-                        setContent("trailer");
-                      }}
-                    >
-                      Trailer
-                    </button>
-                  </li>
-                )}
-                {collections && (
-                  <li>
-                    <button
-                      onClick={() => {
-                        setContent("collections");
-                      }}
-                    >
-                      Coleções
-                    </button>
-                  </li>
-                )}
-                {recommendations && (
-                  <li>
-                    <button
-                      onClick={() => {
-                        setContent("recommendations");
-                      }}
-                    >
-                      Recomendações
-                    </button>
-                  </li>
-                )}
-              </ul>
-            </section>
-          )}
+          <section>
+            <ul className={S.menu_show_it}>
+              {trailerData && (
+                <li>
+                  <button
+                    data-testid="btn_trailer"
+                    onClick={() => {
+                      setContent("trailer");
+                    }}
+                  >
+                    Trailer
+                  </button>
+                </li>
+              )}
+              {collections && (
+                <li>
+                  <button
+                    data-testid="btn_collections"
+                    onClick={() => {
+                      setContent("collections");
+                    }}
+                  >
+                    Coleções
+                  </button>
+                </li>
+              )}
+              {recommendations && (
+                <li>
+                  <button
+                    data-testid="btn_recommendations"
+                    onClick={() => {
+                      setContent("recommendations");
+                    }}
+                  >
+                    Recomendações
+                  </button>
+                </li>
+              )}
+            </ul>
+          </section>
+
           {/* TRAILER */}
           {showIt === "trailer" && (
             <section>
-              {router.query.searchTopic === "movie" && trailerData && (
+              {trailerData?.key && (
                 <section className={S.trailer}>
                   <h2>Trailer</h2>
                   <iframe
                     title={trailerData.name}
                     sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-presentation"
-                    src={`https://youtube.com/embed/${trailerData.key}?autoplay=0`}
+                    src={`https://youtube.com/embed/${trailerData.key}`}
                   ></iframe>
                 </section>
               )}
@@ -227,9 +229,7 @@ const About = ({
               {collections && (
                 <section className={S.collections}>
                   <h2>Coleções</h2>
-                  <ul className={S.card_list}>
-                    <Card dataCard={collections} />
-                  </ul>
+                  <Card dataCard={collections} />
                 </section>
               )}
             </>
@@ -278,7 +278,7 @@ export async function getServerSideProps({
   // Collections
   let dataCollections = null;
 
-  if (query.searchTopic === "movie" && dataDetails.belongs_to_collection?.id) {
+  if (dataDetails.belongs_to_collection?.id) {
     const collectionsURL = `${api_url_default}collection/${dataDetails.belongs_to_collection.id}?${api_key}&language=pt-BR`;
     dataCollections = await fetchData(collectionsURL);
   }
