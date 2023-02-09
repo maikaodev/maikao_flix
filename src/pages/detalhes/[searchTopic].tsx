@@ -32,7 +32,7 @@ import {
   TrailerProps,
 } from "@/types/pages";
 
-type AboutProps = DataProps &
+export type AboutProps = DataProps &
   DetailsData & {
     belongs_to_collection?: { id: number };
   };
@@ -227,9 +227,7 @@ const About = ({
               {collections && (
                 <section className={S.collections}>
                   <h2>Coleções</h2>
-                  <ul className={S.card_list}>
-                    <Card dataCard={collections} />
-                  </ul>
+                  <Card dataCard={collections} />
                 </section>
               )}
             </>
