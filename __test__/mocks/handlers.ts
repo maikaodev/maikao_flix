@@ -211,6 +211,16 @@ export const handlers = [
         })
       );
     }
+
+    // bad request
+    return res(
+      ctx.status(400),
+      ctx.json({
+        success: false,
+        status_code: 34,
+        status_message: "The resource you requested could not be found.",
+      })
+    );
   }),
 
   rest.get(
