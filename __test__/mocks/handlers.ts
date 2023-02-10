@@ -71,6 +71,7 @@ export const handlers = [
         })
       );
     }
+
     if (theme === "tv" && topic === "top_rated") {
       return res(
         ctx.status(200),
@@ -131,6 +132,14 @@ export const handlers = [
     }
 
     // bad request
+
+    if (theme === "movie" && topic === "top_rated_not_found") {
+      return res(
+        ctx.status(200),
+        ctx.json({ page: 1, results: [], total_pages: 1, total_results: 0 })
+      );
+    }
+
     return res(
       ctx.status(400),
       ctx.json({
