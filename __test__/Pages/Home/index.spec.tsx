@@ -16,58 +16,97 @@ jest.mock("next/router", () => require("next-router-mock"));
 
 describe("Home page", () => {
   //
-  let dataTopRatedMovie: ResultProps;
-  let dataTopRatedSerie: ResultProps;
+  describe("Good request", () => {
+    let dataTopRatedMovie: ResultProps;
+    let dataTopRatedSerie: ResultProps;
 
-  beforeEach(async () => {
-    const topRatedMovieUrl = "https://api.themoviedb.org/3/movie/top_rated";
-    const topRatedSerieUrl = "https://api.themoviedb.org/3/tv/top_rated";
+    beforeEach(async () => {
+      const topRatedMovieUrl = "https://api.themoviedb.org/3/movie/top_rated";
+      const topRatedSerieUrl = "https://api.themoviedb.org/3/tv/top_rated";
 
-    dataTopRatedMovie = await fetchData(topRatedMovieUrl);
-    dataTopRatedSerie = await fetchData(topRatedSerieUrl);
+      dataTopRatedMovie = await fetchData(topRatedMovieUrl);
+      dataTopRatedSerie = await fetchData(topRatedSerieUrl);
+    });
+    //
+    it("should have a carousel component", async () => {
+      //
+      const { getByTestId } = render(
+        <Home
+          dataTopRatedMovie={dataTopRatedMovie}
+          dataTopRatedSerie={dataTopRatedSerie}
+        />
+      );
+
+      const carousel = getByTestId("carousel");
+
+      expect(carousel).toBeInTheDocument();
+    });
+
+    it("should have a card component", async () => {
+      //
+      const { getByTestId } = render(
+        <Home
+          dataTopRatedMovie={dataTopRatedMovie}
+          dataTopRatedSerie={dataTopRatedSerie}
+        />
+      );
+
+      const card = getByTestId("card");
+
+      expect(card).toBeInTheDocument();
+    });
+
+    it("should render the same amout", async () => {
+      //
+      const { getByTestId } = render(
+        <Home
+          dataTopRatedMovie={dataTopRatedMovie}
+          dataTopRatedSerie={dataTopRatedSerie}
+        />
+      );
+      const card = getByTestId("card");
+      const cardList = getByTestId("card_list");
+      const itemsInCard = within(cardList).getAllByTestId("item_card_list");
+
+      expect(card).toContainElement(cardList);
+      expect(itemsInCard).toHaveLength(dataTopRatedSerie.results.length);
+    });
   });
+
   //
-  it("should have a carousel component", async () => {
-    //
-    const { getByTestId } = render(
-      <Home
-        dataTopRatedMovie={dataTopRatedMovie}
-        dataTopRatedSerie={dataTopRatedSerie}
-      />
-    );
+  describe("Bad request", () => {
+    let dataTopRatedMovie: ResultProps;
+    let dataTopRatedSerie: ResultProps;
 
-    const carousel = getByTestId("carousel");
+    beforeEach(async () => {
+      const topRatedMovieUrl = "https://api.themoviedb.org/3/aaa/bbb";
+      const topRatedSerieUrl = "https://api.themoviedb.org/3/ccc/ddd";
 
-    expect(carousel).toBeInTheDocument();
-  });
+      dataTopRatedMovie = await fetchData(topRatedMovieUrl);
+      dataTopRatedSerie = await fetchData(topRatedSerieUrl);
+    });
 
-  it("should have a card component", async () => {
-    //
-    const { getByTestId } = render(
-      <Home
-        dataTopRatedMovie={dataTopRatedMovie}
-        dataTopRatedSerie={dataTopRatedSerie}
-      />
-    );
+    it.only("should have a alert component", async () => {
+      //
+      const { getByTestId } = render(
+        <Home
+          dataTopRatedMovie={dataTopRatedMovie}
+          dataTopRatedSerie={dataTopRatedSerie}
+        />
+      );
 
-    const card = getByTestId("card");
+      // Elements
+      const alert = getByTestId("alert");
+      const alertMessage = getByTestId("alert_message");
+      const alertButton = getByTestId("alert_button");
 
-    expect(card).toBeInTheDocument();
-  });
-
-  it("should render the same amout", async () => {
-    //
-    const { getByTestId } = render(
-      <Home
-        dataTopRatedMovie={dataTopRatedMovie}
-        dataTopRatedSerie={dataTopRatedSerie}
-      />
-    );
-    const card = getByTestId("card");
-    const cardList = getByTestId("card_list");
-    const itemsInCard = within(cardList).getAllByTestId("item_card_list");
-
-    expect(card).toContainElement(cardList);
-    expect(itemsInCard).toHaveLength(dataTopRatedSerie.results.length);
+      // Assertions
+      expect(alert).toBeInTheDocument();
+      expect(alertMessage).toHaveTextContent(
+        "Desculpe, ocorreu um erro inesperado!"
+      );
+      expect(alertButton).toHaveTextContent("Recarregar");
+      expect(alertButton).toBeEnabled();
+    });
   });
 });
