@@ -10,9 +10,11 @@ import { AiFillWarning } from "react-icons/ai";
 export const AlertMessage = ({
   alertMessage,
   backTo,
+  isAReqNotFound = false,
 }: {
   alertMessage: string;
   backTo?: string;
+  isAReqNotFound?: boolean;
 }) => {
   const router = useRouter();
 
@@ -27,7 +29,7 @@ export const AlertMessage = ({
     <>
       <div className={S.alert} data-testid="alert">
         <div>
-          <AiFillWarning />
+          {!isAReqNotFound && <AiFillWarning data-testid="alert_icon" />}
           <span data-testid="alert_message">{alertMessage}</span>
         </div>
         <button onClick={checkTheRoute} data-testid="alert_button">
