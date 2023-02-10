@@ -16,70 +16,144 @@ jest.mock("next/router", () => require("next-router-mock"));
 
 describe("Category page", () => {
   //
-  let topRatedData: TopRated;
 
-  beforeEach(async () => {
+  describe("Good request", () => {
     //
-    const url = "https://api.themoviedb.org/3/movie/top_rated";
+    let topRatedData: TopRated;
 
-    topRatedData = await fetchData(url);
+    beforeEach(async () => {
+      //
+      const url = "https://api.themoviedb.org/3/movie/top_rated";
 
-    // Passing the page parameter to the pagination component
-    mockRouter.push("/categoria/series?page=1");
-  });
+      topRatedData = await fetchData(url);
 
-  // Configuring to test antd component
-  beforeAll(() => {
-    Object.defineProperty(window, "matchMedia", {
-      writable: true,
-      value: jest.fn().mockImplementation((query) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(), // Deprecated
-        removeListener: jest.fn(), // Deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      })),
+      // Passing the page parameter to the pagination component
+      mockRouter.push("/categoria/series?page=1");
     });
-  });
-  //
-  it("should have a card component", async () => {
+
+    // Configuring to test antd component
+    beforeAll(() => {
+      Object.defineProperty(window, "matchMedia", {
+        writable: true,
+        value: jest.fn().mockImplementation((query) => ({
+          matches: false,
+          media: query,
+          onchange: null,
+          addListener: jest.fn(), // Deprecated
+          removeListener: jest.fn(), // Deprecated
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          dispatchEvent: jest.fn(),
+        })),
+      });
+    });
+
     //
-    const { getByTestId } = render(<Category dataTopRated={topRatedData} />);
+    it("should have a card component", async () => {
+      //
+      const { getByTestId } = render(<Category dataTopRated={topRatedData} />);
 
-    // Element
-    const card = getByTestId("card");
+      // Element
+      const card = getByTestId("card");
 
-    // Assertion
-    expect(card).toBeInTheDocument();
-  });
+      // Assertion
+      expect(card).toBeInTheDocument();
+    });
 
-  it("should have a pagination component", async () => {
-    //
+    it("should have a pagination component", async () => {
+      //
 
-    // Render
-    const { getByTestId } = render(<Category dataTopRated={topRatedData} />);
+      // Render
+      const { getByTestId } = render(<Category dataTopRated={topRatedData} />);
 
-    // Element
-    const pagination = getByTestId("pagination");
+      // Element
+      const pagination = getByTestId("pagination");
 
-    // Assertion
-    expect(pagination).toBeInTheDocument();
-  });
+      // Assertion
+      expect(pagination).toBeInTheDocument();
+    });
 
-  it("should render the same amout", async () => {
-    //
-    const { getByTestId } = render(<Category dataTopRated={topRatedData} />);
+    it("should render the same amout", async () => {
+      //
+      const { getByTestId } = render(<Category dataTopRated={topRatedData} />);
 
-    // Elements
-    const card = getByTestId("card");
-    const cardList = getByTestId("card_list");
-    const itemsInCard = within(cardList).getAllByTestId("item_card_list");
+      // Elements
+      const card = getByTestId("card");
+      const cardList = getByTestId("card_list");
+      const itemsInCard = within(cardList).getAllByTestId("item_card_list");
 
-    // Assertions
-    expect(card).toContainElement(cardList);
-    expect(itemsInCard).toHaveLength(topRatedData.results.length);
+      // Assertions
+      expect(card).toContainElement(cardList);
+      expect(itemsInCard).toHaveLength(topRatedData.results.length);
+    });
+
+    describe("Bad request", () => {
+      //
+      let topRatedDataNotFound: TopRated;
+      let topRatedBadReq: TopRated;
+
+      beforeEach(async () => {
+        //
+        const url = "https://api.themoviedb.org/3/movie/top_rated_not_found";
+        const badReqUrl = "https://api.themoviedb.org/3/aaa/bbb";
+
+        topRatedDataNotFound = await fetchData(url);
+        topRatedBadReq = await fetchData(badReqUrl);
+
+        // Passing the page parameter to the pagination component
+        mockRouter.push("/categoria/series?page=1");
+      });
+
+      // Configuring to test antd component
+      beforeAll(() => {
+        Object.defineProperty(window, "matchMedia", {
+          writable: true,
+          value: jest.fn().mockImplementation((query) => ({
+            matches: false,
+            media: query,
+            onchange: null,
+            addListener: jest.fn(), // Deprecated
+            removeListener: jest.fn(), // Deprecated
+            addEventListener: jest.fn(),
+            removeEventListener: jest.fn(),
+            dispatchEvent: jest.fn(),
+          })),
+        });
+      });
+
+      it("Should have an alert : Nothing Found", async () => {
+        const { getByTestId } = render(
+          <Category dataTopRated={topRatedDataNotFound} />
+        );
+
+        // Elements
+        const alertMessage = getByTestId("alert_message");
+        const buttonMessage = getByTestId("alert_button");
+
+        // Assertions
+        expect(alertMessage).toHaveTextContent("Nada foi encontrado...");
+        expect(buttonMessage).toHaveTextContent("Página Inicial");
+      });
+
+      it.only("Should have an alert : Sorry, an unexpected error occurred", async () => {
+        //
+        const { getByTestId } = render(
+          <Category dataTopRated={topRatedBadReq} />
+        );
+
+        // Elements
+        const alert = getByTestId("alert");
+        const alertMessage = getByTestId("alert_message");
+        const alertButton = getByTestId("alert_button");
+
+        // Assertions
+        expect(alert).toBeInTheDocument();
+        expect(alertMessage).toHaveTextContent(
+          "Desculpe, ocorreu um erro inesperado!"
+        );
+        expect(alertButton).toHaveTextContent("Página Inicial");
+        expect(alertButton).toBeEnabled();
+      });
+    });
   });
 });
