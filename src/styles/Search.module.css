@@ -38,43 +38,6 @@
   color: #ffff;
 }
 
-.nothingToSeeHere {
-  height: 80vh;
-  width: 100vw;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  gap: 16px;
-}
-
-.nothingToSeeHere a {
-  width: 250px;
-
-  background-color: #2e9abf;
-  color: #222222;
-
-  border: 2px solid #2e9abf;
-
-  padding: 16px;
-
-  border-radius: 6px;
-
-  text-align: center;
-  font-weight: 700;
-
-  transition: 0.75s;
-}
-
-.nothingToSeeHere a:hover {
-  background-color: #02f2ff;
-  color: #222222;
-
-  border: 2px solid #02f2ff;
-}
-
 @media (min-width: 1024px) {
   .content .searchedCategory ul {
     flex-direction: row;
