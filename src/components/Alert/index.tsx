@@ -25,12 +25,14 @@ export const AlertMessage = ({
   };
   return (
     <>
-      <div className={S.alert}>
+      <div className={S.alert} data-testid="alert">
         <div>
           <AiFillWarning />
-          <span>{alertMessage}</span>
+          <span data-testid="alert_message">{alertMessage}</span>
         </div>
-        <button onClick={checkTheRoute}>{backTo || "Página Inicial"}</button>
+        <button onClick={checkTheRoute} data-testid="alert_button">
+          {backTo || "Página Inicial"}
+        </button>
       </div>
     </>
   );
