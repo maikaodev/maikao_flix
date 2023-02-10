@@ -71,6 +71,7 @@ export const handlers = [
         })
       );
     }
+
     if (theme === "tv" && topic === "top_rated") {
       return res(
         ctx.status(200),
@@ -129,89 +130,131 @@ export const handlers = [
         })
       );
     }
-    if (theme === "search" && topic === "multi") {
+
+    // bad request
+
+    if (theme === "movie" && topic === "top_rated_not_found") {
       return res(
         ctx.status(200),
+        ctx.json({ page: 1, results: [], total_pages: 1, total_results: 0 })
+      );
+    }
+
+    return res(
+      ctx.status(400),
+      ctx.json({
+        success: false,
+        status_code: 34,
+        status_message: "The resource you requested could not be found.",
+      })
+    );
+  }),
+
+  rest.get(
+    "https://api.themoviedb.org/3/search/multi/:topic",
+    (req, res, ctx) => {
+      const { topic } = req.params;
+
+      if (topic === "batman") {
+        return res(
+          ctx.status(200),
+          ctx.json({
+            results: [
+              {
+                adult: false,
+                backdrop_path: "/b0PlSFdDwbyK0cf5RxwDpaOJQvQ.jpg",
+                genre_ids: [80, 9648, 53],
+                id: 1414906,
+                media_type: "movie",
+                original_language: "en",
+                original_title: "The Batman",
+                overview: `Após dois anos espreitando as ruas como Batman, Bruce Wayne se encontra nas profundezas mais sombrias de Gotham City. Com poucos aliados confiáveis, o vigilante solitário 
+          se estabelece como a personificação da vingança para a população.`,
+                popularity: 331.984,
+                poster_path: "/wd7b4Nv9QBHDTIjc2m7sr0IUMoh.jpg",
+                release_date: "2022-03-03",
+                title: "Batman",
+                video: false,
+                vote_average: 7.7,
+                vote_count: 7423,
+              },
+              {
+                adult: false,
+                backdrop_path: "/b0PlSFdDwbyK0cf5RxwDpaOJQvQ.jpg",
+                genre_ids: [80, 9648, 53],
+                id: 2414906,
+                media_type: "movie",
+                original_language: "en",
+                original_title: "The Batman",
+                overview: `Após dois anos espreitando as ruas como Batman, Bruce Wayne se encontra nas profundezas mais sombrias de Gotham City. Com poucos aliados confiáveis, o vigilante solitário 
+              se estabelece como a personificação da vingança para a população.`,
+                popularity: 331.984,
+                poster_path: "/wd7b4Nv9QBHDTIjc2m7sr0IUMoh.jpg",
+                release_date: "2022-03-03",
+                title: "Batman",
+                video: false,
+                vote_average: 7.7,
+                vote_count: 7423,
+              },
+              {
+                adult: false,
+                backdrop_path: "/b0PlSFdDwbyK0cf5RxwDpaOJQvQ.jpg",
+                genre_ids: [80, 9648, 53],
+                id: 3414906,
+                media_type: "movie",
+                original_language: "en",
+                original_title: "The Batman",
+                overview: `Após dois anos espreitando as ruas como Batman, Bruce Wayne se encontra nas profundezas mais sombrias de Gotham City. Com poucos aliados confiáveis, o vigilante solitário 
+                  se estabelece como a personificação da vingança para a população.`,
+                popularity: 331.984,
+                poster_path: "/wd7b4Nv9QBHDTIjc2m7sr0IUMoh.jpg",
+                release_date: "2022-03-03",
+                title: "Batman",
+                video: false,
+                vote_average: 7.7,
+                vote_count: 7423,
+              },
+              {
+                adult: false,
+                backdrop_path: "/b0PlSFdDwbyK0cf5RxwDpaOJQvQ.jpg",
+                genre_ids: [80, 9648, 53],
+                id: 4414906,
+                media_type: "movie",
+                original_language: "en",
+                original_title: "The Batman",
+                overview: `Após dois anos espreitando as ruas como Batman, Bruce Wayne se encontra nas profundezas mais sombrias de Gotham City. Com poucos aliados confiáveis, o vigilante solitário 
+                      se estabelece como a personificação da vingança para a população.`,
+                popularity: 331.984,
+                poster_path: "/wd7b4Nv9QBHDTIjc2m7sr0IUMoh.jpg",
+                release_date: "2022-03-03",
+                title: "Batman",
+                video: false,
+                vote_average: 7.7,
+                vote_count: 7423,
+              },
+            ],
+            total_pages: 200,
+          })
+        );
+      }
+      if (topic === "12231223123") {
+        return res(
+          ctx.status(200),
+          ctx.json({ page: 1, results: [], total_pages: 1, total_results: 0 })
+        );
+      }
+
+      // bad request
+      return res(
+        ctx.status(400),
         ctx.json({
-          results: [
-            {
-              adult: false,
-              backdrop_path: "/b0PlSFdDwbyK0cf5RxwDpaOJQvQ.jpg",
-              genre_ids: [80, 9648, 53],
-              id: 1414906,
-              media_type: "movie",
-              original_language: "en",
-              original_title: "The Batman",
-              overview: `Após dois anos espreitando as ruas como Batman, Bruce Wayne se encontra nas profundezas mais sombrias de Gotham City. Com poucos aliados confiáveis, o vigilante solitário 
-            se estabelece como a personificação da vingança para a população.`,
-              popularity: 331.984,
-              poster_path: "/wd7b4Nv9QBHDTIjc2m7sr0IUMoh.jpg",
-              release_date: "2022-03-03",
-              title: "Batman",
-              video: false,
-              vote_average: 7.7,
-              vote_count: 7423,
-            },
-            {
-              adult: false,
-              backdrop_path: "/b0PlSFdDwbyK0cf5RxwDpaOJQvQ.jpg",
-              genre_ids: [80, 9648, 53],
-              id: 2414906,
-              media_type: "movie",
-              original_language: "en",
-              original_title: "The Batman",
-              overview: `Após dois anos espreitando as ruas como Batman, Bruce Wayne se encontra nas profundezas mais sombrias de Gotham City. Com poucos aliados confiáveis, o vigilante solitário 
-                se estabelece como a personificação da vingança para a população.`,
-              popularity: 331.984,
-              poster_path: "/wd7b4Nv9QBHDTIjc2m7sr0IUMoh.jpg",
-              release_date: "2022-03-03",
-              title: "Batman",
-              video: false,
-              vote_average: 7.7,
-              vote_count: 7423,
-            },
-            {
-              adult: false,
-              backdrop_path: "/b0PlSFdDwbyK0cf5RxwDpaOJQvQ.jpg",
-              genre_ids: [80, 9648, 53],
-              id: 3414906,
-              media_type: "movie",
-              original_language: "en",
-              original_title: "The Batman",
-              overview: `Após dois anos espreitando as ruas como Batman, Bruce Wayne se encontra nas profundezas mais sombrias de Gotham City. Com poucos aliados confiáveis, o vigilante solitário 
-                    se estabelece como a personificação da vingança para a população.`,
-              popularity: 331.984,
-              poster_path: "/wd7b4Nv9QBHDTIjc2m7sr0IUMoh.jpg",
-              release_date: "2022-03-03",
-              title: "Batman",
-              video: false,
-              vote_average: 7.7,
-              vote_count: 7423,
-            },
-            {
-              adult: false,
-              backdrop_path: "/b0PlSFdDwbyK0cf5RxwDpaOJQvQ.jpg",
-              genre_ids: [80, 9648, 53],
-              id: 4414906,
-              media_type: "movie",
-              original_language: "en",
-              original_title: "The Batman",
-              overview: `Após dois anos espreitando as ruas como Batman, Bruce Wayne se encontra nas profundezas mais sombrias de Gotham City. Com poucos aliados confiáveis, o vigilante solitário 
-                        se estabelece como a personificação da vingança para a população.`,
-              popularity: 331.984,
-              poster_path: "/wd7b4Nv9QBHDTIjc2m7sr0IUMoh.jpg",
-              release_date: "2022-03-03",
-              title: "Batman",
-              video: false,
-              vote_average: 7.7,
-              vote_count: 7423,
-            },
-          ],
-          total_pages: 200,
+          success: false,
+          status_code: 34,
+          status_message: "The resource you requested could not be found.",
         })
       );
     }
-  }),
+  ),
 
   rest.get(
     "https://api.themoviedb.org/detalhes/:id/:topic",

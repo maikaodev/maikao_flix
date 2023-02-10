@@ -1,6 +1,5 @@
 // Functions - Native
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -67,12 +66,10 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
         <AlertMessage alertMessage={alertMessage} />
       )}
       {!isLoading && searchedCategory.length === 0 && (
-        <>
-          <div className={styles.nothingToSeeHere}>
-            <h1>Filme não encontrado...</h1>
-            <Link href="/">Voltar para página principal</Link>
-          </div>
-        </>
+        <AlertMessage
+          alertMessage="Filme não encontrado..."
+          isAReqNotFound={true}
+        />
       )}
       {!isLoading && searchedCategory.length > 0 && (
         <section className={styles.content}>

@@ -1,6 +1,5 @@
 // Functions - Native
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -250,12 +249,11 @@ const About = ({
           {/* RECOMMENDATIONS */}
         </main>
       )}
+
       {!isLoading && reqNotFound && (
-        <div className={S.req_not_found}>
-          <span>Desculpe... não existe informações a respeito</span>
-          <Link href="/">Página Inicial</Link>
-        </div>
+        <AlertMessage alertMessage="Desculpe... não existe informações a respeito" />
       )}
+
       {!isLoading && alertMessage && (
         <AlertMessage alertMessage={alertMessage} />
       )}
