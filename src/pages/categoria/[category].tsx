@@ -1,6 +1,5 @@
 // Function - Native
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -66,9 +65,11 @@ const CategoryPage = ({ dataTopRated }: { dataTopRated: TopRated }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {isLoading && <Loading />}
+
       {!isLoading && alertMessage && (
         <AlertMessage alertMessage={alertMessage} />
       )}
+
       {!isLoading && !alertMessage && (
         <section className={S.content}>
           {!isLoading && searchedCategory && (
@@ -98,12 +99,7 @@ const CategoryPage = ({ dataTopRated }: { dataTopRated: TopRated }) => {
             </>
           )}
           {searchedCategory.length === 0 && (
-            <>
-              <div className={S.nothingToSeeHere}>
-                <h1>Filme não encontrado...</h1>
-                <Link href="/">Voltar para página principal</Link>
-              </div>
-            </>
+            <AlertMessage alertMessage="Nada foi encontrado..." />
           )}
         </section>
       )}
