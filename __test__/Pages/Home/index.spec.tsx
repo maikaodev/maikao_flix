@@ -86,7 +86,7 @@ describe("Home page", () => {
       dataTopRatedSerie = await fetchData(topRatedSerieUrl);
     });
 
-    it.only("should have a alert component", async () => {
+    it("should have a alert component", async () => {
       //
       const { getByTestId } = render(
         <Home
