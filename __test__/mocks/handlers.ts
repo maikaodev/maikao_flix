@@ -567,6 +567,27 @@ export const handlers = [
           })
         );
       }
+      let results_empty = new Object();
+      if (id === "123" && topic === "empty_request") {
+        return res(
+          ctx.status(200),
+          ctx.json({
+            success: false,
+            status_code: 34,
+            status_message: "The resource you requested could not be found.",
+          })
+        );
+      }
+
+      // bad request
+      return res(
+        ctx.status(400),
+        ctx.json({
+          success: false,
+          status_code: 34,
+          status_message: "The resource you requested could not be found.",
+        })
+      );
     }
   ),
 ];
