@@ -34,6 +34,7 @@ import {
 export type AboutProps = DataProps &
   DetailsData & {
     belongs_to_collection?: { id: number };
+    success?: boolean;
   };
 
 const About = ({
@@ -76,7 +77,7 @@ const About = ({
       return setAlertMessage(data.message);
     }
 
-    if (data === undefined) {
+    if (!data.success) {
       setReqNotFound(true);
     }
 
