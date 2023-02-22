@@ -1,23 +1,17 @@
-// Functions - Native
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-// Functions - Utils
 import { fetchData } from "@/utils/fetchData";
 
-// Components
 import { AlertMessage, Card, Loading } from "@/components";
 import { Pagination } from "antd";
 
-// CSS
 import S from "../../styles/Home.module.css";
 import styles from "../../styles/Search.module.css";
 
-// .env
 import { api_key, api_url_default } from "../index";
 
-// TS
 import { DataProps as WantedDataProps, ResultsProps } from "@/types/pages";
 
 const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
@@ -29,7 +23,6 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alertMessage, setAlertMessage] = useState<string>();
 
-  // Router
   const router = useRouter();
 
   const checkData = (data: WantedDataProps) => {
