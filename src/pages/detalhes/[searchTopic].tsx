@@ -1,12 +1,9 @@
-// Functions - Native
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-// Functions - utils
 import { fetchData } from "@/utils/fetchData";
 
-// Component
 import {
   AlertMessage,
   BtnGoToTop,
@@ -15,13 +12,10 @@ import {
   Loading,
 } from "../../components";
 
-// CSS
 import S from "../../styles/About.module.css";
 
-// .env
 import { api_key, api_url_default } from "../index";
 
-// TS
 import {
   CollectionsProps,
   DataProps,
@@ -48,7 +42,6 @@ const About = ({
   dataRecommendations: DataProps;
   dataCollections: CollectionsProps;
 }) => {
-  //
   const [details, setDetails] = useState<DetailsData>();
   const [recommendations, setRecommendations] = useState<
     ResultsProps[] | null
@@ -60,7 +53,6 @@ const About = ({
   const [reqNotFound, setReqNotFound] = useState<boolean>(false);
   const [alertMessage, setAlertMessage] = useState<string>();
 
-  // Router
   const router = useRouter();
 
   const getDetailsMovies = async (
@@ -69,7 +61,6 @@ const About = ({
     dataRecommendations: DataProps,
     dataCollections: CollectionsProps
   ) => {
-    //
 
     if (data?.error) {
       setIsLoading(false);
@@ -88,21 +79,18 @@ const About = ({
         setShowIt("");
       }
 
-      // Trailer
       if (dataTrailer?.results) {
         setTrailerData(dataTrailer.results[0]);
       } else {
         setTrailerData(null);
       }
 
-      // Recommendations
       if (dataRecommendations?.results) {
         setRecommendations(dataRecommendations.results);
       } else {
         setRecommendations(null);
       }
 
-      // Collections
       if (dataCollections?.parts) {
         setCollections(dataCollections.parts);
       } else {
@@ -206,7 +194,6 @@ const About = ({
             </ul>
           </section>
 
-          {/* TRAILER */}
           {showIt === "trailer" && (
             <section>
               {trailerData?.key && (
@@ -221,9 +208,7 @@ const About = ({
               )}
             </section>
           )}
-          {/* TRAILER */}
 
-          {/* COLLECTIONS */}
           {showIt === "collections" && (
             <>
               {collections && (
@@ -234,9 +219,7 @@ const About = ({
               )}
             </>
           )}
-          {/* COLLECTIONS */}
 
-          {/* RECOMMENDATIONS */}
           {showIt === "recommendations" && (
             <>
               {recommendations && (
@@ -247,7 +230,6 @@ const About = ({
               )}
             </>
           )}
-          {/* RECOMMENDATIONS */}
         </main>
       )}
 
@@ -274,7 +256,6 @@ export async function getServerSideProps({
   const dataTrailer = await fetchData(trailerURL);
   const dataRecommendations = await fetchData(recommendationsURL);
 
-  // Collections
   let dataCollections = null;
 
   if (dataDetails.belongs_to_collection?.id) {

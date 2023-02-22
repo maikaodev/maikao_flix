@@ -1,18 +1,13 @@
-// Functions - Native
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
-// Functions - utils
 import { fetchData } from "@/utils/fetchData";
 
-// Component
 import { AlertMessage, Card, InputText, Loading } from "@/components";
 import { Carousel } from "@/components/Carousel";
 
-// CSS
 import styles from "../styles/Home.module.css";
 
-// TS
 import { CarouselProps } from "@/types/components";
 import { DataProps as TopRatedProps, ResultsProps } from "@/types/pages";
 
@@ -36,7 +31,6 @@ export default function Home({
   const [alertMessage, setAlertMessage] = useState<string>();
 
   const checkDatas = (dataMovie: TopRatedProps, dataSeries: TopRatedProps) => {
-    //
     if (dataMovie.error || dataSeries.error) {
       setIsLoading(false);
 
@@ -58,7 +52,6 @@ export default function Home({
     setIsLoading(false);
   };
 
-  //
 
   const countDown = () => {
     if (counter > 0) {
@@ -100,14 +93,13 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* ERROR */}
+
       {!isLoading && alertMessage && (
         <AlertMessage alertMessage={alertMessage} backTo="Recarregar" />
       )}
-      {/* ERROR */}
+
       {isLoading && <Loading />}
 
-      {/* HEADER */}
       {!isLoading && !alertMessage && (
         <>
           <div className={styles.header}>
@@ -126,9 +118,7 @@ export default function Home({
         </>
       )}
 
-      {/* HEADER */}
 
-      {/* MAIN */}
     </>
   );
 }

@@ -1,27 +1,20 @@
-// Function - Native
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-// Function - Utils
 import { fetchData } from "@/utils/fetchData";
 
-// Components
 import { Pagination } from "antd";
 import { AlertMessage, Card, Loading } from "../../components";
 
-// CSS
 import S from "../../styles/Category.module.css";
 import styles from "../../styles/Home.module.css";
 
-// .env
 import { api_key, api_url_default } from "../index";
 
-// TS
 import { DataProps as TopRated, ResultsProps } from "@/types/pages";
 
 const CategoryPage = ({ dataTopRated }: { dataTopRated: TopRated }) => {
-  // React
 
   const [searchedCategory, setSearchedCategory] = useState([
     {} as ResultsProps,
@@ -30,7 +23,6 @@ const CategoryPage = ({ dataTopRated }: { dataTopRated: TopRated }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [alertMessage, setAlertMessage] = useState<string>();
 
-  // Router
   const router = useRouter();
 
   const checkData = async (dataTopRated: TopRated) => {
@@ -88,7 +80,6 @@ const CategoryPage = ({ dataTopRated }: { dataTopRated: TopRated }) => {
                     current={Number(router.query.page)}
                     total={totalPages * 10}
                     onChange={(event) => {
-                      //
                       router.push({
                         query: { page: event.toString() },
                       });
