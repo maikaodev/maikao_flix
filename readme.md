@@ -27,10 +27,6 @@ https://www.linkedin.com/in/maikaodev/
 
 ### Tarefas:
 
-- [ ] -> Testes
-  - [ ] -> Testes unitários
-    - [ ] -> Componentes
-    - [ ] -> Funções
-  - [ ] -> Teste de ponta a ponta
-  - [ ] -> MOCK
-  - [ ] -> Error boundaries
+- [x] -> Testes unitários
+- [ ] -> Teste de ponta a ponta
+- [ ] -> Error boundaries
