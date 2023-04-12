@@ -61,13 +61,12 @@ const About = ({
     dataRecommendations: DataProps,
     dataCollections: CollectionsProps
   ) => {
-
     if (data?.error) {
       setIsLoading(false);
 
       return setAlertMessage(data.message);
     }
-    
+
     if (!data) {
       setReqNotFound(true);
     }

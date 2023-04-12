@@ -1,7 +1,5 @@
-// Functions - Native
 import { useEffect, useState } from "react";
 
-// CSS
 import S from "./BtnGoToTop.module.css";
 
 export const BtnGoToTop = () => {

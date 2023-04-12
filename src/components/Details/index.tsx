@@ -1,24 +1,18 @@
-// Function - Native
 import Image from "next/image";
 
-// Icons
 import { BsGraphUp } from "react-icons/bs";
 import { CgSandClock } from "react-icons/cg";
 import { MdDescription } from "react-icons/md";
 import { SlWallet } from "react-icons/sl";
 
-// CSS
 import S from "./Details.module.css";
 
-// Functions - utils
 import { convertMinutesToHours } from "@/utils/convertMinutesToHours";
 import { formatCurrency } from "@/utils/formatCurrency";
 import { releaseDate } from "@/utils/releaseDate";
 
-// Components
 import { api_image } from "../Card";
 
-// TS
 import { DetailsProps } from "@/types/components";
 
 export const Details = ({
@@ -31,8 +25,6 @@ export const Details = ({
   release_date,
   genres,
 }: DetailsProps) => {
-  //
-
   return (
     <div className={S.content_details}>
       <Image
@@ -42,7 +34,6 @@ export const Details = ({
         width={300}
       />
       <section>
-        {/* HEADER */}
         <div className={S.header_movie}>
           <h2>
             {title} ({releaseDate(new Date(release_date))})
@@ -53,7 +44,7 @@ export const Details = ({
                 genres.map((genre) => {
                   return (
                     <>
-                      <li key={genre.name}>{genre.name}</li>
+                      <li key={genre.id}>{genre.name}</li>
                       {genres.length > 1 && <span>-</span>}
                     </>
                   );
@@ -67,9 +58,7 @@ export const Details = ({
             )}
           </ul>
         </div>
-        {/* HEADER */}
 
-        {/* DESCRIPTION */}
         <ul className={S.details_list}>
           {budget > 0 && (
             <li className={S.item_details}>
@@ -98,7 +87,6 @@ export const Details = ({
             <p className={S.synopsis}>{overview || "Não tem sinopse... "}</p>
           </li>
         </ul>
-        {/* DESCRIPTION */}
       </section>
     </div>
   );

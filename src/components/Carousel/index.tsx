@@ -1,16 +1,11 @@
-// Functions - Native
 import Link from "next/link";
 
-// Functions - Utils
 import { releaseDate } from "@/utils/releaseDate";
 
-// CSS
 import S from "./Carousel.module.css";
 
-// .env
 import { api_image } from "../Card";
 
-// TS
 import { CarouselProps } from "@/types/components";
 
 export const Carousel = ({ data = {} as CarouselProps }) => {

@@ -15,7 +15,6 @@ import { api_key, api_url_default } from "../index";
 import { DataProps as WantedDataProps, ResultsProps } from "@/types/pages";
 
 const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
-  // React
   const [searchedCategory, setSearchedCategory] = useState([
     {} as ResultsProps,
   ]);
@@ -80,7 +79,6 @@ const Search = ({ wantedData }: { wantedData: WantedDataProps }) => {
                 current={Number(router.query.page)}
                 total={totalPages * 10}
                 onChange={(event) => {
-                  //
                   setIsLoading(true);
                   router.push(`${router.query.name}?page=${event}`);
                 }}

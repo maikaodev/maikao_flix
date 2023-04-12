@@ -1,11 +1,8 @@
-// Functions
 import { useRouter } from "next/router";
 import { FormEvent, useRef } from "react";
 
-// Icons
 import { BiSearchAlt2 } from "react-icons/bi";
 
-// CSS
 import S from "./InputText.module.css";
 
 export const InputText = () => {
