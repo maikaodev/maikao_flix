@@ -13,5 +13,5 @@ export type DetailsProps = {
   overview: string;
   title: string;
   release_date: string;
-  genres: [{ name: string }];
+  genres: [{ id:number; name: string }];
 };

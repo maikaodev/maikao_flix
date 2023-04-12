@@ -67,8 +67,8 @@ const About = ({
 
       return setAlertMessage(data.message);
     }
-
-    if (!data.success) {
+    
+    if (!data) {
       setReqNotFound(true);
     }
 
@@ -133,6 +133,7 @@ const About = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {isLoading && <Loading />}
+
       {!isLoading && details && (
         <main>
           <div>
