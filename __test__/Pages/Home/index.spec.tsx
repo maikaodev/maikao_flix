@@ -1,21 +1,15 @@
 import "@testing-library/jest-dom/extend-expect";
 import { render, within } from "@testing-library/react";
-// import mockRouter from "next-router-mock";
 
-// Page
 import Home from "@/pages/index";
 
-// TS
 import { DataProps as ResultProps } from "@/types/pages";
 
-// Functions - utils
 import { fetchData } from "../../../src/utils/fetchData";
 
-// Mock Router
 jest.mock("next/router", () => require("next-router-mock"));
 
 describe("Home page", () => {
-  //
   describe("Good request", () => {
     let dataTopRatedMovie: ResultProps;
     let dataTopRatedSerie: ResultProps;
@@ -27,9 +21,8 @@ describe("Home page", () => {
       dataTopRatedMovie = await fetchData(topRatedMovieUrl);
       dataTopRatedSerie = await fetchData(topRatedSerieUrl);
     });
-    //
+
     it("should have a carousel component", async () => {
-      //
       const { getByTestId } = render(
         <Home
           dataTopRatedMovie={dataTopRatedMovie}
@@ -43,7 +36,6 @@ describe("Home page", () => {
     });
 
     it("should have a card component", async () => {
-      //
       const { getByTestId } = render(
         <Home
           dataTopRatedMovie={dataTopRatedMovie}
@@ -57,7 +49,6 @@ describe("Home page", () => {
     });
 
     it("should render the same amout", async () => {
-      //
       const { getByTestId } = render(
         <Home
           dataTopRatedMovie={dataTopRatedMovie}
@@ -73,7 +64,6 @@ describe("Home page", () => {
     });
   });
 
-  //
   describe("Bad request", () => {
     let dataTopRatedMovie: ResultProps;
     let dataTopRatedSerie: ResultProps;
@@ -87,7 +77,6 @@ describe("Home page", () => {
     });
 
     it("should have a alert component", async () => {
-      //
       const { getByTestId } = render(
         <Home
           dataTopRatedMovie={dataTopRatedMovie}
@@ -95,12 +84,10 @@ describe("Home page", () => {
         />
       );
 
-      // Elements
       const alert = getByTestId("alert");
       const alertMessage = getByTestId("alert_message");
       const alertButton = getByTestId("alert_button");
 
-      // Assertions
       expect(alert).toBeInTheDocument();
       expect(alertMessage).toHaveTextContent(
         "Desculpe, ocorreu um erro inesperado!"

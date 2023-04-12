@@ -2,21 +2,15 @@ import "@testing-library/jest-dom/extend-expect";
 import { fireEvent, render, within } from "@testing-library/react";
 import mockRouter from "next-router-mock";
 
-// Page
 import Details, { AboutProps } from "@/pages/detalhes/[searchTopic]";
 
-// TS
 import { CollectionsProps, DataProps, TrailerProps } from "@/types/pages";
 
-// Functions - utils
 import { fetchData } from "../../../src/utils/fetchData";
 
-// Mock Router
 jest.mock("next/router", () => require("next-router-mock"));
 
 describe("Details page", () => {
-  //
-
   describe("Good request", () => {
     let dataDetails: AboutProps;
     let dataTrailer: TrailerProps;
@@ -24,7 +18,6 @@ describe("Details page", () => {
     let dataCollections: CollectionsProps;
 
     beforeEach(async () => {
-      //
       const detailsURL = "https://api.themoviedb.org/detalhes/238/default";
       const trailerURL = "https://api.themoviedb.org/detalhes/238/trailer";
       const recommendationsURL =
@@ -35,16 +28,11 @@ describe("Details page", () => {
       dataDetails = await fetchData(detailsURL);
       dataTrailer = await fetchData(trailerURL);
       dataRecommendations = await fetchData(recommendationsURL);
-
-      // req condicional
-      // dataCollections
       dataCollections = await fetchData(collectionsURL);
 
-      // Passing the page parameter to the pagination component
       mockRouter.push("/detalhes/movie?id=238");
     });
 
-    // Configuring to test antd component
     beforeAll(() => {
       Object.defineProperty(window, "matchMedia", {
         writable: true,
@@ -52,8 +40,8 @@ describe("Details page", () => {
           matches: false,
           media: query,
           onchange: null,
-          addListener: jest.fn(), // Deprecated
-          removeListener: jest.fn(), // Deprecated
+          addListener: jest.fn(),
+          removeListener: jest.fn(),
           addEventListener: jest.fn(),
           removeEventListener: jest.fn(),
           dispatchEvent: jest.fn(),
@@ -61,9 +49,7 @@ describe("Details page", () => {
       });
     });
 
-    //
     it("should have a card component", async () => {
-      //
       const { getByTestId } = render(
         <Details
           dataDetails={dataDetails}
@@ -73,24 +59,19 @@ describe("Details page", () => {
         />
       );
 
-      // Element
       const btn_collections = getByTestId("btn_collections");
       const btn_recommendations = getByTestId("btn_recommendations");
 
-      // event
       const btns = [btn_collections, btn_recommendations];
 
       btns.forEach((btn) => {
-        // Event
         fireEvent.click(btn);
 
-        // Assertion
         expect(getByTestId("card_list")).toBeInTheDocument();
       });
     });
 
     it("should render the same amout", async () => {
-      //
       const { getByTestId } = render(
         <Details
           dataDetails={dataDetails}
@@ -100,22 +81,17 @@ describe("Details page", () => {
         />
       );
 
-      // Elements
       const btn_collections = getByTestId("btn_collections");
       const btn_recommendations = getByTestId("btn_recommendations");
 
-      // Event
       fireEvent.click(btn_collections);
 
-      // Assertion
       expect(
         within(getByTestId("card_list")).getAllByTestId("item_card_list")
       ).toHaveLength(dataCollections.parts.length);
 
-      // Event
       fireEvent.click(btn_recommendations);
 
-      // Assertion
       expect(
         within(getByTestId("card_list")).getAllByTestId("item_card_list")
       ).toHaveLength(dataRecommendations.results.length);
@@ -130,7 +106,6 @@ describe("Details page", () => {
     let dataCollections: CollectionsProps;
 
     beforeEach(async () => {
-      //
       const detailsURL =
         "https://api.themoviedb.org/detalhes/123/empty_request";
       const detailsReqFailedURL = "https://api.themoviedb.org/detalhes/123/123";
@@ -140,7 +115,6 @@ describe("Details page", () => {
     });
 
     it("Should have an alert : Nothing Found", async () => {
-      //
       const { getByTestId } = render(
         <Details
           dataDetails={dataDetailsEmptyReq}
@@ -150,11 +124,8 @@ describe("Details page", () => {
         />
       );
 
-      // Element
       const alertMessage = getByTestId("alert_message");
       const alertButton = getByTestId("alert_button");
-
-      // event
 
       expect(alertMessage).toHaveTextContent(
         "Desculpe... não existe informações a respeito"
@@ -163,7 +134,6 @@ describe("Details page", () => {
     });
 
     it.only("Should have an alert : Sorry, an unexpected error occurred", async () => {
-      //
       const { getByTestId } = render(
         <Details
           dataDetails={dataDetailsReqFailed}
@@ -173,11 +143,8 @@ describe("Details page", () => {
         />
       );
 
-      // Element
       const alertMessage = getByTestId("alert_message");
       const alertButton = getByTestId("alert_button");
-
-      // event
 
       expect(alertMessage).toHaveTextContent(
         "Desculpe, ocorreu um erro inesperado!"

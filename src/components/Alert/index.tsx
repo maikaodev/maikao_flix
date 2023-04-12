@@ -1,10 +1,7 @@
-// Functions - Native
 import { useRouter } from "next/router";
 
-// CSS
 import S from "./Alert.module.css";
 
-// Icons
 import { AiFillWarning } from "react-icons/ai";
 
 export const AlertMessage = ({

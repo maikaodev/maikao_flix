@@ -1,13 +1,10 @@
-// Function - Native
 import Link from "next/link";
 
-// Icons
 import { FiGithub } from "react-icons/fi";
 import { MdContactPage } from "react-icons/md";
 import { SiGmail } from "react-icons/si";
 import { SlSocialLinkedin } from "react-icons/sl";
 
-//CSS
 import S from "./Footer.module.css";
 
 export const Footer = () => {

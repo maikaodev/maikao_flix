@@ -52,7 +52,6 @@ export default function Home({
     setIsLoading(false);
   };
 
-
   const countDown = () => {
     if (counter > 0) {
       setTimeout(() => setCounter(counter - 1), 1000);
@@ -117,8 +116,6 @@ export default function Home({
           </section>
         </>
       )}
-
-
     </>
   );
 }
