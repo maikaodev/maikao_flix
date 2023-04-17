@@ -15,7 +15,6 @@ import { api_key, api_url_default } from "../index";
 import { DataProps as TopRated, ResultsProps } from "@/types/pages";
 
 const CategoryPage = ({ dataTopRated }: { dataTopRated: TopRated }) => {
-
   const [searchedCategory, setSearchedCategory] = useState([
     {} as ResultsProps,
   ]);
@@ -46,7 +45,7 @@ const CategoryPage = ({ dataTopRated }: { dataTopRated: TopRated }) => {
     setIsLoading(true);
 
     checkData(dataTopRated);
-  }, [router.query.category]);
+  }, [router.query.category, router.query.page]);
 
   return (
     <main>
@@ -81,7 +80,10 @@ const CategoryPage = ({ dataTopRated }: { dataTopRated: TopRated }) => {
                     total={totalPages * 10}
                     onChange={(event) => {
                       router.push({
-                        query: { page: event.toString() },
+                        query: {
+                          ...router.query,
+                          page: event.toString(),
+                        },
                       });
                     }}
                   />
