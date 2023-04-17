@@ -19,10 +19,14 @@ export const Sidebar = ({ isActive }: { isActive: boolean }) => {
           {!hideIt && (
             <>
               <li>
-                <Link href="/categoria/filmes?page=1">Filmes</Link>
+                <Link data-testid="movies_page" href="/categoria/filmes?page=1">
+                  Filmes
+                </Link>
               </li>
               <li>
-                <Link href="/categoria/series?page=1">Séries</Link>
+                <Link data-testid="series_page" href="/categoria/series?page=1">
+                  Séries
+                </Link>
               </li>
               <li className={S.search}>
                 <button onClick={hiddenMenu}>Buscar</button>
