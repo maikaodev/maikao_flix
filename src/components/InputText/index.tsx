@@ -28,12 +28,13 @@ export const InputText = () => {
   return (
     <form className={S.form} onSubmit={handleSubmit}>
       <input
+        data-testid="research_input"
         ref={input}
         type="text"
         name="searching"
         placeholder="Buscar por um Filme ou Série..."
       />
-      <button type="submit">
+      <button id="research_button" type="submit">
         <BiSearchAlt2 className={S.icon} />
       </button>
     </form>
