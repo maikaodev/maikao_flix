@@ -23,3 +23,5 @@ describe("Home page", () => {
     cy.url().should("eq", "http://localhost:3000/procurando/Batman?page=1");
   });
 });
+
+export {};
